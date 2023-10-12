@@ -9,7 +9,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 function Header() {
   return (
     <>
-      <Navbar expand={false} className="bg-body-tertiary mb-3">
+      <Navbar expand={"lg"} className="bg-body-tertiary mb-3">
         <Container fluid>
           <Navbar.Brand href="#">Admin</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
