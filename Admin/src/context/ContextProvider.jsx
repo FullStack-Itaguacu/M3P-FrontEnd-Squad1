@@ -8,8 +8,9 @@ import axios from "axios";
 
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
+
   const BASEURL = "http://localhost:3333";
-  const ENDPOINTLOGIN = "/api/admin/login";
+  const ENDPOINTLOGIN = "/api/user/login";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -35,22 +36,24 @@ export function ContextProvider({ children }) {
     return regex.test(email);
   }
 
-  const loginAadmin = async (email, senha) => {
+  const loginAadmin = async (email, password) => {
     if (!validaEmail(email)) {
       return;
     }
-    if (!validaSenha(senha)) {
+    if (!validaSenha(password)) {
       return;
     }
     try {
       const response = await axios.post(BASEURL + ENDPOINTLOGIN, {
         email,
-        senha,
+        password,
       });
 
-      localStorage.setItem("token", response.data.token);
+      const token = response.data.data.token;
+      localStorage.setItem("token", token);
+      setIsLoggedin(true);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
