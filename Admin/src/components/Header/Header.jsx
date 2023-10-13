@@ -6,10 +6,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-function Header() {
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+
+
+function Header({ children }) {
   return (
     <>
-      <Navbar expand={false} className="bg-body-tertiary mb-3">
+      <Navbar expand={"lg"} className="bg-body-tertiary mb-3">
         <Container fluid>
           <Navbar.Brand href="#">Admin</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
@@ -25,16 +29,20 @@ function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="#action1">Link 1</Nav.Link>
-                <Nav.Link href="#action2">Link 2</Nav.Link>
+                <Link className="nav-link" to="/">
+                  Dashboard
+                </Link>
                 <NavDropdown
                   title="Mais opções"
                   id={`offcanvasNavbarDropdown-expand`}
                 >
-                  <NavDropdown.Item href="#action3">Link 3</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Link 4 </NavDropdown.Item>
+                  <Link className="nav-link" to="/">
+                    Dashboard
+                  </Link>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">Link5 </NavDropdown.Item>
+                  <Link className="nav-link" to="/">
+                    Dashboard
+                  </Link>
                 </NavDropdown>
               </Nav>
               <Form className="d-flex">
@@ -50,8 +58,13 @@ function Header() {
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
+      {children}
     </>
   );
 }
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Header;
