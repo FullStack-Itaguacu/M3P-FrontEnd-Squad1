@@ -1,12 +1,11 @@
-import Header from "./components/Header/Header"
+import Header from "./components/Header/Header";
+import { useContexto } from "./context/useContexto";
+import Login from "./pages/Login/Login";
 
 function App() {
+  const { isLoggedin } = useContexto();
 
-  return (
-    <>
-    <Header />
-    </>
-  )
+  return <>{isLoggedin ? <Header /> :  <Login />}</>;
 }
 
-export default App
+export default App;
