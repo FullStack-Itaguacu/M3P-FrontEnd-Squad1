@@ -6,9 +6,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
 
 function Header({ children }) {
   return (
@@ -31,6 +30,9 @@ function Header({ children }) {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Link className="nav-link" to="/">
                   Dashboard
+                </Link>
+                <Link className="nav-link" to="/cadastro-produto">
+                  Cadastro Produto
                 </Link>
                 <NavDropdown
                   title="Mais opções"

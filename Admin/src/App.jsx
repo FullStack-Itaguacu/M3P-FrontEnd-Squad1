@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
 import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
+import CadastroProduto from "./pages/CadastroProduto/CadastroProduto";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         {/* Rotas da aplicaçao quando usuario esta logado */}
         <Route path="/" element={<PaginaDashboard/>} />
+        <Route path="/cadastro-produto" element={<CadastroProduto />} />
 
         {/*Rota de erro quando nao existe a rota */}
         <Route path="*" element={<Error />} />
