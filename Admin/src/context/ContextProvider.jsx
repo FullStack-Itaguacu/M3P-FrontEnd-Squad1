@@ -9,8 +9,8 @@ import axios from "axios";
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
 
-  const BASEURL = "http://localhost:3333";
-  const ENDPOINTLOGIN = "/api/user/login";
+  const BASEURL = "http://localhost:3000";
+  const ENDPOINTLOGIN = "/api/user/admin/login";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -43,18 +43,32 @@ export function ContextProvider({ children }) {
     if (!validaSenha(password)) {
       return;
     }
-    try {
-      const response = await axios.post(BASEURL + ENDPOINTLOGIN, {
+
+    axios
+      .post(BASEURL + ENDPOINTLOGIN, {
         email,
         password,
+      })
+      .then((response) => {
+        if (response) {
+          const { status } = response;
+          const token = response.data.data;
+          if (status && status === 200) {
+            localStorage.setItem("token", token);
+            setIsLoggedin(true);
+          }
+        }
+      })
+      .catch((err) => {
+        if (!err.response) {
+          alert("# É raro, mais acontece o backend não respondeu! ");
+          return;
+        }
+        const { message, cause, status, error } = err.response.data;
+        alert(
+          `# ${message} - Status: ${status} Causa : ${cause}  Erro: ${error}`
+        );
       });
-
-      const token = response.data.data.token;
-      localStorage.setItem("token", token);
-      setIsLoggedin(true);
-    } catch (error) {
-      alert(error);
-    }
   };
 
   const value = {
