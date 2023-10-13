@@ -6,8 +6,15 @@ import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
 function App() {
   const { isLoggedin } = useContexto();
 
-  return <>{isLoggedin ? <Header /> :  <Login />}
-  <PaginaDashboard />
+  if (isLoggedin) {
+    return <>
+      <Header />
+      <PaginaDashboard />
+    </>
+  }
+
+  return <>{isLoggedin ? <Header /> : <Login /> }
+  
   </>;
 }
 

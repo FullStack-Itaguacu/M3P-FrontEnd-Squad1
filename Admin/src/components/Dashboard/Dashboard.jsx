@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Card } from "react-bootstrap";
 //import { useHistory } from "react-router-dom";
-import {} from "react";
+import styles from "./Dashboard.module.css";
+
 
 function Dashboard() {
   const [salesData, setSalesData] = useState({ totalSales: null, totalAmount: null });
-  const [sales, setSales] = useState([]);
 
   const token = localStorage.getItem("token");
 
@@ -18,7 +18,7 @@ function Dashboard() {
             Authorization: `${token}`,
           },
         });
-        const { totalSales, totalAmount } = response.data.dados; // Certifique-se de usar a estrutur
+        const { totalSales, totalAmount } = response.data.dados; 
         setSalesData({ totalSales, totalAmount });
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -28,33 +28,27 @@ function Dashboard() {
 
     fetchData();
   }, [token]); 
-  // Se os dados ainda estão sendo carregados, você pode mostrar uma mensagem de carregamento
-  if (salesData.totalSales === null || salesData.totalAmount === null) {
-    return <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "80vh",
-      }}
-    >Carregando...</div>;
-  }
+  
   return (
-    <Container className="mt-2 ">
-      <Card>
-        <Card.Body>
-          <Card.Title>Total de Vendas</Card.Title>
-          <Card.Text>{salesData.totalSales}</Card.Text>
+    <div className={styles.dashboard}>
+      <h1>Bem-vindo</h1>
+      <h3> <br></br>Sistema de Gerenciamento de Usuários e Medicamentos</h3>
+    <Container className={styles.container}>
+      <Card className={styles.card}>
+        <Card.Body className={styles.card_body}>
+          <Card.Title className={styles.sub_title}>Valor Total de Vendas</Card.Title>
+          <Card.Text className={styles.text}>{`R$ ${salesData.totalSales}`}</Card.Text>
         </Card.Body>
       </Card>
 
-      <Card className="mt-2">
-        <Card.Body>
-          <Card.Title>Total de Quantidade Vendida</Card.Title>
-          <Card.Text>{salesData.totalAmount}</Card.Text>
+      <Card className={styles.card}>
+        <Card.Body className={styles.card_body}>
+          <Card.Title className={styles.sub_title}>Quantidade de Podutos Vendido</Card.Title>
+          <Card.Text className={styles.text}>{salesData.totalAmount}</Card.Text>
         </Card.Body>
       </Card>
     </Container>
+    </div>
   );
 }
 
