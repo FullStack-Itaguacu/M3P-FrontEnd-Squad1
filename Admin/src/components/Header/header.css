@@ -1,5 +1,5 @@
 .navbar {     
-    background: linear-gradient(to right, rgb(2, 209, 26), blue);
+    background: linear-gradient(to right, rgb(3, 193, 25), blue);
 }
 
 .navbar:hover {
@@ -13,6 +13,7 @@
 
 .text-left:hover {
     color: blue;
+    transition: 0,6s ease-in-out;
 }
 
 
