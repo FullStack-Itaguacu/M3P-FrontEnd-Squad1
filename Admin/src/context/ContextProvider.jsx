@@ -139,22 +139,20 @@ export function ContextProvider({ children }) {
     }
   }
 
-  // function handleViaCep(cepCode) {
-  //   axios.get(`https://viacep.com.br/ws/${cepCode}/json/`).then((response) => {
-  //     console.log(response.data);
-  //     const { logradouro, bairro, localidade, uf } = response.data;
-  //     setStreet(logradouro);
-  //     setNeighborhood(bairro);
-  //     setCity(localidade);
-  //     setState(uf);
-  //   });
-  // }
+  function handleViaCep(cepCode) {
+    axios.get(`https://viacep.com.br/ws/${cepCode}/json/`).then((response) => {
+      const { logradouro, bairro, localidade, uf } = response.data;
+      setStreet(logradouro);
+      setNeighborhood(bairro);
+      setCity(localidade);
+      setState(uf);
+    });
+  }
 
   const value = {
     isLoggedin,
     setIsLoggedin,
     loginAadmin,
-    // handleViaCep,
     validaEmail,
     validaSenha,
     handleCadastrarUsuario,
@@ -191,6 +189,7 @@ export function ContextProvider({ children }) {
     setLat,
     long,
     setLong,
+    handleViaCep,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

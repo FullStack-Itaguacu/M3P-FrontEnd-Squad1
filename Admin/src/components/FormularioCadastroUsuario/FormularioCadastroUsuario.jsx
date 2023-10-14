@@ -42,18 +42,9 @@ const FormularioCadastroUsuario = () => {
         handleViaCep
       } = useContexto();
 
-    //   async function handleViaCep(cep) {
-        
-    //     const url = `https://viacep.com.br/ws/${cep}/json/`;
-    //     await axios.get(url).then((response) => {
-    //       const { logradouro, bairro, localidade, uf } = response.data;
-    //       setStreet(logradouro);
-    //       setNeighborhood(bairro);
-    //       setCity(localidade);
-    //       setState(uf);
-    //     });
-    //   }
-
+        useEffect(() => {
+            handleViaCep(cep);
+            }, [cep]);
 
 
   return (
@@ -145,9 +136,7 @@ const FormularioCadastroUsuario = () => {
           type="text"
           placeholder="88888-888"
           value={cep}
-        //   onBlur= {(event) => handleViaCep(event.target.value)}
             onChange={(event) => setCep(event.target.value)}
-
           required
         />
       </Form.Group>
@@ -240,9 +229,12 @@ const FormularioCadastroUsuario = () => {
         </Form.Group>
 
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className="m-2">
         Cadastrar
       </Button>
+      <Button variant="danger" type="reset" className="m-2">
+        Limpar Campos
+        </Button>
     </Form>
   );
 };
