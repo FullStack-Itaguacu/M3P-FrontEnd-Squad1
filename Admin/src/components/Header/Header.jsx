@@ -6,16 +6,26 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
+import "./header.css"
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
-function Header({ children }) {
+function Header({ children }) { 
   return (
     <>
-      <Navbar expand={"lg"} className="bg-body-tertiary mb-3">
+      <Navbar expand={"lg"} className="navbar mb-3">
         <Container fluid>
-          <Navbar.Brand href="#">Admin</Navbar.Brand>
+        <Navbar.Brand href="#home">
+            <img
+              alt=""
+              src="/public/logo1.png"
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+            />{' '}            
+          </Navbar.Brand>
+          <Navbar.Brand href="#" className="text-left">Express Pharmacy</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand`}
@@ -29,10 +39,19 @@ function Header({ children }) {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link text-light" to="/">
                   Dashboard
                 </Link>
-                <NavDropdown
+                <Link className="nav-link text-light" to="/vendas">
+                  Vendas
+                </Link>
+                <Link className="nav-link text-light" to="/registro-produtos">
+                  Produtos
+                </Link>
+                <Link className="nav-link text-light" to="/registro-usuarios">
+                  Usuários
+                </Link>                
+                {/* <NavDropdown
                   title="Mais opções"
                   id={`offcanvasNavbarDropdown-expand`}
                 >
@@ -43,9 +62,8 @@ function Header({ children }) {
                   <Link className="nav-link" to="/">
                     Dashboard
                   </Link>
-                </NavDropdown>
-              </Nav>
-              <Form className="d-flex">
+                </NavDropdown> */}
+                {/* <Form className="d-flex">
                 <Form.Control
                   type="search"
                   placeholder="Item Buscado"
@@ -53,7 +71,11 @@ function Header({ children }) {
                   aria-label="Search"
                 />
                 <Button variant="outline-success">Buscar</Button>
-              </Form>
+                </Form>               */}                
+                <Link className="nav-link text-light divider" to="/">
+                  Sair
+                </Link>
+              </Nav>                            
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
