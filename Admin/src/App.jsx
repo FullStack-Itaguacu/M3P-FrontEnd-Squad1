@@ -1,21 +1,34 @@
-import Header from "./components/Header/Header";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { useContexto } from "./context/useContexto";
+
+import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
+import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
+
 
 function App() {
   const { isLoggedin } = useContexto();
 
-  if (isLoggedin) {
-    return <>
-      <Header />
-      <PaginaDashboard />
-    </>
-  }
+  return <>{isLoggedin ?  
+  <BrowserRouter>
+      <Header >
+      <Routes>
+        {/* Rotas da aplicaçao quando usuario esta logado */}
+        <Route path="/" element={<PaginaDashboard/>} />
 
-  return <>{isLoggedin ? <Header /> : <Login /> }
-  
-  </>;
+        {/*Rota de erro quando nao existe a rota */}
+        <Route path="*" element={<Error />} />
+      </Routes>
+      </Header>
+  </BrowserRouter> :  
+  <BrowserRouter>
+      <Routes>
+        {/* Rotas da aplicaçao quando usuario nao esta logado */}
+        <Route path="/" element={<Login />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+  </BrowserRouter>}</>;
 }
 
 export default App;
