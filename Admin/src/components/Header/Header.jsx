@@ -19,7 +19,7 @@ function Header({ children }) {
         <Navbar.Brand href="#home">
             <img
               alt=""
-              src="/public/logo1.png"
+              src="/logo1.png"
               width="50"
               height="50"
               className="d-inline-block align-top"
@@ -31,10 +31,11 @@ function Header({ children }) {
             id={`offcanvasNavbar-expand`}
             aria-labelledby={`offcanvasNavbarLabel-expand`}
             placement="end"
+            style={{backgroundColor:"#888888"}}
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand`}>
-                Admin
+                Express Pharmacy
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
