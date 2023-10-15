@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Container, Card, Row, Col, Pagination , Form} from "react-bootstrap";
+import { Container, Card, Row, Col, Pagination, Form } from "react-bootstrap";
 
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
   const [limit, setLimit] = useState(30);
   const [page, setPage] = useState(1);
-  const [paginaAnterior, setPaginaAnterior] = useState([page - 1]);
-  const [paginaSeguinte, setPaginaSeguinte] = useState([page + 1]);
   const [totalPages, setTotalPages] = useState([0]);
 
   const [name, setName] = useState("");
@@ -27,16 +25,23 @@ function ListagemProdutos() {
           Authorization: token,
         },
         params: {
-          name : name,
-          type_product : type_product,
+          name: name,
+          type_product: type_product,
         },
       })
       .then((res) => {
-        console.log(res);
         if (res && res.status === 200) {
           setProdutos(res.data.products);
           setTotalPages(res.data.total_pages);
           setPage(res.data.actual_page);
+        }
+        if (res && res.status === 204) {
+          alert(
+            "Nenhum produto encontrado com esses parametros de busqueda, vamos mostrar todos os produtos"
+          );
+          setName("");
+          setType_product("");
+          setLimit(30);
         }
       });
   }
@@ -54,54 +59,58 @@ function ListagemProdutos() {
     }
   };
   return (
-    <Container>
-      {totalPages > 0 && (
-         <Row>
-         <Col md={3}>
-           <Form.Control
-             type="text"
-             placeholder="Nome do produto"
-             onChange={(e) => setName(e.target.value)}
-           />
-         </Col>
-         <Col md={3}>
-           <Form.Control
-             as="select"
-             onChange={(e) => {
-               setTypeProduct(e.target.value);
-             }}
-           >
-             <option value="">Tipo de produto</option>
-             <option value="controlled">Controlado</option>
-             <option value="uncontrolled">Não Controlado</option>
-           </Form.Control>
-         </Col>
-         <Col md={3}>
-     
-           <Form.Control
-             as="select"
-             onChange={(e) => {
-               setLimit(e.target.value);
-               setPage(1);
-             }}
-           >
-             <option value="">Produtos por pagina</option>
-             <option value="1">1</option>
-             <option value="5">5</option>
-             <option value="10">10</option>
-             <option value="20">20</option>
-             <option value="30">30</option>
-           </Form.Control>
-         </Col>
-         <Col md={3}>
-         <Pagination>
-             <Pagination.Prev onClick={handleBack} />
-             <Pagination.Item>{page}</Pagination.Item>
-             <Pagination.Next onClick={handleNext} />
-           </Pagination>
-          </Col>
-       </Row>
-      )}
+    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">
+      <Row>
+        <Col md={3}>
+          <Form.Control
+            type="text"
+            placeholder="Nome do produto"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Col>
+        <Col md={3}>
+          <Form.Control
+            as="select"
+            onChange={(e) => {
+              setType_product(e.target.value);
+            }}
+          >
+            <option value="">Tipo de produto</option>
+            <option value="controlled">Controlado</option>
+            <option value="uncontrolled">Não Controlado</option>
+          </Form.Control>
+        </Col>
+
+        <Col md={3}>
+          <Form.Control
+            as="select"
+            onChange={(e) => {
+              setLimit(e.target.value);
+              setPage(1);
+            }}
+          >
+            <option value="30">Produtos por pagina</option>
+            <option value="1">1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+          </Form.Control>
+        </Col>
+        <Col md={3}>
+          <Pagination>
+            <Pagination.First onClick={() => setPage(1)} />
+            <Pagination.Prev onClick={handleBack} />
+            <Pagination.Item>{page}</Pagination.Item>
+            <Pagination.Ellipsis />
+            <Pagination.Item>{totalPages}</Pagination.Item>
+            <Pagination.Next onClick={handleNext} />
+            <Pagination.Last onClick={() => setPage(totalPages)} />
+          </Pagination>
+        </Col>
+      </Row>
 
       <Row>
         {produtos.map((produto) => (

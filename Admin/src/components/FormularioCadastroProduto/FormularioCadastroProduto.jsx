@@ -18,7 +18,7 @@ function FormularioCadastroProduto() {
 
   return (
     <Form
-      className="d-flex flex-column m-5 p-5"
+      className="d-flex flex-column m-2 p-3  border border-2 rounded-3 accordion"
       ref={refForm}
       noValidate
       validated={formularioValidado}
