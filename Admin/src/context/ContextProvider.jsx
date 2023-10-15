@@ -1,7 +1,6 @@
 import { createContext } from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
-// import axios from "axios";
 export const appContext = createContext();
 
 import axios from "axios";
@@ -12,7 +11,7 @@ export function ContextProvider({ children }) {
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
-  const ENDPOINTPOSTPRODUTO = "/api/products/admin";
+  //const ENDPOINTPOSTPRODUTO = "/api/products/admin";
   const ENDPOINTPOSTUSUARIO = "/api/user/admin/signup";
 
   //função para validar senha
@@ -73,71 +72,10 @@ export function ContextProvider({ children }) {
         );
       });
   };
-  // const postProduto = (produto) => {
-  //   const token = localStorage.getItem("token");
-  //   //adicionar produto ao banco de dados
-  //   axios
-  //     .post(BASEURL + ENDPOINTPOSTPRODUTO, produto, {
-  //       headers: {
-  //         Authorization: `${token}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       const { message, produto } = response.data;
-
-  //       const { id, name, lab_name, unit_price } = produto;
-  //       //alert para mensagem de sucesso caso produto seja adicionado ao banco de dados
-  //       alert(
-  //         `${message}  ID : ${id} Nome: ${name} Laboratorio: ${lab_name} Preço Unitario: ${unit_price}`
-  //       );
-  //     })
-  //     .catch((err) => {
-  //       //alert para mensagem de erro caso produto nao seja adicionado ao banco de dados
-  //       const { cause, error, status } = err.response.data;
-  //       alert(
-  //         `Infelizmente o produto  ${produto.name} não foi adiccionado - ${error} - ${cause} - ${status}`
-  //       );
-  //     });
-  // };
-  // const handleSubmitProduto = (event) => {
-  //   //obter formulário
-  //   const form = event.currentTarget;
-  //   //variável para guardar os dados do formulário para criação de um novo objeto produto;
-  //   let produto;
-  //   //se formulario nao e valido
-  //   if (form.checkValidity() === false) {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //   }
-  //   //mostra os errores dos inputs no formulário
-  //   setFormularioValidado(true);
-  //   event.preventDefault();
-  //   //quando formulário e valido cria um objeto estabelecimento para   ser guardado na base de dados
-  //   if (form.checkValidity() === true) {
-  //     event.preventDefault();
-  //     //captura de dados do formulário para criação de objeto produto
-  //     produto = {
-  //       name: event.target.elements["medicamento"].value,
-  //       lab_name: event.target.elements["laboratorio"].value,
-  //       image_link: event.target.elements["imagem"].value,
-  //       dosage:
-  //         event.target.elements["dosagem"].value +
-  //         event.target.elements["unidade_dosagem"].value,
-  //       unit_price: Number(event.target.elements["valorUnitario"].value),
-  //       type_product: event.target.elements["tipo"].value,
-  //       total_stock: Number(event.target.elements["quantidade"].value),
-  //       description: event.target.elements["descricao"].value,
-  //     };
-  //     postProduto(produto);
-  //     //limpar formulário  e estado de validação dos campos controlados do formulário
-  //     setFormularioValidado(false);
-  //     event.target.reset();
-  //   }
-  // };
-
 
   const postUsuario = (usuario) => {
-    //adicionar usuario ao banco de dados
+    const token = localStorage.getItem("token");
+
     axios
       .post(BASEURL + ENDPOINTPOSTUSUARIO, usuario ,{
         headers: {
@@ -145,16 +83,13 @@ export function ContextProvider({ children }) {
         },
       })
       .then((response) => {
-        const { message, usuario } = response.data;
-
-        const { id, name, email, cpf, phone } = usuario;
-        //alert para mensagem de sucesso caso usuario seja adicionado ao banco de dados
+        const { message, usuario } = response.data
+        const { id, full_name, email, cpf, phone } = usuario;
         alert(
-          `${message}  ID : ${id} Nome: ${name} Email: ${email} CPF: ${cpf} Telefone: ${phone}`
+          `${message}  ID : ${id} Nome: ${full_name} Email: ${email} CPF: ${cpf} Telefone: ${phone}`
         );
       })
       .catch((err) => {
-        //alert para mensagem de erro caso usuario nao seja adicionado ao banco de dados
         const { cause, error, status } = err.response.data;
         alert(
           `Infelizmente o usuário  ${usuario.name} não foi adiccionado - ${error} - ${cause} - ${status}`
@@ -163,22 +98,23 @@ export function ContextProvider({ children }) {
   }
 
   const handleCadastrarUsuario = (event) => {
-    // Evitar o comportamento padrão do formulário
-    event.preventDefault();
-    event.stopPropagation();
-  
-    // Obter os dados do formulário
     const form = event.currentTarget;
-    const isValid = form.checkValidity();
+    let usuario;
   
-    // Atualizar o estado de validação
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  
     setFormularioValidado(true);
+    event.preventDefault();
   
-    // Se o formulário for válido, criar o objeto de usuário e enviar para a API
-    if (isValid) {
-      const usuario = {
+    if (form.checkValidity() === true) {
+      event.preventDefault();
+  
+      usuario = {
         user: {
-          full_name: form.elements["name"].value,
+          full_name: form.elements["full_name"].value,
           cpf: form.elements["cpf"].value,
           birth_date: form.elements["birth_date"].value,
           email: form.elements["email"].value,
@@ -188,7 +124,7 @@ export function ContextProvider({ children }) {
         },
         address: [
           {
-            zip: form.elements["cep"].value,
+            zip: form.elements["zip"].value,
             street: form.elements["street"].value,
             number_street: form.elements["number_street"].value,
             neighborhood: form.elements["neighborhood"].value,
@@ -206,17 +142,15 @@ export function ContextProvider({ children }) {
       form.reset();
     }
   };
-  
+
 
   const value = {
     isLoggedin,
     setIsLoggedin,
     loginAadmin,
-    // handleSubmitProduto,
     formularioValidado,
     setFormularioValidado,
     handleCadastrarUsuario,
-
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

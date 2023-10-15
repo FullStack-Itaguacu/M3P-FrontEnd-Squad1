@@ -1,5 +1,6 @@
 {
   "name": "admin",
+  "proxy": "https://viacep.com.br",
   "private": true,
   "version": "0.0.0",
   "type": "module",
