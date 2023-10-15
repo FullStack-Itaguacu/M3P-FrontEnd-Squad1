@@ -1,0 +1,134 @@
+h1{
+    color: #010101;
+    font-family: Poppins, sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+h3{
+    color: #53575d;
+    font-family: Poppins, sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+label{
+    color: #010101;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 100%;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.containerPrincipal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+
+.container {
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    width: 800px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+
+}
+
+.coluna{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+
+}
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.botaoCadastro{
+    margin-top: 20px;
+   
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botaoCadastro:hover{
+    background-color: #f4f4f4;
+    color: #010101;
+    transition: 0.5s;
+}
+
+.botaoLimpar{
+    margin-top: 20px;
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.botaoLimpar:hover{
+    background-color: #f4f4f4;
+    color: #010101;
+    transition: 0.5s;
+}
+
+input{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+input:focus{
+    outline: none;
+}
+
+input::placeholder{
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+
+}

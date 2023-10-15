@@ -86,16 +86,47 @@ export function ContextProvider({ children }) {
         );
       });
   };
-
+function validaCamposCadastroUsuario(){
+  if (!validaEmail(email)) {
+    return;
+  }
+r
+  if (!validaSenha(password)) {
+    return;
+  }
+//tem que ter 18 anos para se cadastra
+  const data = new Date();
+  const anoAtual = data.getFullYear();
+  const anoNascimento = birth_date.slice(0, 4);
+  const idade = anoAtual - anoNascimento;
+  if (idade < 18) {
+    alert("Você tem que ter 18 anos para se cadastrar");
+    return;
+  }
+  if(
+    !cpf ||
+    !birth_date ||
+    !full_name ||
+    !email ||
+    !phone ||
+    !password ||
+    !type_user ||
+    !cep ||
+    !street ||
+    !number_street ||
+    !neighborhood ||
+    !city ||
+    !state ||
+    !complement 
+  ) {
+    alert(`Preencha todos os campos!`);
+    return;
+  }
+}
   // função para cadastrar usuario no banco de dados
   async function handleCadastrarUsuario(event) {
-    if (!validaEmail(email)) {
-      return;
-    }
-    if (!validaSenha(password)) {
-      return;
-    }
     event.preventDefault();
+    validaCamposCadastroUsuario();
 
     const token = localStorage.getItem("token");
     try {
@@ -133,9 +164,11 @@ export function ContextProvider({ children }) {
       );
       console.log(response.data);
       alert(`Usuário cadastrado com sucesso!`);
+      handleLimparCamposCasdastroUsuario();
     } catch (error) {
       console.error(error.response.data);
-      alert(`Erro ao cadastrar usuário: ${error.response.data.message} `);
+      alert(`Erro ao cadastrar usuário!`  + error.response.data.message);
+
     }
   }
 
@@ -149,6 +182,25 @@ export function ContextProvider({ children }) {
     });
   }
 
+  function handleLimparCamposCasdastroUsuario() {
+    setCpf("");
+    setD("");
+    setFullName("");
+    setEmail("");
+    setPhone("");
+    setPassword("");
+    setTypeUser("");
+    setCep("");
+    setStreet("");
+    setNumberStreet("");
+    setNeighborhood("");
+    setCity("");
+    setState("");
+    setComplement("");
+    setLat("");
+    setLong("");
+  }
+
   const value = {
     isLoggedin,
     setIsLoggedin,
@@ -160,7 +212,6 @@ export function ContextProvider({ children }) {
     setCpf,
     birth_date,
     setD,
-
     full_name,
     setFullName,
     email,
@@ -190,6 +241,8 @@ export function ContextProvider({ children }) {
     long,
     setLong,
     handleViaCep,
+    handleLimparCamposCasdastroUsuario,
+    
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

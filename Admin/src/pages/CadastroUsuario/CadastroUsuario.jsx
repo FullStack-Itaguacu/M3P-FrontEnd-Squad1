@@ -1,8 +1,10 @@
 import FormularioCadastroUsuario from "../../components/FormularioCadastroUsuario/FormularioCadastroUsuario";
 
+
 const CadastroUsuario = () => {
     return (
-        <div>
+        <div
+        >
         <FormularioCadastroUsuario />
         </div>
     );
