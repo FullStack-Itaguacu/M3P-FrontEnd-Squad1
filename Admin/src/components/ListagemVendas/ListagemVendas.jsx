@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Table } from "react-bootstrap";
+import { Container, Card, Row, Col } from "react-bootstrap";
 
 function ListagemVendas() {
   const [vendas, setVendas] = useState([]);
@@ -25,34 +25,33 @@ function ListagemVendas() {
   }, []);
 
   return (
-    <Table striped bordered hover>
-      {/* 
-      Imagem do produto */}
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Produto</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Valor Total </th>
-          <th>Imagem</th>
-        </tr>
-      </thead>
-      <tbody>
+    <Container fluid className=" m-2 p-3  border border-2 rounded-3">
+      <Row>
         {vendas.map((venda) => (
-          <tr key={venda.id}>
-            <td>{venda.id}</td>
-            <td>{venda.product.name}</td>
-            <td>{venda.amount_buy}</td>
-            <td>{venda.product.unit_price}</td>
-            <td>{venda.total}</td>
-            <td>
-              <img src={venda.product.image_link} alt="Imagem do produto" />
-            </td>
-          </tr>
+          <Card as={Col} lg={3} md={6} xs={12} key={venda.id}>
+            <Card.Img
+              variant="top"
+              src={venda.product.image_link}
+              alt="Imagem do produto"
+            />
+            <Card.Body>
+              <Card.Title>{venda.product.name}</Card.Title>
+              <Card.Text>
+                <strong>Cliente : </strong> {venda.buyer.email}
+                <br />
+                <strong>Quantidade Vendida: </strong> {venda.amount_buy}
+                <br />
+                <strong>Valor Unitario : </strong>{" "}
+                {Number(venda.total / venda.amount_buy)}
+                <br />
+                <strong>Valor Total da venda: </strong> {venda.total}
+                <br />
+              </Card.Text>
+            </Card.Body>
+          </Card>
         ))}
-      </tbody>
-    </Table>
+      </Row>
+    </Container>
   );
 }
 export default ListagemVendas;
