@@ -11,7 +11,6 @@ export function ContextProvider({ children }) {
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
-  //const ENDPOINTPOSTPRODUTO = "/api/products/admin";
   const ENDPOINTPOSTUSUARIO = "/api/user/admin/signup";
 
   //função para validar senha
@@ -73,20 +72,66 @@ export function ContextProvider({ children }) {
       });
   };
 
+  //validação de cadastro de usuario
+  function validaCPF(cpf) {
+    const regex = /^[0-9]{11}$/;
+
+    if (!regex.test(cpf)) {
+      alert("CPF incorreto, verificar se não possui caracteres especiais ou menos de 11 dígitos.");
+    }
+    return regex.test(cpf);
+  }
+
+  function validaTelefone(telefone) {
+    const regex = /^[0-9]+$/;
+
+    if (!regex.test(telefone)) {
+      alert(
+        "Telefone incorreto, verificar se não possui caracteres especiais."
+      );
+    }
+    return regex.test(telefone);
+  }
+  function validaCEP(cep) {
+    const regex = /^[0-9]{8}$/;
+
+    if (!regex.test(cep)) {
+      alert("CEP incorreto, verificar se possui 8 dígitos numéricos.");
+    }
+    return regex.test(cep);
+  }
+
+  function validaTypeUser(typeUser) {
+    if (typeUser === "Selecione") {
+      alert("Por favor selecione um tipo de usuário.");
+      return false;
+    }
+    return true;
+  }
+  
+
+  function validaCampoObrigatorio(campo, nomeCampo) {
+    if (!campo || campo.trim() === "") {
+      alert(`O campo ${nomeCampo} é obrigatório.`);
+      return false;
+    }
+    return true;
+  }
+
   const postUsuario = (usuario) => {
     const token = localStorage.getItem("token");
-
+    console.log(usuario);
     axios
-      .post(BASEURL + ENDPOINTPOSTUSUARIO, usuario ,{
+      .post(BASEURL + ENDPOINTPOSTUSUARIO, usuario, {
         headers: {
           Authorization: `${token}`,
         },
       })
       .then((response) => {
-        const { message, usuario } = response.data
-        const { id, full_name, email, cpf, phone } = usuario;
+        const { message, usuario } = response.data;
+        const {  full_name } = usuario;
         alert(
-          `${message}  ID : ${id} Nome: ${full_name} Email: ${email} CPF: ${cpf} Telefone: ${phone}`
+          `${message} Nome: ${full_name} `
         );
       })
       .catch((err) => {
@@ -95,23 +140,45 @@ export function ContextProvider({ children }) {
           `Infelizmente o usuário  ${usuario.name} não foi adiccionado - ${error} - ${cause} - ${status}`
         );
       });
-  }
+  };
 
   const handleCadastrarUsuario = (event) => {
     const form = event.currentTarget;
     let usuario;
-  
+
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-  
+
     setFormularioValidado(true);
     event.preventDefault();
-  
+
     if (form.checkValidity() === true) {
       event.preventDefault();
-  
+      const emailValido = validaEmail(form.elements["email"].value);
+      const senhaValida = validaSenha(form.elements["password"].value);
+      const cpfValido = validaCPF(form.elements["cpf"].value);
+      const telefoneValido = validaTelefone(form.elements["phone"].value);
+      const cepValido = validaCEP(form.elements["zip"].value);
+      const nomeCompletoValido = validaCampoObrigatorio(
+        form.elements["full_name"].value,
+        "Nome completo");
+      const typeUserValido = validaTypeUser(form.elements["type_user"].value);
+      // Adicione mais chamadas para validaCampoObrigatorio para os outros campos obrigatórios aqui
+
+      // Se qualquer uma das validações falhar, pare o processamento e não envie os dados para o back-end
+      if (
+        !emailValido ||
+        !senhaValida ||
+        !cpfValido ||
+        !telefoneValido ||
+        !cepValido ||
+        !nomeCompletoValido ||
+        !typeUserValido
+      ) {
+        return;
+      }
       usuario = {
         user: {
           full_name: form.elements["full_name"].value,
@@ -136,13 +203,12 @@ export function ContextProvider({ children }) {
           },
         ],
       };
-   
+
       postUsuario(usuario);
       setFormularioValidado(false);
       form.reset();
     }
   };
-
 
   const value = {
     isLoggedin,
@@ -151,6 +217,7 @@ export function ContextProvider({ children }) {
     formularioValidado,
     setFormularioValidado,
     handleCadastrarUsuario,
+
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
