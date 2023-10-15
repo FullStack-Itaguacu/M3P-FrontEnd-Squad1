@@ -46,8 +46,7 @@ function Header({ children }) {
                 <Link className="nav-link" to="/cadastro-produto">
                   Cadastro Produto
                 </Link>
-                <NavDropdown
-                <Link className="nav-link text-light" to="/vendas">
+                <Link className="nav-link text-light" to="/vendas"> */}
                   Vendas
                 </Link>
                 <Link className="nav-link text-light" to="/registro-produtos">
@@ -55,28 +54,7 @@ function Header({ children }) {
                 </Link>
                 <Link className="nav-link text-light" to="/registro-usuarios">
                   Usuários
-                </Link>                
-                {/* <NavDropdown
-                  title="Mais opções"
-                  id={`offcanvasNavbarDropdown-expand`}
-                >
-                  <Link className="nav-link" to="/">
-                    Dashboard
-                  </Link>
-                  <NavDropdown.Divider />
-                  <Link className="nav-link" to="/">
-                    Dashboard
-                  </Link>
-                </NavDropdown> */}
-                {/* <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Item Buscado"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Buscar</Button>
-                </Form>               */}                
+                </Link>                      
                 <Link className="nav-link text-light divider" to="/">
                   Sair
                 </Link>
