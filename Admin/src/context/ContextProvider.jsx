@@ -8,9 +8,11 @@ import axios from "axios";
 
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
+  const [formularioValidado, setFormularioValidado] = useState(false);
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
+  const ENDPOINTPOSTPRODUTO = "/api/products/admin";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -70,11 +72,74 @@ export function ContextProvider({ children }) {
         );
       });
   };
+  const postProduto = (produto) => {
+    const token = localStorage.getItem("token");
+    //adicionar produto ao banco de dados
+    axios
+      .post(BASEURL + ENDPOINTPOSTPRODUTO, produto, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      .then((response) => {
+        const { message, produto } = response.data;
 
+        const { id, name, lab_name, unit_price } = produto;
+        //alert para mensagem de sucesso caso produto seja adicionado ao banco de dados
+        alert(
+          `${message}  ID : ${id} Nome: ${name} Laboratorio: ${lab_name} Preço Unitario: ${unit_price}`
+        );
+      })
+      .catch((err) => {
+        //alert para mensagem de erro caso produto nao seja adicionado ao banco de dados
+        const { cause, error, status } = err.response.data;
+        alert(
+          `Infelizmente o produto  ${produto.name} não foi adiccionado - ${error} - ${cause} - ${status}`
+        );
+      });
+  };
+  const handleSubmitProduto = (event) => {
+    //obter formulário
+    const form = event.currentTarget;
+    //variável para guardar os dados do formulário para criação de um novo objeto produto;
+    let produto;
+    //se formulario nao e valido
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    //mostra os errores dos inputs no formulário
+    setFormularioValidado(true);
+    event.preventDefault();
+    //quando formulário e valido cria um objeto estabelecimento para   ser guardado na base de dados
+    if (form.checkValidity() === true) {
+      event.preventDefault();
+      //captura de dados do formulário para criação de objeto produto
+      produto = {
+        name: event.target.elements["medicamento"].value,
+        lab_name: event.target.elements["laboratorio"].value,
+        image_link: event.target.elements["imagem"].value,
+        dosage:
+          event.target.elements["dosagem"].value +
+          event.target.elements["unidade_dosagem"].value,
+        unit_price: Number(event.target.elements["valorUnitario"].value),
+        type_product: event.target.elements["tipo"].value,
+        total_stock: Number(event.target.elements["quantidade"].value),
+        description: event.target.elements["descricao"].value,
+      };
+      postProduto(produto);
+      //limpar formulário  e estado de validação dos campos controlados do formulário
+      setFormularioValidado(false);
+      event.target.reset();
+    }
+  };
   const value = {
     isLoggedin,
     setIsLoggedin,
     loginAadmin,
+    handleSubmitProduto,
+    formularioValidado,
+    setFormularioValidado,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

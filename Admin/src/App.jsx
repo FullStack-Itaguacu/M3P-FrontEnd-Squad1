@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
 import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
+import CadastroProduto from "./pages/CadastroProduto/CadastroProduto";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         {/* Rotas da aplicaçao quando usuario esta logado */}
         <Route path="/" element={<PaginaDashboard/>} />
+        <Route path="/cadastro-produto" element={<CadastroProduto />} />
         <Route path="/vendas" element={<h1>Vendas</h1>} />
         <Route path="/registro-produtos" element={<h1>Registro Produtos</h1>} />
         <Route path="/registro-usuarios" element={<h1>Registro Usuários</h1>} />
