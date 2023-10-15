@@ -1,32 +1,19 @@
 import { createContext } from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
+// import axios from "axios";
 export const appContext = createContext();
+
 import axios from "axios";
 
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
-  const [cpf, setCpf] = useState("");
-  const [birth_date, setD] = useState("");
-  const [full_name, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [type_user, setTypeUser] = useState("");
-
-  const [cep, setCep] = useState("");
-  const [street, setStreet] = useState("");
-  const [number_street, setNumberStreet] = useState("");
-  const [neighborhood, setNeighborhood] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [complement, setComplement] = useState("");
-  const [lat, setLat] = useState("");
-  const [long, setLong] = useState("");
+  const [formularioValidado, setFormularioValidado] = useState(false);
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
-  const ENDPOINTCADASTRO = "/api/user/admin/signup";
+  const ENDPOINTPOSTPRODUTO = "/api/products/admin";
+  const ENDPOINTPOSTUSUARIO = "/api/user/admin/signup";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -86,163 +73,150 @@ export function ContextProvider({ children }) {
         );
       });
   };
-function validaCamposCadastroUsuario(){
-  if (!validaEmail(email)) {
-    return;
-  }
-r
-  if (!validaSenha(password)) {
-    return;
-  }
-//tem que ter 18 anos para se cadastra
-  const data = new Date();
-  const anoAtual = data.getFullYear();
-  const anoNascimento = birth_date.slice(0, 4);
-  const idade = anoAtual - anoNascimento;
-  if (idade < 18) {
-    alert("Você tem que ter 18 anos para se cadastrar");
-    return;
-  }
-  if(
-    !cpf ||
-    !birth_date ||
-    !full_name ||
-    !email ||
-    !phone ||
-    !password ||
-    !type_user ||
-    !cep ||
-    !street ||
-    !number_street ||
-    !neighborhood ||
-    !city ||
-    !state ||
-    !complement 
-  ) {
-    alert(`Preencha todos os campos!`);
-    return;
-  }
-}
-  // função para cadastrar usuario no banco de dados
-  async function handleCadastrarUsuario(event) {
-    event.preventDefault();
-    validaCamposCadastroUsuario();
+  // const postProduto = (produto) => {
+  //   const token = localStorage.getItem("token");
+  //   //adicionar produto ao banco de dados
+  //   axios
+  //     .post(BASEURL + ENDPOINTPOSTPRODUTO, produto, {
+  //       headers: {
+  //         Authorization: `${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       const { message, produto } = response.data;
 
-    const token = localStorage.getItem("token");
-    try {
-      const response = await axios.post(
-        BASEURL + ENDPOINTCADASTRO,
-        {
-          user: {
-            full_name,
-            cpf,
-            birth_date,
-            email,
-            phone,
-            password,
-            type_user,
-          },
-          address: [
-            {
-              zip: cep,
-              street,
-              number_street,
-              neighborhood,
-              city,
-              state,
-              complement,
-              lat,
-              long,
-            },
-          ],
+  //       const { id, name, lab_name, unit_price } = produto;
+  //       //alert para mensagem de sucesso caso produto seja adicionado ao banco de dados
+  //       alert(
+  //         `${message}  ID : ${id} Nome: ${name} Laboratorio: ${lab_name} Preço Unitario: ${unit_price}`
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       //alert para mensagem de erro caso produto nao seja adicionado ao banco de dados
+  //       const { cause, error, status } = err.response.data;
+  //       alert(
+  //         `Infelizmente o produto  ${produto.name} não foi adiccionado - ${error} - ${cause} - ${status}`
+  //       );
+  //     });
+  // };
+  // const handleSubmitProduto = (event) => {
+  //   //obter formulário
+  //   const form = event.currentTarget;
+  //   //variável para guardar os dados do formulário para criação de um novo objeto produto;
+  //   let produto;
+  //   //se formulario nao e valido
+  //   if (form.checkValidity() === false) {
+  //     event.preventDefault();
+  //     event.stopPropagation();
+  //   }
+  //   //mostra os errores dos inputs no formulário
+  //   setFormularioValidado(true);
+  //   event.preventDefault();
+  //   //quando formulário e valido cria um objeto estabelecimento para   ser guardado na base de dados
+  //   if (form.checkValidity() === true) {
+  //     event.preventDefault();
+  //     //captura de dados do formulário para criação de objeto produto
+  //     produto = {
+  //       name: event.target.elements["medicamento"].value,
+  //       lab_name: event.target.elements["laboratorio"].value,
+  //       image_link: event.target.elements["imagem"].value,
+  //       dosage:
+  //         event.target.elements["dosagem"].value +
+  //         event.target.elements["unidade_dosagem"].value,
+  //       unit_price: Number(event.target.elements["valorUnitario"].value),
+  //       type_product: event.target.elements["tipo"].value,
+  //       total_stock: Number(event.target.elements["quantidade"].value),
+  //       description: event.target.elements["descricao"].value,
+  //     };
+  //     postProduto(produto);
+  //     //limpar formulário  e estado de validação dos campos controlados do formulário
+  //     setFormularioValidado(false);
+  //     event.target.reset();
+  //   }
+  // };
+
+
+  const postUsuario = (usuario) => {
+    //adicionar usuario ao banco de dados
+    axios
+      .post(BASEURL + ENDPOINTPOSTUSUARIO, usuario ,{
+        headers: {
+          Authorization: `${token}`,
         },
-        {
-          headers: {
-            Authorization: `${token}`,
+      })
+      .then((response) => {
+        const { message, usuario } = response.data;
+
+        const { id, name, email, cpf, phone } = usuario;
+        //alert para mensagem de sucesso caso usuario seja adicionado ao banco de dados
+        alert(
+          `${message}  ID : ${id} Nome: ${name} Email: ${email} CPF: ${cpf} Telefone: ${phone}`
+        );
+      })
+      .catch((err) => {
+        //alert para mensagem de erro caso usuario nao seja adicionado ao banco de dados
+        const { cause, error, status } = err.response.data;
+        alert(
+          `Infelizmente o usuário  ${usuario.name} não foi adiccionado - ${error} - ${cause} - ${status}`
+        );
+      });
+  }
+
+  const handleCadastrarUsuario = (event) => {
+    // Evitar o comportamento padrão do formulário
+    event.preventDefault();
+    event.stopPropagation();
+  
+    // Obter os dados do formulário
+    const form = event.currentTarget;
+    const isValid = form.checkValidity();
+  
+    // Atualizar o estado de validação
+    setFormularioValidado(true);
+  
+    // Se o formulário for válido, criar o objeto de usuário e enviar para a API
+    if (isValid) {
+      const usuario = {
+        user: {
+          full_name: form.elements["name"].value,
+          cpf: form.elements["cpf"].value,
+          birth_date: form.elements["birth_date"].value,
+          email: form.elements["email"].value,
+          phone: form.elements["phone"].value,
+          password: form.elements["password"].value,
+          type_user: form.elements["type_user"].value,
+        },
+        address: [
+          {
+            zip: form.elements["cep"].value,
+            street: form.elements["street"].value,
+            number_street: form.elements["number_street"].value,
+            neighborhood: form.elements["neighborhood"].value,
+            city: form.elements["city"].value,
+            state: form.elements["state"].value,
+            complement: form.elements["complement"].value,
+            lat: form.elements["lat"].value,
+            long: form.elements["long"].value,
           },
-        }
-      );
-      console.log(response.data);
-      alert(`Usuário cadastrado com sucesso!`);
-      handleLimparCamposCasdastroUsuario();
-    } catch (error) {
-      console.error(error.response.data);
-      alert(`Erro ao cadastrar usuário!`  + error.response.data.message);
-
+        ],
+      };
+   
+      postUsuario(usuario);
+      setFormularioValidado(false);
+      form.reset();
     }
-  }
-
-  function handleViaCep(cepCode) {
-    axios.get(`https://viacep.com.br/ws/${cepCode}/json/`).then((response) => {
-      const { logradouro, bairro, localidade, uf } = response.data;
-      setStreet(logradouro);
-      setNeighborhood(bairro);
-      setCity(localidade);
-      setState(uf);
-    });
-  }
-
-  function handleLimparCamposCasdastroUsuario() {
-    setCpf("");
-    setD("");
-    setFullName("");
-    setEmail("");
-    setPhone("");
-    setPassword("");
-    setTypeUser("");
-    setCep("");
-    setStreet("");
-    setNumberStreet("");
-    setNeighborhood("");
-    setCity("");
-    setState("");
-    setComplement("");
-    setLat("");
-    setLong("");
-  }
+  };
+  
 
   const value = {
     isLoggedin,
     setIsLoggedin,
     loginAadmin,
-    validaEmail,
-    validaSenha,
+    // handleSubmitProduto,
+    formularioValidado,
+    setFormularioValidado,
     handleCadastrarUsuario,
-    cpf,
-    setCpf,
-    birth_date,
-    setD,
-    full_name,
-    setFullName,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    password,
-    setPassword,
-    type_user,
-    setTypeUser,
-    cep,
-    setCep,
-    street,
-    setStreet,
-    number_street,
-    setNumberStreet,
-    neighborhood,
-    setNeighborhood,
-    city,
-    setCity,
-    state,
-    setState,
-    complement,
-    setComplement,
-    lat,
-    setLat,
-    long,
-    setLong,
-    handleViaCep,
-    handleLimparCamposCasdastroUsuario,
-    
+
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
