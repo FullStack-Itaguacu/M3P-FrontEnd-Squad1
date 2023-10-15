@@ -12,7 +12,7 @@ export function ContextProvider({ children }) {
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
-  const ENDPOINTPOSTPRODUTO = "/api/products/admin";
+  const ENDPOINPRODUTOS = "/api/products/admin/";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -76,7 +76,7 @@ export function ContextProvider({ children }) {
     const token = localStorage.getItem("token");
     //adicionar produto ao banco de dados
     axios
-      .post(BASEURL + ENDPOINTPOSTPRODUTO, produto, {
+      .post(BASEURL + ENDPOINPRODUTOS, produto, {
         headers: {
           Authorization: `${token}`,
         },
@@ -133,6 +133,36 @@ export function ContextProvider({ children }) {
       event.target.reset();
     }
   };
+
+  function buscarProdutos(setProdutos, setTotalPages, setPage, setName, setType_product, setLimit, name, type_product, page, limit) {
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(`${BASEURL}${ENDPOINPRODUTOS}${page}/${limit}`, {
+        headers: {
+          Authorization: token,
+        },
+        params: {
+          name: name,
+          type_product: type_product,
+        },
+      })
+      .then((res) => {BASEURL
+        if (res && res.status === 200) {
+          setProdutos(res.data.products);
+          setTotalPages(res.data.total_pages);
+          setPage(res.data.actual_page);
+        }
+        if (res && res.status === 204) {
+          alert(
+            "Nenhum produto encontrado com esses parametros de busqueda, vamos mostrar todos os produtos"
+          );
+          setName("");
+          setType_product("");
+          setLimit(30);
+        }
+      });
+  }
   const value = {
     isLoggedin,
     setIsLoggedin,
@@ -140,6 +170,11 @@ export function ContextProvider({ children }) {
     handleSubmitProduto,
     formularioValidado,
     setFormularioValidado,
+    buscarProdutos,
+    BASEURL,
+    ENDPOINTLOGIN,
+    ENDPOINPRODUTOS,
+    
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
