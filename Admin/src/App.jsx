@@ -18,6 +18,10 @@ function App() {
         {/* Rotas da aplicaçao quando usuario esta logado */}
         <Route path="/" element={<PaginaDashboard/>} />
         <Route path="/cadastro-produto" element={<CadastroProduto />} />
+        <Route path="/vendas" element={<h1>Vendas</h1>} />
+        <Route path="/registro-produtos" element={<h1>Registro Produtos</h1>} />
+        <Route path="/registro-usuarios" element={<h1>Registro Usuários</h1>} />
+
 
         {/*Rota de erro quando nao existe a rota */}
         <Route path="*" element={<Error />} />
