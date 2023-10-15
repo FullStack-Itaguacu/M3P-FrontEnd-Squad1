@@ -147,7 +147,7 @@ export function ContextProvider({ children }) {
           type_product: type_product,
         },
       })
-      .then((res) => {
+      .then((res) => {BASEURL
         if (res && res.status === 200) {
           setProdutos(res.data.products);
           setTotalPages(res.data.total_pages);
@@ -170,7 +170,11 @@ export function ContextProvider({ children }) {
     handleSubmitProduto,
     formularioValidado,
     setFormularioValidado,
-    buscarProdutos
+    buscarProdutos,
+    BASEURL,
+    ENDPOINTLOGIN,
+    ENDPOINPRODUTOS,
+    
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

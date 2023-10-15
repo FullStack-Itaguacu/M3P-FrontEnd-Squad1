@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useContexto } from "../../context/useContexto";
 import { Container, Card, Row, Col, Pagination, Form } from "react-bootstrap";
+import ModalEdicao from "./ModalEdicao";
 
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -109,6 +110,9 @@ function ListagemProdutos() {
                 <p>Tipo : {produto.type_product}</p>
               </Card.Text>
             </Card.Body>
+            <Card.Footer>
+              <ModalEdicao produto={produto} />
+            </Card.Footer>
           </Card>
         ))}
       </Row>
