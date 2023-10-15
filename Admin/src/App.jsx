@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
 import CadastroProduto from "./pages/CadastroProduto/CadastroProduto";
+import Vendas from "./pages/Vendas/Vendas"
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <Routes>
         {/* Rotas da aplicaçao quando usuario esta logado */}
         <Route path="/" element={<PaginaDashboard/>} />
-        <Route path="/vendas" element={<h1>Vendas</h1>} />
+        <Route path="/vendas" element={<Vendas/>} />
         <Route path="/registro-produtos" element={<CadastroProduto />} />
         <Route path="/registro-usuarios" element={<h1>Registro Usuários</h1>} />
 
