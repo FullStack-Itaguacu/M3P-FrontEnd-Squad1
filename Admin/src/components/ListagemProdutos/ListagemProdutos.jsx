@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-
+import { useContexto } from "../../context/useContexto";
 import { Container, Card, Row, Col, Pagination, Form } from "react-bootstrap";
 
 function ListagemProdutos() {
@@ -8,43 +7,25 @@ function ListagemProdutos() {
   const [limit, setLimit] = useState(30);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState([0]);
-
   const [name, setName] = useState("");
   const [type_product, setType_product] = useState("");
 
+  const { buscarProdutos } = useContexto();
+
   useEffect(() => {
-    buscarProdutos();
+    buscarProdutos(
+      setProdutos,
+      setTotalPages,
+      setPage,
+      setName,
+      setType_product,
+      setLimit,
+      name,
+      type_product,
+      page,
+      limit
+    );
   }, [page, limit, name, type_product]);
-
-  function buscarProdutos() {
-    const token = localStorage.getItem("token");
-
-    axios
-      .get(`http://localhost:3000/api/products/admin/${page}/${limit}`, {
-        headers: {
-          Authorization: token,
-        },
-        params: {
-          name: name,
-          type_product: type_product,
-        },
-      })
-      .then((res) => {
-        if (res && res.status === 200) {
-          setProdutos(res.data.products);
-          setTotalPages(res.data.total_pages);
-          setPage(res.data.actual_page);
-        }
-        if (res && res.status === 204) {
-          alert(
-            "Nenhum produto encontrado com esses parametros de busqueda, vamos mostrar todos os produtos"
-          );
-          setName("");
-          setType_product("");
-          setLimit(30);
-        }
-      });
-  }
 
   const handleBack = (e) => {
     e.preventDefault();
