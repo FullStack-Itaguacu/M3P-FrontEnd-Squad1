@@ -31,7 +31,7 @@ function ListaUsuarios() {
                     setPage(res.data.actual_page);
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => alert(error))
     }
 
     useEffect(() => {
@@ -52,7 +52,6 @@ function ListaUsuarios() {
     };
 
     const filtra = async () => {
-        console.log("filtrou")
         await buscaUsuarios(page, limit, nome, ordem)
     }
 
