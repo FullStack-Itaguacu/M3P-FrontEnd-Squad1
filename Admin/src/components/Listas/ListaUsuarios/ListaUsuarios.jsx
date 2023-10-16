@@ -36,7 +36,7 @@ function ListaUsuarios() {
 
     useEffect(() => {
         buscaUsuarios(page, limit, nome, ordem)
-    }, [])
+    }, [page])
 
     const handleBack = (e) => {
         e.preventDefault();
