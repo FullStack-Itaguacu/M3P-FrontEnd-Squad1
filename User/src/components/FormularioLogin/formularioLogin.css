@@ -1,0 +1,20 @@
+.form {
+    background: linear-gradient(to right, rgb(3, 193, 25), blue);
+    border: 2px #ffffff solid;
+    border-radius: 5px;
+    padding: 45px;
+    box-shadow: 5px 5px 10px grey;
+    transition: 0,6s ease-in-out;
+}
+
+.form:hover {
+    box-shadow: 10px 10px 15px grey;
+    transition: 0,6s ease-in-out;
+}
+
+.text-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+}
