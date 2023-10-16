@@ -146,10 +146,48 @@ export function ContextProvider({ children }) {
     }
   };
 
-  function buscarProdutos(setProdutos, setTotalPages, setPage, setName, setType_product, setLimit, name, type_product, page, limit) {
+  function buscarProdutos(
+    setProdutos,
+    setTotalPages,
+    setPage,
+    setName,
+    setType_product,
+    setLimit,
+    name,
+    type_product,
+    page,
+    limit
+  ) {
     const token = localStorage.getItem("token");
 
-// ___________VALIDAÇÃO DE CADASTRO DE USUARIO_______________________
+    axios
+      .get(`${BASEURL}${ENDPOINPRODUTOS}${page}/${limit}`, {
+        headers: {
+          Authorization: token,
+        },
+        params: {
+          name: name,
+          type_product: type_product,
+        },
+      })
+      .then((res) => {
+        BASEURL;
+        if (res && res.status === 200) {
+          setProdutos(res.data.products);
+          setTotalPages(res.data.total_pages);
+          setPage(res.data.actual_page);
+        }
+        if (res && res.status === 204) {
+          alert(
+            "Nenhum produto encontrado com esses parametros de busqueda, vamos mostrar todos os produtos"
+          );
+          setName("");
+          setType_product("");
+          setLimit(30);
+        }
+      });
+  }
+  // ___________VALIDAÇÃO DE CADASTRO DE USUARIO_______________________
 
   function validaCPF(cpf) {
     const regex = /^[0-9]{11}$/;
@@ -166,16 +204,15 @@ export function ContextProvider({ children }) {
     const regex = /^[0-9]{10,}$/; // Para pelo menos 10 dígitos
 
     if (!regex.test(telefone)) {
-        alert(
-            "Telefone incorreto, verificar se não possui caracteres especiais ou menos de 10 dígitos."
-        );
-        return false;
+      alert(
+        "Telefone incorreto, verificar se não possui caracteres especiais ou menos de 10 dígitos."
+      );
+      return false;
     }
     return true;
-}
+  }
 
   function validaCEP(cep) {
-
     const regex = /^[0-9]{8}$/;
 
     if (!regex.test(cep)) {
@@ -214,7 +251,7 @@ export function ContextProvider({ children }) {
     return value.replace(/\D/g, "");
   }
 
-//função para buscar endereço pelo cep
+  //função para buscar endereço pelo cep
   const handleBuscarEndereco = async (e) => {
     const { value } = e.target;
     const cep = value?.replace(/\D/g, "");
@@ -275,7 +312,9 @@ export function ContextProvider({ children }) {
         if (error.response) {
           // O servidor respondeu com um código de erro
           if (error.response.status === 409) {
-            alert("Usuário já cadastrado. Por favor, escolha um email diferente.");
+            alert(
+              "Usuário já cadastrado. Por favor, escolha um email diferente."
+            );
           } else {
             console.error(error.response.data); // Lidar com outros erros de resposta do servidor
             alert(`Erro ao cadastrar usuário: ${error.response.data.message}`);
@@ -283,7 +322,9 @@ export function ContextProvider({ children }) {
         } else if (error.request) {
           // A solicitação foi feita, mas não recebeu resposta
           console.error(error.request);
-          alert("Não foi possível cadastrar o usuário. Tente novamente mais tarde.");
+          alert(
+            "Não foi possível cadastrar o usuário. Tente novamente mais tarde."
+          );
         } else {
           // Algo aconteceu durante a configuração da solicitação que desencadeou um erro
           console.error("Erro", error.message);
@@ -316,7 +357,7 @@ export function ContextProvider({ children }) {
       );
       const telefoneValido = validaTelefone(telefoneValue);
       const cepValue = removeNonNumericCharacters(form.elements["zip"].value);
-      const cepValido = validaCEP(cepValue); 
+      const cepValido = validaCEP(cepValue);
       const nomeCompletoValido = validaCampoObrigatorio(
         form.elements["full_name"].value,
         "Nome completo"
@@ -365,35 +406,8 @@ export function ContextProvider({ children }) {
       form.reset();
     }
   };
-//___________-FIM VALIDAÇÃO DE CADASTRO DE USUARIO-_______________________
+  //___________-FIM VALIDAÇÃO DE CADASTRO DE USUARIO-_______________________
 
-    axios
-      .get(`${BASEURL}${ENDPOINPRODUTOS}${page}/${limit}`, {
-        headers: {
-          Authorization: token,
-        },
-        params: {
-          name: name,
-          type_product: type_product,
-        },
-      })
-      .then((res) => {BASEURL
-        if (res && res.status === 200) {
-          setProdutos(res.data.products);
-          setTotalPages(res.data.total_pages);
-          setPage(res.data.actual_page);
-        }
-        if (res && res.status === 204) {
-          alert(
-            "Nenhum produto encontrado com esses parametros de busqueda, vamos mostrar todos os produtos"
-          );
-          setName("");
-          setType_product("");
-          setLimit(30);
-        }
-      });
-  }
-  
   const value = {
     isLoggedin,
     setIsLoggedin,
@@ -417,8 +431,6 @@ export function ContextProvider({ children }) {
     setCidade,
     estado,
     setEstado,
-    handleSubmitProduto,
-    buscarProdutos,
     BASEURL,
     ENDPOINTLOGIN,
     ENDPOINPRODUTOS,
