@@ -77,7 +77,9 @@ export function ContextProvider({ children }) {
     const regex = /^[0-9]{11}$/;
 
     if (!regex.test(cpf)) {
-      alert("CPF incorreto, verificar se não possui caracteres especiais ou menos de 11 dígitos.");
+      alert(
+        "CPF incorreto, verificar se não possui caracteres especiais ou menos de 11 dígitos."
+      );
     }
     return regex.test(cpf);
   }
@@ -108,7 +110,6 @@ export function ContextProvider({ children }) {
     }
     return true;
   }
-  
 
   function validaCampoObrigatorio(campo, nomeCampo) {
     if (!campo || campo.trim() === "") {
@@ -117,10 +118,25 @@ export function ContextProvider({ children }) {
     }
     return true;
   }
+  // idade minima para cadastro 18 anos
+  function validaIdade(dataNascimento) {
+    const dataAtual = new Date();
+    const dataNascimentoFormatada = new Date(dataNascimento);
+    const idade = dataAtual.getFullYear() - dataNascimentoFormatada.getFullYear();
+    const mes = dataAtual.getMonth() - dataNascimentoFormatada.getMonth();
+    if (mes < 0 || (mes === 0 && dataAtual.getDate() < dataNascimentoFormatada.getDate())) {
+      idade--;
+    }
+    if (idade < 18) {
+      alert("Idade mínima para cadastro é 18 anos.");
+      return false;
+    }
+    return true;
+  }
+
 
   const postUsuario = (usuario) => {
     const token = localStorage.getItem("token");
-    console.log(usuario);
     axios
       .post(BASEURL + ENDPOINTPOSTUSUARIO, usuario, {
         headers: {
@@ -129,16 +145,15 @@ export function ContextProvider({ children }) {
       })
       .then((response) => {
         const { message, usuario } = response.data;
-        const {  full_name } = usuario;
-        alert(
-          `${message} Nome: ${full_name} `
-        );
+        const { full_name } = usuario;
+        alert(`${message} Nome: ${full_name} `);
       })
       .catch((err) => {
-        const { cause, error, status } = err.response.data;
-        alert(
-          `Infelizmente o usuário  ${usuario.name} não foi adiccionado - ${error} - ${cause} - ${status}`
-        );
+        if (err.response && err.response.status === 409) {
+          alert("Usuário já existe");
+        } else {
+          console.error(err);
+        }
       });
   };
 
@@ -163,10 +178,11 @@ export function ContextProvider({ children }) {
       const cepValido = validaCEP(form.elements["zip"].value);
       const nomeCompletoValido = validaCampoObrigatorio(
         form.elements["full_name"].value,
-        "Nome completo");
+        "Nome completo"
+      );
       const typeUserValido = validaTypeUser(form.elements["type_user"].value);
-      // Adicione mais chamadas para validaCampoObrigatorio para os outros campos obrigatórios aqui
-
+      const idadeValida = validaIdade(form.elements["birth_date"].value);
+     
       // Se qualquer uma das validações falhar, pare o processamento e não envie os dados para o back-end
       if (
         !emailValido ||
@@ -175,7 +191,8 @@ export function ContextProvider({ children }) {
         !telefoneValido ||
         !cepValido ||
         !nomeCompletoValido ||
-        !typeUserValido
+        !typeUserValido ||
+        !idadeValida
       ) {
         return;
       }
@@ -217,7 +234,6 @@ export function ContextProvider({ children }) {
     formularioValidado,
     setFormularioValidado,
     handleCadastrarUsuario,
-
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
