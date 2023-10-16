@@ -66,7 +66,7 @@ function ListaUsuarios() {
                     <Form.Select aria-label="Tipo de usuário" id="ordem"
                         onChange={(e) => setOrdem(e.target.value)}
                     >
-                        <option>Selecione...</option>
+                        <option value="ASC">Selecione...</option>
                         <option value="ASC">Crescente</option>
                         <option value="DESC">Decrescente</option>
                     </Form.Select>
@@ -79,7 +79,7 @@ function ListaUsuarios() {
                             setPage(1);
                         }}
                     >
-                        <option value="20">Produtos por pagina</option>
+                        <option value="20">Cards por página</option>
                         <option value="1">1</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -112,11 +112,11 @@ function ListaUsuarios() {
                             )
                         })
                     ) :
-                    <h1>Teste</h1>
+                    <h2 className="tituloListagem">Não há registros de usuários</h2>
                 }
             </Row>
 
-        </Container>
+        </Container >
     )
 }
 
