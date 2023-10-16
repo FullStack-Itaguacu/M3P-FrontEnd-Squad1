@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useContexto } from "../../context/useContexto";
+import InputMask from "react-input-mask";
 import axios from "axios";
 
 function FormularioCadastroUsuario() {
@@ -18,11 +19,10 @@ function FormularioCadastroUsuario() {
   
   const refForm = useRef(null);
 
-  const { formularioValidado, setFormularioValidado, handleCadastrarUsuario } =
+  const { formularioValidado, setFormularioValidado, handleCadastrarUsuario ,setTipoUsuario,tipoUsuario} =
     useContexto();
 
   useEffect(() => {
-
     if (cep.length === 8) {
       axios
         .get(`https://viacep.com.br/ws/${cep}/json/`)
@@ -80,14 +80,26 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="cpf">
           <Form.Label>CPF</Form.Label>
-          <Form.Control required type="text" placeholder="000.000.000-00" />
+          <Form.Control 
+            required 
+            as={InputMask}
+            mask="999.999.999-99"
+            type="text" 
+            placeholder="000.000.000-00" 
+            />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um CPF válido.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="phone">
-          <Form.Label>Telefone</Form.Label>
-          <Form.Control required type="text" placeholder="(00) 00000-0000" />
+          <Form.Label>Telefone/Celular</Form.Label>
+          <Form.Control 
+            required 
+            as={InputMask}
+            mask="(99) 99999-9999"
+            type="text" 
+            placeholder="(00) 00000-0000" 
+            />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um telefone válido.
           </Form.Control.Feedback>
@@ -96,7 +108,7 @@ function FormularioCadastroUsuario() {
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control required type="email" placeholder="Email" />
+          <Form.Control required type="email" placeholder="exemplo@exemplo.com" />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um email válido.
           </Form.Control.Feedback>
@@ -125,17 +137,16 @@ function FormularioCadastroUsuario() {
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="type_user">
           <Form.Label>Tipo de Usuário</Form.Label>
-          <Form.Control as="select" required>
-            <option>Selecione</option>
-            <option>Administrador</option>
-            <option>Usuário</option>
+          <Form.Control
+            as="select"
+            required
+            value={tipoUsuario}
+            onChange={(e) => setTipoUsuario(e.target.value)}
+          >
+            <option value="">Selecione</option>
+            <option value="Admin">Administrador</option>
+            <option value="Buyer">Usuário</option>
           </Form.Control>
-          <Form.Control.Feedback>
-            {refForm.current &&
-            refForm.current.elements["type_user"].value !== "Selecione"
-              ? "OK"
-              : "Por favor selecione um tipo de usuário."}
-          </Form.Control.Feedback>
           <Form.Control.Feedback type="invalid">
             Por favor selecione um tipo de usuário.
           </Form.Control.Feedback>
@@ -144,6 +155,8 @@ function FormularioCadastroUsuario() {
           <Form.Label>CEP</Form.Label>
           <Form.Control
             required
+            as={InputMask}
+            mask="99999-999"
             type="text"
             placeholder="00000-000"
             value={cep}
@@ -170,7 +183,10 @@ function FormularioCadastroUsuario() {
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="number_street">
           <Form.Label>Número</Form.Label>
-          <Form.Control required type="text" placeholder="Número" />
+          <Form.Control 
+          required 
+          type="text" 
+          placeholder="Número" />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um número válido.
           </Form.Control.Feedback>
@@ -215,7 +231,10 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="lat">
           <Form.Label>Latitude</Form.Label>
-          <Form.Control type="text" placeholder="Latitude (opcional)" />
+          <Form.Control 
+            type="text" 
+            placeholder="Latitude (opcional)" 
+            />
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="long">
           <Form.Label>Longitude</Form.Label>

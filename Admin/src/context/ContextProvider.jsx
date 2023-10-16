@@ -8,6 +8,7 @@ import axios from "axios";
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [formularioValidado, setFormularioValidado] = useState(false);
+  const [tipoUsuario, setTipoUsuario] = useState("");
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
@@ -114,41 +115,44 @@ export function ContextProvider({ children }) {
   function validaIdade(dataNascimento) {
     const dataAtual = new Date();
     const dataNascimentoFormatada = new Date(dataNascimento);
-    const idade = dataAtual.getFullYear() - dataNascimentoFormatada.getFullYear();
+    let idade = dataAtual.getFullYear() - dataNascimentoFormatada.getFullYear();
     const mes = dataAtual.getMonth() - dataNascimentoFormatada.getMonth();
     if (mes < 0 || (mes === 0 && dataAtual.getDate() < dataNascimentoFormatada.getDate())) {
       idade--;
     }
-    if (idade < 18) {
-      alert("Idade mínima para cadastro é 18 anos.");
+    if (idade < 18 || idade > 120) {
+      alert("Idade incorreta, verificar se a idade é maior que 18 anos.");
       return false;
     }
     return true;
   }
 
-  const postUsuario = (usuario) => {
-    usuario.user.type_user = typeUser;
-    console.log(usuario);
+  const postUsuario = (usuarioProp) => {
+    usuarioProp.user.type_user = tipoUsuario;
     const token = localStorage.getItem("token");
+
     axios
-      .post(BASEURL + ENDPOINTPOSTUSUARIO, usuario, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      })
-      .then((response) => {
-        const { message, usuario } = response.data;
-        const { full_name } = usuario;
-        alert(`${message} Nome: ${full_name} `);
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 409) {
-          alert("Usuário já existe");
-        } else {
-          console.error(err);
-        }
-      });
-  };
+        .post(BASEURL + ENDPOINTPOSTUSUARIO, usuarioProp, {
+            headers: {
+                Authorization: `${token}`,
+            },
+        })
+        .then((response) => {
+            const { message, usuario } = response.data;
+            if (usuario && usuario.full_name) {
+                const { full_name } = usuario;
+                console.log(usuario);
+                alert(`${message} - Usuário ${full_name} cadastrado com sucesso!`);
+            } else {
+                alert(`${message} - Usuário cadastrado com sucesso!`);
+            }
+        })
+        .catch((error) => {
+            console.error(error); // Lidere com qualquer erro que ocorra durante a chamada à API
+            alert("Erro ao cadastrar usuário. Por favor, tente novamente.");
+        });
+};
+
   
   const handleCadastrarUsuario = (event) => {
     const form = event.currentTarget;
@@ -183,11 +187,11 @@ export function ContextProvider({ children }) {
         !telefoneValido ||
         !cepValido ||
         !nomeCompletoValido ||
-        !typeUserValido ||
         !idadeValida 
       ) {
         return;
       }
+      
       usuario = {
         user: {
           full_name: form.elements["full_name"].value,
@@ -196,7 +200,7 @@ export function ContextProvider({ children }) {
           email: form.elements["email"].value,
           phone: form.elements["phone"].value,
           password: form.elements["password"].value,
-          type_user: form.elements["type_user"].value,
+          type_user: tipoUsuario,
         },
         address: [
           {
@@ -225,6 +229,9 @@ export function ContextProvider({ children }) {
     formularioValidado,
     setFormularioValidado,
     handleCadastrarUsuario,
+    tipoUsuario,
+    setTipoUsuario,
+    
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
