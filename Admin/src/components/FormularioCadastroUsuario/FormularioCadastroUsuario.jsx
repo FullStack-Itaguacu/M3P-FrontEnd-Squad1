@@ -42,7 +42,7 @@ function FormularioCadastroUsuario() {
       onSubmit={handleCadastrarUsuario}
     >
       <div className="d-flex justify-content-left">
-        <h3 className="m-3">Cadastro de Usuário</h3>
+        <h3 className="m-3">Registro de um novo Usuário</h3>
       </div>
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="full_name">

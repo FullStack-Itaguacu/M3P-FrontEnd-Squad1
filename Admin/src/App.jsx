@@ -17,7 +17,7 @@ function App() {
       <Routes>
         {/* Rotas da aplicaçao quando usuario esta logado */}
         <Route path="/" element={<PaginaDashboard/>} />
-        <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
+        <Route path="/registro-usuarios" element={<CadastroUsuario />} />
         {/*Rota de erro quando nao existe a rota */}
         <Route path="*" element={<Error />} />
       </Routes>

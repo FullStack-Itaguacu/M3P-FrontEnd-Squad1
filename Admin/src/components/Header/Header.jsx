@@ -40,8 +40,8 @@ function Header({ children }) {
                     Dashboard
                   </Link>
                   <NavDropdown.Divider />
-                  <Link className="nav-link" to="/cadastro-usuario">
-                   Cadastro de Usuário
+                  <Link className="nav-link" to="/registro-usuarios">
+                  Usuários
                   </Link>
                 </NavDropdown>
               </Nav>
