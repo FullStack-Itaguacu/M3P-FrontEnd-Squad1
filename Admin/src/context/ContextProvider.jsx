@@ -412,6 +412,8 @@ export function ContextProvider({ children }) {
     isLoggedin,
     setIsLoggedin,
     loginAadmin,
+    handleSubmitProduto,
+    buscarProdutos,
     formularioValidado,
     setFormularioValidado,
     handleCadastrarUsuario,
