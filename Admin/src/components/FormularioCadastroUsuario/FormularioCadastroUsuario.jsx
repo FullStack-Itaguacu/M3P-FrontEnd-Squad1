@@ -1,20 +1,63 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useContexto } from "../../context/useContexto";
+import axios from "axios";
 
 function FormularioCadastroUsuario() {
+  const [cep, setCep] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
+  const [endereco, setEndereco] = useState({
+    logradouro: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+  });
+  
   const refForm = useRef(null);
 
-  const {
-    formularioValidado,
-    setFormularioValidado,
-    handleCadastrarUsuario,
-    handleLimparCamposCadastroUsuario,
-  } = useContexto();
+  const { formularioValidado, setFormularioValidado, handleCadastrarUsuario } =
+    useContexto();
+
+  useEffect(() => {
+
+    if (cep.length === 8) {
+      axios
+        .get(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => {
+          setEndereco({
+            logradouro: response.data.logradouro,
+            bairro: response.data.bairro,
+            cidade: response.data.localidade,
+            estado: response.data.uf,
+          });
+        })
+        .catch((error) => {
+          alert("CEP não encontrado!");
+          console.error("Erro ao buscar CEP:", error);
+        });
+    }
+  }, [cep]);
 
   useEffect(() => {
     setFormularioValidado(false);
   }, []);
+
+  const handleLimparCamposCadastroUsuario = () => {
+    setCep("");
+    setLogradouro("");
+    setBairro("");
+    setCidade("");
+    setEstado("");
+    setEndereco({
+      logradouro: "",
+      bairro: "",
+      cidade: "",
+      estado: "",
+    });
+  };
 
   return (
     <Form
@@ -99,7 +142,13 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="zip">
           <Form.Label>CEP</Form.Label>
-          <Form.Control required type="text" placeholder="00000-000" />
+          <Form.Control
+            required
+            type="text"
+            placeholder="00000-000"
+            value={cep}
+            onChange={(e) => setCep(e.target.value)}
+          />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um CEP válido.
           </Form.Control.Feedback>
@@ -110,6 +159,8 @@ function FormularioCadastroUsuario() {
             required
             type="text"
             placeholder="Avenida / Rua / Servidão ..."
+            value={endereco.logradouro}
+            onChange={(e) => setLogradouro(e.target.value)}
           />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um logradouro válido.
@@ -131,18 +182,36 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="neighborhood">
           <Form.Label>Bairro</Form.Label>
-          <Form.Control required type="text" placeholder="Bairro" />
+          <Form.Control
+            required
+            type="text"
+            placeholder="Bairro"
+            value={endereco.bairro}
+            onChange={(e) => setBairro(e.target.value)}
+          />
         </Form.Group>
       </Row>
       <Row className="mb-3">
         <Form.Group as={Col} md="3" controlId="city">
           <Form.Label>Cidade</Form.Label>
-          <Form.Control required type="text" placeholder="Cidade" />
+          <Form.Control
+            required
+            type="text"
+            placeholder="Cidade"
+            value={endereco.cidade}
+            onChange={(e) => setCidade(e.target.value)}
+          />
         </Form.Group>
 
         <Form.Group as={Col} md="3" controlId="state">
           <Form.Label>Estado</Form.Label>
-          <Form.Control required type="text" placeholder="Estado" />
+          <Form.Control
+            required
+            type="text"
+            placeholder="Estado"
+            value={endereco.estado}
+            onChange={(e) => setEstado(e.target.value)}
+          />
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="lat">
           <Form.Label>Latitude</Form.Label>
