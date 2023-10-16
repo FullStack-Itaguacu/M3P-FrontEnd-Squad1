@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useContexto } from "../../context/useContexto";
 import InputMask from "react-input-mask";
-import axios from "axios";
 
 function FormularioCadastroUsuario() {
   const [cep, setCep] = useState("");
@@ -27,34 +26,30 @@ function FormularioCadastroUsuario() {
     tipoUsuario,
   } = useContexto();
 
-  useEffect(() => {
-    try {
-      if (cep.length === 9) {
-        const cepLimpo = cep.replace("-", "");
-        console.log(cepLimpo);
-        axios
-          .get(`https://viacep.com.br/ws/${cepLimpo}/json/`)
-          .then((response) => {
-            setEndereco({
-              logradouro: response.data.logradouro,
-              bairro: response.data.bairro,
-              cidade: response.data.localidade,
-              estado: response.data.uf,
-            });
-          })
-          .catch((error) => {
-            console.error("Erro ao buscar CEP:", error);
-          });
-      }else{
-        alert("CEP inválido. Por favor, tente novamente.");
-      }
-  
+  const handleBuscarEndereco = async (e) => {
+    const { value } = e.target;
+    const cep = value?.replace(/\D/g, "");
+
+    if (cep?.length !== 8) {
+      return;
     }
-    catch (error) {
-      console.error("Erro ao focar no campo CEP:", error);
-    }
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.erro) {
+          alert("CEP não encontrado");
+          return;
+        }
+        setEndereco({
+          setCep: data.cep,
+          logradouro: data.logradouro,
+          bairro: data.bairro,
+          cidade: data.localidade,
+          estado: data.uf,
+        });
+      });
+  };
     
-  }, [cep]);
 
   useEffect(() => {
     setFormularioValidado(false);
@@ -180,6 +175,7 @@ function FormularioCadastroUsuario() {
             placeholder="00000-000"
             value={cep}
             onChange={(e) => setCep(e.target.value)}
+            onBlur={handleBuscarEndereco}
           />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um CEP válido.

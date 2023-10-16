@@ -178,11 +178,17 @@ export function ContextProvider({ children }) {
 
     if (form.checkValidity() === true) {
       event.preventDefault();
+
       const emailValido = validaEmail(form.elements["email"].value);
       const senhaValida = validaSenha(form.elements["password"].value);
-      const cpfValido = validaCPF(form.elements["cpf"].value);
-      const telefoneValido = validaTelefone(form.elements["phone"].value);
-      const cepValido = validaCEP(form.elements["zip"].value);
+      const cpfValue = removeNonNumericCharacters(form.elements["cpf"].value);
+      const cpfValido = validaCPF(cpfValue);
+      const telefoneValue = removeNonNumericCharacters(
+        form.elements["phone"].value
+      );
+      const telefoneValido = validaTelefone(telefoneValue);
+      const cepValue = removeNonNumericCharacters(form.elements["zip"].value);
+      const cepValido = validaCEP(cepValue); 
       const nomeCompletoValido = validaCampoObrigatorio(
         form.elements["full_name"].value,
         "Nome completo"
@@ -205,10 +211,10 @@ export function ContextProvider({ children }) {
       usuario = {
         user: {
           full_name: form.elements["full_name"].value,
-          ccpf: removeNonNumericCharacters(form.elements["cpf"].value),
+          cpf: removeNonNumericCharacters(form.elements["cpf"].value),
           birth_date: form.elements["birth_date"].value,
           email: form.elements["email"].value,
-          phone: removeNonNumericAndSpaces(form.elements["phone"].value),
+          phone: removeNonNumericCharacters(form.elements["phone"].value),
           password: form.elements["password"].value,
           type_user: tipoUsuario,
         },
@@ -226,6 +232,7 @@ export function ContextProvider({ children }) {
           },
         ],
       };
+      console.log(usuario);
       postUsuario(usuario);
       setFormularioValidado(false);
       form.reset();
