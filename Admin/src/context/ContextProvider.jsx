@@ -207,9 +207,23 @@ export function ContextProvider({ children }) {
         }
       })
       .catch((error) => {
-        console.error(error); // Lidere com qualquer erro que ocorra durante a chamada à API
-        alert("Erro ao cadastrar usuário. Por favor, tente novamente.");
-        cause: "Erro ao cadastrar usuário. Por favor, tente novamente.";
+        if (error.response) {
+          // O servidor respondeu com um código de erro
+          if (error.response.status === 409) {
+            alert("Usuário já cadastrado. Por favor, escolha um email diferente.");
+          } else {
+            console.error(error.response.data); // Lidar com outros erros de resposta do servidor
+            alert(`Erro ao cadastrar usuário: ${error.response.data.message}`);
+          }
+        } else if (error.request) {
+          // A solicitação foi feita, mas não recebeu resposta
+          console.error(error.request);
+          alert("Não foi possível cadastrar o usuário. Tente novamente mais tarde.");
+        } else {
+          // Algo aconteceu durante a configuração da solicitação que desencadeou um erro
+          console.error("Erro", error.message);
+          alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+        }
       });
   };
 
