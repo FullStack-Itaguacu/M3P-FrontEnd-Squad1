@@ -32,6 +32,9 @@ function Header({ children }) {
                 <Link className="nav-link" to="/">
                   Dashboard
                 </Link>
+                <Link className="nav-link" to="/registro-usuarios">
+                  Usuários
+                </Link>
                 <NavDropdown
                   title="Mais opções"
                   id={`offcanvasNavbarDropdown-expand`}

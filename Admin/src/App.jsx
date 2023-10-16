@@ -5,30 +5,32 @@ import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
 import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
+import RegistroUsuarios from "./pages/RegistroUsuarios/RegistroUsuarios";
 
 
 function App() {
   const { isLoggedin } = useContexto();
 
-  return <>{isLoggedin ?  
-  <BrowserRouter>
+  return <>{isLoggedin ?
+    <BrowserRouter>
       <Header >
-      <Routes>
-        {/* Rotas da aplicaçao quando usuario esta logado */}
-        <Route path="/" element={<PaginaDashboard/>} />
+        <Routes>
+          {/* Rotas da aplicaçao quando usuario esta logado */}
+          <Route path="/" element={<PaginaDashboard />} />
+          <Route path="/registro-usuarios" element={<RegistroUsuarios />} />
 
-        {/*Rota de erro quando nao existe a rota */}
-        <Route path="*" element={<Error />} />
-      </Routes>
+          {/*Rota de erro quando nao existe a rota */}
+          <Route path="*" element={<Error />} />
+        </Routes>
       </Header>
-  </BrowserRouter> :  
-  <BrowserRouter>
+    </BrowserRouter> :
+    <BrowserRouter>
       <Routes>
         {/* Rotas da aplicaçao quando usuario nao esta logado */}
         <Route path="/" element={<Login />} />
         <Route path="*" element={<Error />} />
       </Routes>
-  </BrowserRouter>}</>;
+    </BrowserRouter>}</>;
 }
 
 export default App;
