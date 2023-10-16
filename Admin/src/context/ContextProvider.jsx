@@ -117,7 +117,10 @@ export function ContextProvider({ children }) {
     const dataNascimentoFormatada = new Date(dataNascimento);
     let idade = dataAtual.getFullYear() - dataNascimentoFormatada.getFullYear();
     const mes = dataAtual.getMonth() - dataNascimentoFormatada.getMonth();
-    if (mes < 0 || (mes === 0 && dataAtual.getDate() < dataNascimentoFormatada.getDate())) {
+    if (
+      mes < 0 ||
+      (mes === 0 && dataAtual.getDate() < dataNascimentoFormatada.getDate())
+    ) {
       idade--;
     }
     if (idade < 18 || idade > 120) {
@@ -126,34 +129,41 @@ export function ContextProvider({ children }) {
     }
     return true;
   }
+  // Função para remover caracteres não numéricos de uma string
+  function removeNonNumericCharacters(value) {
+    return value.replace(/\D/g, "");
+  }
 
+  // Função para remover caracteres não numéricos e espaços de uma string
+  function removeNonNumericAndSpaces(value) {
+    return value.replace(/[^\d\s]/g, "").replace(/\s/g, "");
+  }
   const postUsuario = (usuarioProp) => {
     usuarioProp.user.type_user = tipoUsuario;
     const token = localStorage.getItem("token");
 
     axios
-        .post(BASEURL + ENDPOINTPOSTUSUARIO, usuarioProp, {
-            headers: {
-                Authorization: `${token}`,
-            },
-        })
-        .then((response) => {
-            const { message, usuario } = response.data;
-            if (usuario && usuario.full_name) {
-                const { full_name } = usuario;
-                console.log(usuario);
-                alert(`${message} - Usuário ${full_name} cadastrado com sucesso!`);
-            } else {
-                alert(`${message} - Usuário cadastrado com sucesso!`);
-            }
-        })
-        .catch((error) => {
-            console.error(error); // Lidere com qualquer erro que ocorra durante a chamada à API
-            alert("Erro ao cadastrar usuário. Por favor, tente novamente.");
-        });
-};
+      .post(BASEURL + ENDPOINTPOSTUSUARIO, usuarioProp, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      .then((response) => {
+        const { message, usuario } = response.data;
+        if (usuario && usuario.full_name) {
+          const { full_name } = usuario;
+          console.log(usuario);
+          alert(`${message} - Usuário ${full_name} cadastrado com sucesso!`);
+        } else {
+          alert(`${message} - Usuário cadastrado com sucesso!`);
+        }
+      })
+      .catch((error) => {
+        console.error(error); // Lidere com qualquer erro que ocorra durante a chamada à API
+        alert("Erro ao cadastrar usuário. Por favor, tente novamente.");
+      });
+  };
 
-  
   const handleCadastrarUsuario = (event) => {
     const form = event.currentTarget;
     let usuario;
@@ -178,7 +188,7 @@ export function ContextProvider({ children }) {
         "Nome completo"
       );
       const idadeValida = validaIdade(form.elements["birth_date"].value);
-     
+
       // Se qualquer uma das validações falhar, pare o processamento e não envie os dados para o back-end
       if (
         !emailValido ||
@@ -187,24 +197,24 @@ export function ContextProvider({ children }) {
         !telefoneValido ||
         !cepValido ||
         !nomeCompletoValido ||
-        !idadeValida 
+        !idadeValida
       ) {
         return;
       }
-      
+
       usuario = {
         user: {
           full_name: form.elements["full_name"].value,
-          cpf: form.elements["cpf"].value,
+          ccpf: removeNonNumericCharacters(form.elements["cpf"].value),
           birth_date: form.elements["birth_date"].value,
           email: form.elements["email"].value,
-          phone: form.elements["phone"].value,
+          phone: removeNonNumericAndSpaces(form.elements["phone"].value),
           password: form.elements["password"].value,
           type_user: tipoUsuario,
         },
         address: [
           {
-            zip: form.elements["zip"].value,
+            zip: removeNonNumericCharacters(form.elements["zip"].value),
             street: form.elements["street"].value,
             number_street: form.elements["number_street"].value,
             neighborhood: form.elements["neighborhood"].value,
@@ -231,7 +241,6 @@ export function ContextProvider({ children }) {
     handleCadastrarUsuario,
     tipoUsuario,
     setTipoUsuario,
-    
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

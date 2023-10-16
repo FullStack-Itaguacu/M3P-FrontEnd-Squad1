@@ -16,29 +16,44 @@ function FormularioCadastroUsuario() {
     cidade: "",
     estado: "",
   });
-  
+
   const refForm = useRef(null);
 
-  const { formularioValidado, setFormularioValidado, handleCadastrarUsuario ,setTipoUsuario,tipoUsuario} =
-    useContexto();
+  const {
+    formularioValidado,
+    setFormularioValidado,
+    handleCadastrarUsuario,
+    setTipoUsuario,
+    tipoUsuario,
+  } = useContexto();
 
   useEffect(() => {
-    if (cep.length === 8) {
-      axios
-        .get(`https://viacep.com.br/ws/${cep}/json/`)
-        .then((response) => {
-          setEndereco({
-            logradouro: response.data.logradouro,
-            bairro: response.data.bairro,
-            cidade: response.data.localidade,
-            estado: response.data.uf,
+    try {
+      if (cep.length === 9) {
+        const cepLimpo = cep.replace("-", "");
+        console.log(cepLimpo);
+        axios
+          .get(`https://viacep.com.br/ws/${cepLimpo}/json/`)
+          .then((response) => {
+            setEndereco({
+              logradouro: response.data.logradouro,
+              bairro: response.data.bairro,
+              cidade: response.data.localidade,
+              estado: response.data.uf,
+            });
+          })
+          .catch((error) => {
+            console.error("Erro ao buscar CEP:", error);
           });
-        })
-        .catch((error) => {
-          alert("CEP não encontrado!");
-          console.error("Erro ao buscar CEP:", error);
-        });
+      }else{
+        alert("CEP inválido. Por favor, tente novamente.");
+      }
+  
     }
+    catch (error) {
+      console.error("Erro ao focar no campo CEP:", error);
+    }
+    
   }, [cep]);
 
   useEffect(() => {
@@ -80,26 +95,26 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="cpf">
           <Form.Label>CPF</Form.Label>
-          <Form.Control 
-            required 
+          <Form.Control
+            required
             as={InputMask}
             mask="999.999.999-99"
-            type="text" 
-            placeholder="000.000.000-00" 
-            />
+            type="text"
+            placeholder="000.000.000-00"
+          />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um CPF válido.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="phone">
           <Form.Label>Telefone/Celular</Form.Label>
-          <Form.Control 
-            required 
+          <Form.Control
+            required
             as={InputMask}
             mask="(99) 99999-9999"
-            type="text" 
-            placeholder="(00) 00000-0000" 
-            />
+            type="text"
+            placeholder="(00) 00000-0000"
+          />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um telefone válido.
           </Form.Control.Feedback>
@@ -108,7 +123,11 @@ function FormularioCadastroUsuario() {
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control required type="email" placeholder="exemplo@exemplo.com" />
+          <Form.Control
+            required
+            type="email"
+            placeholder="exemplo@exemplo.com"
+          />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um email válido.
           </Form.Control.Feedback>
@@ -183,10 +202,7 @@ function FormularioCadastroUsuario() {
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="number_street">
           <Form.Label>Número</Form.Label>
-          <Form.Control 
-          required 
-          type="text" 
-          placeholder="Número" />
+          <Form.Control required type="text" placeholder="Número" />
           <Form.Control.Feedback type="invalid">
             Por favor preencha este campo com um número válido.
           </Form.Control.Feedback>
@@ -231,10 +247,7 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="lat">
           <Form.Label>Latitude</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Latitude (opcional)" 
-            />
+          <Form.Control type="text" placeholder="Latitude (opcional)" />
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="long">
           <Form.Label>Longitude</Form.Label>
