@@ -103,14 +103,6 @@ export function ContextProvider({ children }) {
     return regex.test(cep);
   }
 
-  function validaTypeUser(typeUser) {
-    if (typeUser === "Selecione") {
-      alert("Por favor selecione um tipo de usuário.");
-      return false;
-    }
-    return true;
-  }
-
   function validaCampoObrigatorio(campo, nomeCampo) {
     if (!campo || campo.trim() === "") {
       alert(`O campo ${nomeCampo} é obrigatório.`);
@@ -118,7 +110,7 @@ export function ContextProvider({ children }) {
     }
     return true;
   }
-  // idade minima para cadastro 18 anos
+  //idade minima para cadastro 18 anos
   function validaIdade(dataNascimento) {
     const dataAtual = new Date();
     const dataNascimentoFormatada = new Date(dataNascimento);
@@ -134,8 +126,9 @@ export function ContextProvider({ children }) {
     return true;
   }
 
-
   const postUsuario = (usuario) => {
+    usuario.user.type_user = typeUser;
+    console.log(usuario);
     const token = localStorage.getItem("token");
     axios
       .post(BASEURL + ENDPOINTPOSTUSUARIO, usuario, {
@@ -156,7 +149,7 @@ export function ContextProvider({ children }) {
         }
       });
   };
-
+  
   const handleCadastrarUsuario = (event) => {
     const form = event.currentTarget;
     let usuario;
@@ -180,7 +173,6 @@ export function ContextProvider({ children }) {
         form.elements["full_name"].value,
         "Nome completo"
       );
-      const typeUserValido = validaTypeUser(form.elements["type_user"].value);
       const idadeValida = validaIdade(form.elements["birth_date"].value);
      
       // Se qualquer uma das validações falhar, pare o processamento e não envie os dados para o back-end
@@ -192,7 +184,7 @@ export function ContextProvider({ children }) {
         !cepValido ||
         !nomeCompletoValido ||
         !typeUserValido ||
-        !idadeValida
+        !idadeValida 
       ) {
         return;
       }
@@ -220,7 +212,6 @@ export function ContextProvider({ children }) {
           },
         ],
       };
-
       postUsuario(usuario);
       setFormularioValidado(false);
       form.reset();
