@@ -9,6 +9,17 @@ export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [formularioValidado, setFormularioValidado] = useState(false);
   const [tipoUsuario, setTipoUsuario] = useState("");
+  const [cep, setCep] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
+  const [endereco, setEndereco] = useState({
+    logradouro: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+  });
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
@@ -73,7 +84,8 @@ export function ContextProvider({ children }) {
       });
   };
 
-  //validação de cadastro de usuario
+// ___________VALIDAÇÃO DE CADASTRO DE USUARIO_______________________
+
   function validaCPF(cpf) {
     const regex = /^[0-9]{11}$/;
 
@@ -86,16 +98,19 @@ export function ContextProvider({ children }) {
   }
 
   function validaTelefone(telefone) {
-    const regex = /^[0-9]+$/;
+    const regex = /^[0-9]{10,}$/; // Para pelo menos 10 dígitos
 
     if (!regex.test(telefone)) {
-      alert(
-        "Telefone incorreto, verificar se não possui caracteres especiais."
-      );
+        alert(
+            "Telefone incorreto, verificar se não possui caracteres especiais ou menos de 10 dígitos."
+        );
+        return false;
     }
-    return regex.test(telefone);
-  }
+    return true;
+}
+
   function validaCEP(cep) {
+
     const regex = /^[0-9]{8}$/;
 
     if (!regex.test(cep)) {
@@ -134,10 +149,43 @@ export function ContextProvider({ children }) {
     return value.replace(/\D/g, "");
   }
 
-  // Função para remover caracteres não numéricos e espaços de uma string
-  function removeNonNumericAndSpaces(value) {
-    return value.replace(/[^\d\s]/g, "").replace(/\s/g, "");
-  }
+//função para buscar endereço pelo cep
+  const handleBuscarEndereco = async (e) => {
+    const { value } = e.target;
+    const cep = value?.replace(/\D/g, "");
+
+    if (cep?.length !== 8) {
+      return;
+    }
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.erro) {
+          alert("CEP não encontrado");
+          return;
+        }
+        setEndereco({
+          setCep: data.cep,
+          logradouro: data.logradouro,
+          bairro: data.bairro,
+          cidade: data.localidade,
+          estado: data.uf,
+        });
+      });
+  };
+  const handleLimparCamposCadastroUsuario = () => {
+    setCep("");
+    setLogradouro("");
+    setBairro("");
+    setCidade("");
+    setEstado("");
+    setEndereco({
+      logradouro: "",
+      bairro: "",
+      cidade: "",
+      estado: "",
+    });
+  };
   const postUsuario = (usuarioProp) => {
     usuarioProp.user.type_user = tipoUsuario;
     const token = localStorage.getItem("token");
@@ -161,6 +209,7 @@ export function ContextProvider({ children }) {
       .catch((error) => {
         console.error(error); // Lidere com qualquer erro que ocorra durante a chamada à API
         alert("Erro ao cadastrar usuário. Por favor, tente novamente.");
+        cause: "Erro ao cadastrar usuário. Por favor, tente novamente.";
       });
   };
 
@@ -232,12 +281,12 @@ export function ContextProvider({ children }) {
           },
         ],
       };
-      console.log(usuario);
       postUsuario(usuario);
       setFormularioValidado(false);
       form.reset();
     }
   };
+//___________-FIM VALIDAÇÃO DE CADASTRO DE USUARIO-_______________________
 
   const value = {
     isLoggedin,
@@ -248,6 +297,21 @@ export function ContextProvider({ children }) {
     handleCadastrarUsuario,
     tipoUsuario,
     setTipoUsuario,
+    handleBuscarEndereco,
+    handleLimparCamposCadastroUsuario,
+    endereco,
+    setEndereco,
+    cep,
+    setCep,
+    logradouro,
+    setLogradouro,
+    bairro,
+    setBairro,
+    cidade,
+    setCidade,
+    estado,
+    setEstado,
+
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

@@ -4,18 +4,6 @@ import { useContexto } from "../../context/useContexto";
 import InputMask from "react-input-mask";
 
 function FormularioCadastroUsuario() {
-  const [cep, setCep] = useState("");
-  const [logradouro, setLogradouro] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [estado, setEstado] = useState("");
-  const [endereco, setEndereco] = useState({
-    logradouro: "",
-    bairro: "",
-    cidade: "",
-    estado: "",
-  });
-
   const refForm = useRef(null);
 
   const {
@@ -24,50 +12,26 @@ function FormularioCadastroUsuario() {
     handleCadastrarUsuario,
     setTipoUsuario,
     tipoUsuario,
+    handleBuscarEndereco,
+    handleLimparCamposCadastroUsuario,
+    endereco,
+    setEndereco,
+    cep,
+    setCep,
+    logradouro,
+    setLogradouro,
+    bairro,
+    setBairro,
+    cidade,
+    setCidade,
+    estado,
+    setEstado,
   } = useContexto();
-
-  const handleBuscarEndereco = async (e) => {
-    const { value } = e.target;
-    const cep = value?.replace(/\D/g, "");
-
-    if (cep?.length !== 8) {
-      return;
-    }
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.erro) {
-          alert("CEP não encontrado");
-          return;
-        }
-        setEndereco({
-          setCep: data.cep,
-          logradouro: data.logradouro,
-          bairro: data.bairro,
-          cidade: data.localidade,
-          estado: data.uf,
-        });
-      });
-  };
-    
 
   useEffect(() => {
     setFormularioValidado(false);
   }, []);
 
-  const handleLimparCamposCadastroUsuario = () => {
-    setCep("");
-    setLogradouro("");
-    setBairro("");
-    setCidade("");
-    setEstado("");
-    setEndereco({
-      logradouro: "",
-      bairro: "",
-      cidade: "",
-      estado: "",
-    });
-  };
 
   return (
     <Form
