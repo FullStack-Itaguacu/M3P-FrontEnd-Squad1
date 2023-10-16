@@ -13,7 +13,7 @@ function App() {
         <Header >
         <Routes>
           {/* Rotas da aplicaçao quando usuario esta logado */}
-            
+          <Route path="/" element={<h1> Teste </h1>} />
   
           {/*Rota de erro quando nao existe a rota */}
           <Route path="*" element={<Error />} />
