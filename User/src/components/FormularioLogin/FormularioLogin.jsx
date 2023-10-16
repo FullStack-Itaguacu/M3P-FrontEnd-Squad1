@@ -7,7 +7,9 @@ function FormularioLogin() {
             <Row>
                 <Col>
                     <Form action="">
-                        <Form.Text className="">Login</Form.Text>
+                        <div className="text-title">
+                            Login
+                        </div>
                         <Form.Group className="mb-3">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" placeholder="name@email.com" required />

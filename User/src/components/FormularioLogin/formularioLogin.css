@@ -2,6 +2,12 @@
     background: linear-gradient(to right, rgb(3, 193, 25), blue);
     border: 2px #b2c8a7 solid;
     border-radius: 5px;
-    padding: 30px;
+    padding: 45px;
+}
 
+.text-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
 }
