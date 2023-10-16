@@ -6,6 +6,7 @@ import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
 import CadastroUsuario from "./pages/CadastroUsuario/CadastroUsuario";
 import CadastroProduto from "./pages/CadastroProduto/CadastroProduto";
+import Vendas from "./pages/Vendas/Vendas"
 
 function App() {
   const { isLoggedin } = useContexto();
@@ -17,7 +18,7 @@ function App() {
         {/* Rotas da aplicaçao quando usuario esta logado */}
         <Route path="/" element={<PaginaDashboard/>} />
         <Route path="/registro-usuarios" element={<CadastroUsuario />} />
-        <Route path="/vendas" element={<h1>Vendas</h1>} />
+        <Route path="/vendas" element={<Vendas/>} />
         <Route path="/registro-produtos" element={<CadastroProduto />} />
         {/*Rota de erro quando nao existe a rota */}
         <Route path="*" element={<Error />} />

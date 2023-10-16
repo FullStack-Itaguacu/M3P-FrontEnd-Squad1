@@ -5,8 +5,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import propTypes from "prop-types";
 
-function Header() {
+function Header({children}) {
   return (
     <>
       <Navbar expand={false} className="bg-body-tertiary mb-3">
@@ -50,8 +51,12 @@ function Header() {
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
+      {children}
     </>
   );
 }
 
+Header.propTypes = {
+  children: propTypes.node.isRequired,
+};
 export default Header;
