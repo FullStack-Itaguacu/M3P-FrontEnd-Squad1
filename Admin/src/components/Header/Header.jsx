@@ -2,9 +2,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
+
 import "./header.css"
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+
 
 function Header({ children }) { 
   return (
@@ -38,28 +40,6 @@ function Header({ children }) {
                 <Link className="nav-link text-light" to="/">
                   Dashboard
                 </Link>
-                <NavDropdown
-                  title="Mais opções"
-                  id={`offcanvasNavbarDropdown-expand`}
-                >
-                  <Link className="nav-link" to="/">
-                    Dashboard
-                  </Link>
-                  <NavDropdown.Divider />
-                  <Link className="nav-link" to="/registro-usuarios">
-                  Usuários
-                  </Link>
-                </NavDropdown>
-              </Nav>
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Item Buscado"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Buscar</Button>
-              </Form>
                 <Link className="nav-link text-light" to="/vendas"> 
                   Vendas
                 </Link>
