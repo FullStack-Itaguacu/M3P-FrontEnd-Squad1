@@ -12,9 +12,8 @@ function ListagemVendas() {
           Authorization: `${token}`,
         },
       })
-      .then((response) => {
-        console.log(response.data.data);
-        setVendas(response.data.data);
+      .then((res) => {
+        res && res.status === 200 && setVendas(res.data.data);
       })
       .catch((error) => {
         console.log(error);
