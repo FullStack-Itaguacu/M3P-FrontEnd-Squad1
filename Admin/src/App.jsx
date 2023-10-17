@@ -17,7 +17,7 @@ function App() {
         <Routes>
           {/* Rotas da aplicaçao quando usuario esta logado */}
           <Route path="/" element={<PaginaDashboard />} />
-          <Route path="/vendas" element={<h1>Vendas</h1>} />
+          <Route path="/vendas" element={<Vendas />} />
           <Route path="/registro-produtos" element={<CadastroProduto />} />
           <Route path="/registro-usuarios" element={<RegistroUsuarios />} />
 

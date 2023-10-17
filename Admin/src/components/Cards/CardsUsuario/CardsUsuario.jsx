@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import personCircle from '../../../assets/personcircle.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import axios from 'axios'
 
@@ -18,9 +18,9 @@ const CardsUsuario = ({ usuario }) => {
         phone,
         birth_date,
         type_user,
-        created_by,
         createdAt,
         updatedAt } = usuario
+
     const [modal, setModal] = useState(false)
     const [nomeAtualizado, setNomeAtualizado] = useState(full_name)
     const [emailAtualizado, setEmailAtualizado] = useState(email)
@@ -101,6 +101,9 @@ const CardsUsuario = ({ usuario }) => {
                 <Card.Body>
                     <Card.Title>{full_name}</Card.Title>
                     <Card.Text>
+                        ID: {id}
+                    </Card.Text>
+                    <Card.Text>
                         CPF: {cpfMascara}
                     </Card.Text>
                     <Card.Text>
@@ -124,74 +127,67 @@ const CardsUsuario = ({ usuario }) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Dados do Usuário
+                        Dados do Usuário {full_name} ID: {id}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group as={Row} className="mb-3" controlId="nome">
-                            <Form.Label column sm="3">Nome Completo</Form.Label>
-                            <Col sm="9">
+                        <Row className='mb-3'>
+                            <Form.Group as={Col} md="6" controlId="nome">
+                                <Form.Label>Nome Completo</Form.Label>
                                 <Form.Control type="text" value={nomeAtualizado}
                                     onChange={(e) => setNomeAtualizado(e.target.value)}
                                 />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="email">
-                            <Form.Label column sm="3">Email</Form.Label>
-                            <Col sm="9">
+                            </Form.Group>
+                            <Form.Group as={Col} md="6" controlId="email">
+                                <Form.Label>Email</Form.Label>
                                 <Form.Control type="text" value={emailAtualizado}
                                     onChange={(e) => setEmailAtualizado(e.target.value)}
                                 />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column htmlFor="cpf" sm="1">CPF</Form.Label>
-                            <Col sm="5">
-                                <Form.Control id="cpf" type="text" value={cpfAtualizado}
+                            </Form.Group>
+                        </Row>
+                        <Row className='mb-3'>
+                            <Form.Group as={Col} md="4" controlId="cpf">
+                                <Form.Label>CPF</Form.Label>
+                                <Form.Control type="text"
+                                    value={cpfAtualizado}
                                     onChange={(e) => setCpfAtualizado(e.target.value)} />
-                            </Col>
-                            <Form.Label column sm="1" htmlFor="fone">Telefone</Form.Label>
-                            <Col sm="5">
-                                <Form.Control type="text" id="fone" value={foneAtualizado}
+                            </Form.Group>
+                            <Form.Group as={Col} md="4" controlId="fone">
+                                <Form.Label>Telefone</Form.Label>
+                                <Form.Control type="text" value={foneAtualizado}
                                     onChange={(e) => setFoneAtualizado(e.target.value)} />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="tipo">
-                            <Form.Label column sm="3">Tipo de usuário</Form.Label>
-                            <Col sm="9">
+                            </Form.Group>
+                            <Form.Group as={Col} md="4" controlId="tipo">
+                                <Form.Label>Tipo de usuário</Form.Label>
                                 <Form.Select aria-label="Tipo de usuário"
                                     onChange={(e) => setTipoAtualizado(e.target.value)}
                                 >
-                                    <option>Selecione...</option>
+                                    <option value={type_user}>Selecione...</option>
                                     <option value="Buyer">Comprador</option>
                                     <option value="Admin">Administrador</option>
                                 </Form.Select>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="dataNasc">
-                            <Form.Label column sm="3">Data de Nascimento</Form.Label>
-                            <Col sm="9">
+                            </Form.Group>
+                        </Row>
+                        <Row className='mb-3'>
+                            <Form.Group as={Col} md="4" controlId="dataNasc">
+                                <Form.Label>Data de Nascimento</Form.Label>
                                 <Form.Control type="text" value={dataNascMascara} disabled />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="criado">
-                            <Form.Label column sm="3">Cadastrado em </Form.Label>
-                            <Col sm="9">
+                            </Form.Group>
+                            <Form.Group as={Col} md="4" controlId="criado">
+                                <Form.Label>Cadastrado em </Form.Label>
                                 <Form.Control type="text" value={dataCadastroMascara} disabled />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="tipo">
-                            <Form.Label column sm="3">Atualizado em</Form.Label>
-                            <Col sm="9">
+                            </Form.Group>
+                            <Form.Group as={Col} md="4" controlId="tipo">
+                                <Form.Label>Atualizado em</Form.Label>
                                 <Form.Control type="text" value={dataAtualizadoMascara} disabled />
-                            </Col>
-                        </Form.Group>
+                            </Form.Group>
+                        </Row>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={(e) => atualizaDados(e)} variant="success"> Salvar</Button>
-                    <Button onClick={() => setModal(false)} variant="danger"> Cancelar</Button>
+                    <Button onClick={(e) => atualizaDados(e)} variant="success">Salvar</Button>
+                    <Button onClick={() => setModal(false)} variant="danger">Cancelar</Button>
                 </Modal.Footer>
             </Modal >
         </>

@@ -20,8 +20,7 @@ function ListaUsuarios() {
 
     const buscaUsuarios = async (page, limit, nome, ordem) => {
         setToken(localStorage.getItem("token"))
-        await axios.get(`${BASEURL}${ENDPOINTUSUARIOS}/${page}/${limit}?full_name=${nome}&
-        created_at=${ordem}`, {
+        await axios.get(`${BASEURL}${ENDPOINTUSUARIOS}/${page}/${limit}?full_name=${nome}&created_at=${ordem}`, {
             headers: { 'Authorization': token }
         })
             .then(res => {
@@ -108,7 +107,9 @@ function ListaUsuarios() {
                     (
                         users.map((usuario) => {
                             return (
-                                <CardsUsuario usuario={usuario} key={usuario.id} />
+                                <CardsUsuario usuario={usuario}
+                                    key={usuario.id}
+                                    busca={{ buscaUsuarios, nome, page, limit, ordem }} />
                             )
                         })
                     ) :
