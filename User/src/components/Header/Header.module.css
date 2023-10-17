@@ -23,6 +23,14 @@
     transition: 0,6s ease-in-out;
 }
 
+/* .navbarLink:hover {
+    text-decoration: underline 3px;
+    text-decoration-color:rgb(3, 193, 25);       
+    transition: 0,6s ease-in-out;
+    color: rgb(3, 193, 25);
+} */
+
 .navbarLink i {
     margin-right: 6px;
 }
+

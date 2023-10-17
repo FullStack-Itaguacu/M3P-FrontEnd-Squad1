@@ -1,7 +1,7 @@
 import { useContexto } from "../../context/useContexto";
 
 import { Container, Button, Form, Row, Col, Stack } from "react-bootstrap";
-import "./formularioLogin.css";
+import styles from "./Formulario.module.css";
 
 function FormularioLogin() {
   const { loginUser } = useContexto();
@@ -15,13 +15,13 @@ function FormularioLogin() {
   };
 
   return (
-    <Container className="form">
+    <Container className={styles.loginForm}>
       <Row>
         <Col>
           <Form onSubmit={handleSubmit}>
-            <div className="text-title">Login Usuário</div>
+            <div className={styles.textTitle}>Login Usuário</div>
             <Form.Group className="mb-3" controlId="Login.email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label className="text-light">Email</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@email.com"
@@ -29,7 +29,7 @@ function FormularioLogin() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="Login.senha">
-              <Form.Label>Senha</Form.Label>
+              <Form.Label className="text-light">Senha</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Digite sua senha..."
