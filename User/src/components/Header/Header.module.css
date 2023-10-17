@@ -1,0 +1,28 @@
+.navbarHeader {     
+    background: linear-gradient(to right, rgb(3, 193, 25), blue);
+}
+
+.navbarHeader:hover {
+    box-shadow: 5px 5px 10px grey;
+    transition: 0,6s ease-in-out;
+}
+
+.textLeft {
+    color: #fff;
+}
+
+.textLeft:hover {
+    color: blue;
+    transition: 0,6s ease-in-out;
+}
+
+.navbarLink:hover {
+    background-color: rgb(3, 193, 25);
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px grey;
+    transition: 0,6s ease-in-out;
+}
+
+.navbarLink i {
+    margin-right: 6px;
+}
