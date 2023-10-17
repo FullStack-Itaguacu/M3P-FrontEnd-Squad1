@@ -13,7 +13,10 @@ function App() {
         <Header >
         <Routes>
           {/* Rotas da aplicaçao quando usuario esta logado */}
-          <Route path="/" element={<h1> Teste </h1>} />
+          <Route path="/" element={<h1>Home</h1>} />
+          <Route path="/minhas-compras" element={<h1>Minhas compras</h1>} />
+          <Route path="/carrinho" element={<h1>Carrinho de compras</h1>} />
+          <Route path="/nome-usuario" element={<h1>Nome do usuário</h1>} />
   
           {/*Rota de erro quando nao existe a rota */}
           <Route path="*" element={<Error />} />
