@@ -1,0 +1,17 @@
+.login {
+    background-color: rgb(214, 229, 243);
+    padding-bottom: 8%;
+    padding-top: 50px;        
+}
+
+.img {
+    border-radius: 5px;
+    border: 2px #ffffff solid;
+    box-shadow: 5px 5px 10px grey;
+    transition: 0,6s ease-in-out;
+}
+
+.img:hover {
+    box-shadow: 10px 10px 15px grey;
+    transition: 0,6s ease-in-out;
+}

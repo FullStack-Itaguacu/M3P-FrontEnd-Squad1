@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
 import CadastroProduto from "./pages/CadastroProduto/CadastroProduto";
+import Vendas from "./pages/Vendas/Vendas"
 
 
 function App() {
