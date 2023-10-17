@@ -104,6 +104,8 @@ function FormularioCadastroUsuario() {
         .then((response) => {
           const { message } = response.data;
           alert(`${message}`);
+          navigate("/");
+
         })
         .catch((err) => {
           const { message, cause, status, error } = err.response.data;
@@ -122,7 +124,6 @@ function FormularioCadastroUsuario() {
       setLong("");
       event.target.reset();
 
-      navigate("/");
     }
   };
 
