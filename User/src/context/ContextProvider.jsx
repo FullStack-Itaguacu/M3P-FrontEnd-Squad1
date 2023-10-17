@@ -9,7 +9,7 @@ export function ContextProvider({ children }) {
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/login";
-  const ENDPOINTPRODUTOS = "/api/products/";
+  const ENDPOINPRODUTOS = "/api/products/";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -52,7 +52,7 @@ export function ContextProvider({ children }) {
         if (response) {
           const { status } = response;
           const token = response.data.data.token;
-          console.log(token);
+
           if (status && status === 200) {
             localStorage.setItem("token", token);
             setIsLoggedin(true);
@@ -70,6 +70,8 @@ export function ContextProvider({ children }) {
         );
       });
   };
+
+// _______INICIO_função para buscar produtos_________
   function buscarProdutos(
     setProdutos,
     setTotalPages,
@@ -83,11 +85,11 @@ export function ContextProvider({ children }) {
     limit
   ) {
     const token = localStorage.getItem("token");
-    console.log(token);
+
     axios
-      .get(`${BASEURL}${ENDPOINTPRODUTOS}${page}/${limit}`, {
+      .get(`${BASEURL}${ENDPOINPRODUTOS}${page}/${limit}`, {
         headers: {
-          Authorization: `${token}`,
+          Authorization: token,
         },
         params: {
           name: name,
@@ -95,32 +97,20 @@ export function ContextProvider({ children }) {
         },
       })
       .then((res) => {
-        BASEURL;
         if (res && res.status === 200) {
           setProdutos(res.data.products);
           setTotalPages(res.data.total_pages);
           setPage(res.data.actual_page);
-        }
-        if (res && res.status === 204) {
-          alert(
-            "Nenhum produto encontrado com esses parametros de busca, vamos mostrar todos os produtos"
-          );
-          setName("");
-          setType_product("");
-          setLimit(30);
+        } else {
+          console.error("Erro ao buscar produtos:", res);
+          setErrorSatate("Erro ao buscar produtos.");
         }
       })
-      .catch((err) => {
-        if (!err.response) {
-          alert("# É raro, mais acontece o backend não respondeu! ");
-          return;
-        }
-        const { message, cause, status, error } = err.response.data;
-        alert(
-          `# ${message} - Status: ${status} Causa : ${cause}  Erro: ${error}`
-        );
+      .catch((error) => {
+        console.error("Erro ao buscar produtos:", error);
       });
   }
+// _______FIM_função para buscar produtos_________
 
   const value = {
     loginUser,
