@@ -1,4 +1,4 @@
-h1{
+h1 {
     color: #010101;
     font-family: Poppins, sans-serif;
     font-size: 35px;
@@ -9,7 +9,7 @@ h1{
     text-align: center;
 }
 
-h3{
+h3 {
     color: #53575d;
     font-family: Poppins, sans-serif;
     font-size: 23px;
@@ -34,26 +34,26 @@ h3{
     background-color: #f4f4f4;
     width: 400px;
     height: 200px;
-    margin: 60px; 
-    text-align: center; 
+    margin: 60px;
+    text-align: center;
     padding: 0px;
     box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
 .custom-card {
-    min-height: 200px; 
-  }
-  
+    min-height: 200px;
+}
+
 
 
 @media screen and (max-width: 600px) {
     .card {
-        width: 100%; 
+        width: 100%;
     }
 }
 
 
-.card_body{
+.card_body {
     background-color: #f4f4f4;
     width: 400px;
     display: flex;
@@ -62,14 +62,15 @@ h3{
     justify-content: center;
 }
 
-.title{
+.title {
     color: #010101;
     font-family: Poppins, sans-serif;
     font-size: 35px;
     font-weight: 600;
-    margin-bottom: 50px;}
+    margin-bottom: 50px;
+}
 
-.sub_title{
+.sub_title {
     color: #53575d;
     font-family: Poppins, sans-serif;
     font-size: 23px;
@@ -77,10 +78,9 @@ h3{
     margin-bottom: 20px;
 }
 
-.text{
+.text {
     font-family: Poppins, sans-serif;
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 20px;
 }
-

@@ -8,19 +8,19 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
-function Header({ children }) { 
+function Header({ children }) {
   return (
     <>
       <Navbar expand={"lg"} className="navbar mb-3">
         <Container fluid>
-        <Navbar.Brand href="#home">
+          <Navbar.Brand href="#home">
             <img
               alt=""
               src="/logo1.png"
               width="50"
               height="50"
               className="d-inline-block align-top"
-            />{' '}            
+            />{' '}
           </Navbar.Brand>
           <Navbar.Brand href="#" className="text-left">Express Pharmacy</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
@@ -28,7 +28,7 @@ function Header({ children }) {
             id={`offcanvasNavbar-expand`}
             aria-labelledby={`offcanvasNavbarLabel-expand`}
             placement="end"
-            style={{backgroundColor:"#888888"}}
+            style={{ backgroundColor: "#888888" }}
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand`}>
@@ -40,7 +40,7 @@ function Header({ children }) {
                 <Link className="nav-link text-light" to="/">
                   Dashboard
                 </Link>
-                <Link className="nav-link text-light" to="/vendas"> 
+                <Link className="nav-link text-light" to="/vendas">
                   Vendas
                 </Link>
                 <Link className="nav-link text-light" to="/registro-produtos">
@@ -48,11 +48,11 @@ function Header({ children }) {
                 </Link>
                 <Link className="nav-link text-light" to="/registro-usuarios">
                   Usuários
-                </Link>                      
+                </Link>
                 <Link className="nav-link text-light divider" to="/">
                   Sair
                 </Link>
-              </Nav>                            
+              </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
