@@ -1,17 +1,15 @@
 import { createContext } from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
-// import axios from "axios";
 export const appContext = createContext();
-
 import axios from "axios";
 
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
-  
 
   const BASEURL = "http://localhost:3000";
-  const ENDPOINTLOGIN = "/api/user/login";  
+  const ENDPOINTLOGIN = "/api/user/login";
+  const ENDPOINTPRODUTOS = "/api/products/";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -54,6 +52,7 @@ export function ContextProvider({ children }) {
         if (response) {
           const { status } = response;
           const token = response.data.data;
+          console.log(token);
           if (status && status === 200) {
             localStorage.setItem("token", token);
             setIsLoggedin(true);
@@ -71,10 +70,63 @@ export function ContextProvider({ children }) {
         );
       });
   };
-  
+  function buscarProdutos(
+    setProdutos,
+    setTotalPages,
+    setPage,
+    setName,
+    setType_product,
+    setLimit,
+    name,
+    type_product,
+    page,
+    limit
+  ) {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    axios
+      .get(`${BASEURL}${ENDPOINTPRODUTOS}${page}/${limit}`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+        params: {
+          name: name,
+          type_product: type_product,
+        },
+      })
+      .then((res) => {
+        BASEURL;
+        if (res && res.status === 200) {
+          setProdutos(res.data.products);
+          setTotalPages(res.data.total_pages);
+          setPage(res.data.actual_page);
+        }
+        if (res && res.status === 204) {
+          alert(
+            "Nenhum produto encontrado com esses parametros de busca, vamos mostrar todos os produtos"
+          );
+          setName("");
+          setType_product("");
+          setLimit(30);
+        }
+      })
+      .catch((err) => {
+        if (!err.response) {
+          alert("# É raro, mais acontece o backend não respondeu! ");
+          return;
+        }
+        const { message, cause, status, error } = err.response.data;
+        alert(
+          `# ${message} - Status: ${status} Causa : ${cause}  Erro: ${error}`
+        );
+      });
+  }
+
   const value = {
     loginUser,
-    isLoggedin
+    isLoggedin,
+    setIsLoggedin,
+    buscarProdutos,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
