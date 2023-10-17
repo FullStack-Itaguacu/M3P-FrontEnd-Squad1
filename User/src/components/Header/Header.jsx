@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import "./header.css"
+import styles from "./Header.module.css"
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 function Header({ children }) { 
   return (
     <>
-      <Navbar expand={"lg"} className="navbar mb-3">
+      <Navbar expand={"lg"} className={styles.navbarHeader}>
         <Container fluid>
         <Navbar.Brand href="#home">
             <img
@@ -23,7 +23,7 @@ function Header({ children }) {
               className="d-inline-block align-top"
             />{' '}            
           </Navbar.Brand>
-          <Navbar.Brand href="#" className="text-left">Express Pharmacy</Navbar.Brand>
+          <Navbar.Brand href="#" className={styles.textLeft}>Express Pharmacy</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand`}
@@ -38,19 +38,19 @@ function Header({ children }) {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">                  
-                <Link className="nav-link text-light" to="/minhas-compras">
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/minhas-compras">
                   <i className="bi bi-bag"></i>
                   Minhas Compras
                 </Link>
-                <Link className="nav-link text-light" to="/carrinho">
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/carrinho">
                   <i className="bi bi-cart"></i>
                   Carrinho
                 </Link>
-                <Link className="nav-link text-light" to="/nome-usuario">
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/nome-usuario">
                   <i className="bi bi-person-circle"></i>
                   Nome Usuário
                 </Link>                                      
-                <Link className="nav-link text-light divider" to="/">
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/">
                   <i className="bi bi-box-arrow-right"></i>
                   Sair
                 </Link>
