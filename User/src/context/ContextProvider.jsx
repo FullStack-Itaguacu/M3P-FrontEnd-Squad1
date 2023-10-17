@@ -51,7 +51,7 @@ export function ContextProvider({ children }) {
       .then((response) => {
         if (response) {
           const { status } = response;
-          const token = response.data.data;
+          const token = response.data.data.token;
           console.log(token);
           if (status && status === 200) {
             localStorage.setItem("token", token);
