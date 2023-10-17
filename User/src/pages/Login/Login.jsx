@@ -1,4 +1,4 @@
-import FormularioLogin from "../../components/FormularioLogin/formularioLogin";
+import FormularioLogin from "../../components/FormularioLogin/FormularioLogin";
 import { Row, Col, Container, Image } from "react-bootstrap";
 import "./login.css"
 
