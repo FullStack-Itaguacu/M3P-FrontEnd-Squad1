@@ -4,6 +4,7 @@ import { useContexto } from "./context/useContexto";
 import Header from "./components/Header/Header"
 import Login from "./pages/Login/Login"
 import Error from "./pages/Error/NotFound"
+import CadastroUsuario from "./pages/CadastroUsuario/CadastroUsuario";
 
 function App() {
   const { isLoggedin } = useContexto();
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           {/* Rotas da aplicaçao quando usuario nao esta logado */}
           <Route path="/" element={<Login />} />
+          <Route path="/cadastro" element={<CadastroUsuario />} />
           <Route path="*" element={<Error />} />
         </Routes>
     </BrowserRouter> } </>;  

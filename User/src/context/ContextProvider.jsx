@@ -6,12 +6,15 @@ export const appContext = createContext();
 
 import axios from "axios";
 
+
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
   
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/login";  
+  const ENDPOINTPOSTUSUARIO = "/api/user/signup";
+
 
   //função para validar senha
   function validaSenha(senha) {
@@ -54,6 +57,7 @@ export function ContextProvider({ children }) {
         if (response) {
           const { status } = response;
           const token = response.data.data;
+          
           if (status && status === 200) {
             localStorage.setItem("token", token);
             setIsLoggedin(true);
@@ -74,7 +78,9 @@ export function ContextProvider({ children }) {
   
   const value = {
     loginUser,
-    isLoggedin
+    isLoggedin,
+    BASEURL,
+    ENDPOINTPOSTUSUARIO
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

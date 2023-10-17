@@ -1,9 +1,11 @@
 import { useContexto } from "../../context/useContexto";
+import { useNavigate } from "react-router-dom";
 
 import { Container, Button, Form, Row, Col, Stack } from "react-bootstrap";
 import "./formularioLogin.css";
 
 function FormularioLogin() {
+  const navigate = useNavigate();
   const { loginUser } = useContexto();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,7 +51,7 @@ function FormularioLogin() {
               <div className="mt-2">
                 <Button
                   variant="light"
-                  onClick={() => console.log("Mostrar cadastro")}
+                  onClick={() => navigate("/cadastro")}
                 >
                   Cadastrar
                 </Button>
