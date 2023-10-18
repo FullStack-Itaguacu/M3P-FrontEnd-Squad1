@@ -7,11 +7,16 @@ import Error from "./pages/Error/NotFound"
 import CadastroUsuario from "./pages/CadastroUsuario/CadastroUsuario";
 
 function App() {
-  const { isLoggedin } = useContexto();
+  const { isLoggedin, setIsLoggedin } = useContexto();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedin(false)
+  }
 
     return <> { isLoggedin ?  
     <BrowserRouter>
-        <Header >
+        <Header onLogout={handleLogout} >
         <Routes>
           {/* Rotas da aplicaçao quando usuario esta logado */}
           <Route path="/" element={<h1>Home</h1>} />
