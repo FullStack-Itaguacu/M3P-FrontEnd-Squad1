@@ -63,12 +63,12 @@ function ListagemProdutos() {
   const adicionarAoCarrinho = (produto) => {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     const quantidadeDoProduto = quantidades[produto.id] || 1;
-  
+
     if (quantidadeDoProduto <= produto.total_stock) {
       const produtoNoCarrinhoIndex = carrinho.findIndex(
         (item) => item.id === produto.id
       );
-  
+
       if (produtoNoCarrinhoIndex !== -1) {
         // Se o produto já está no carrinho, atualize a quantidade e amount_buy
         carrinho[produtoNoCarrinhoIndex].quantidade += quantidadeDoProduto;
@@ -88,8 +88,19 @@ function ListagemProdutos() {
       alert("Quantidade indisponível");
     }
   };
-  
-  
+  const handleIncrement = (produtoId) => {
+    const quantidadeAtual = quantidades[produtoId] || 0;
+    const novaQuantidade = quantidadeAtual + 1;
+    setQuantidades({ ...quantidades, [produtoId]: novaQuantidade });
+  };
+
+  const handleDecrement = (produtoId) => {
+    const quantidadeAtual = quantidades[produtoId] || 0;
+    if (quantidadeAtual > 0) {
+      const novaQuantidade = quantidadeAtual - 1;
+      setQuantidades({ ...quantidades, [produtoId]: novaQuantidade });
+    }
+  };
 
   return (
     <>
@@ -174,18 +185,21 @@ function ListagemProdutos() {
                 <Card.Footer className="col-12">
                   <Form.Group controlId={`quantidade-${produto.id}`}>
                     <Form.Label>Quantidade</Form.Label>
-                    <Form.Control
-                      type="number"
-                      min="1"
-                      max={produto.total_stock}
-                      value={quantidades[produto.id] || 1}
-                      onChange={(e) =>
-                        handleQuantidadeChange(
-                          produto.id,
-                          parseInt(e.target.value)
-                        )
-                      }
-                    />
+                    <div className="d-flex">
+                      <Button
+                        variant="primary"
+                        onClick={() => handleDecrement(produto.id)}
+                      >
+                        -
+                      </Button>
+                      <div className="mx-2">{quantidades[produto.id] || 0}</div>
+                      <Button
+                        variant="primary"
+                        onClick={() => handleIncrement(produto.id)}
+                      >
+                        +
+                      </Button>
+                    </div>
                   </Form.Group>
                 </Card.Footer>
                 <button
