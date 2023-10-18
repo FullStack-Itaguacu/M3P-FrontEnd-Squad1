@@ -1,6 +1,7 @@
 import { useContexto } from "../../context/useContexto";
 
-import { Container, Button, Form, Row, Col } from "react-bootstrap";
+import { Container, Button, Form, Row, Col, Stack } from "react-bootstrap";
+import styles from "./Formulario.module.css"
 
 function FormularioLogin() {
   const { loginAadmin } = useContexto();
@@ -14,34 +15,34 @@ function FormularioLogin() {
   };
 
   return (
-    <Container style={{ border: "2px #546469 solid" }}>
-      <Row style={{ width: "100uvh" }}>
-        <Col md={6}>
-          <Form onSubmit={handleSubmit} style={{ width: "100uvh" }}>
-            <Form.Text>Login</Form.Text>
+    <Container className={styles.loginForm}>
+      <Row>
+        <Col>
+          <Form onSubmit={handleSubmit}>
+            <div className={styles.textTitle}>Login Administrador</div>
             <Form.Group className="mb-3" controlId="Login.email">
-              <Form.Label>Email </Form.Label>
+              <Form.Label className="text-light">Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="name@example.com"
+                placeholder="name@email.com"
                 required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="Login.senha">
-              <Form.Label> Senha</Form.Label>
+              <Form.Label className="text-light">Senha</Form.Label>
               <Form.Control type="password" placeholder="senha" required />
             </Form.Group>
-            <div className="d-flex justify-content-end">
-              <Button variant="primay" type="submit">
-                Entrar
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => console.log("Mostrar cadastro")}
-              >
-                Cadastrar
-              </Button>
-            </div>
+            <Stack
+              className="d-flex justify-content-center"
+              direction="horizontal"
+              gap={2}
+            >
+              <div className="mt-2">
+                <Button variant="light" type="submit">
+                  Entrar
+                </Button>
+              </div>
+            </Stack>            
           </Form>
         </Col>
       </Row>
