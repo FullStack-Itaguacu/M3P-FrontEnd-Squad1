@@ -73,6 +73,7 @@ export function ContextProvider({ children }) {
   };
 
 // _______INICIO_função para buscar produtos_________
+  
   function buscarProdutos(
     setProdutos,
     setTotalPages,
@@ -98,24 +99,21 @@ export function ContextProvider({ children }) {
         },
       })
       .then((res) => {
+        BASEURL;
         if (res && res.status === 200) {
           setProdutos(res.data.products);
           setTotalPages(res.data.total_pages);
           setPage(res.data.actual_page);
-
-        } else {
-          console.error("Erro ao buscar produtos:", res);
-          errorMessage(res)
         }
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar produtos:", error);
+        if (res && res.status === 204) {
+          alert(
+            "Nenhum produto encontrado com essa descrição, tente novamente!"
+          );
+          setName("");
+          setType_product("");
+          setLimit(30);
+        }
       });
-  }
-  function errorMessage(e){
-    {<p className="text-danger">Erro ao buscar produtos.</p>
-  }
-    
   }
 // _______FIM_função para buscar produtos_________
 
@@ -126,8 +124,6 @@ export function ContextProvider({ children }) {
     loginUser,
     BASEURL,
     ENDPOINTPOSTUSUARIO,
-    errorMessage,
-
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
