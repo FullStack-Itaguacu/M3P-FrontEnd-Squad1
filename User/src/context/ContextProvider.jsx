@@ -102,14 +102,20 @@ export function ContextProvider({ children }) {
           setProdutos(res.data.products);
           setTotalPages(res.data.total_pages);
           setPage(res.data.actual_page);
+
         } else {
           console.error("Erro ao buscar produtos:", res);
-          setErrorSatate("Erro ao buscar produtos.");
+          errorMessage(res)
         }
       })
       .catch((error) => {
         console.error("Erro ao buscar produtos:", error);
       });
+  }
+  function errorMessage(e){
+    {<p className="text-danger">Erro ao buscar produtos.</p>
+  }
+    
   }
 // _______FIM_função para buscar produtos_________
 
@@ -119,7 +125,9 @@ export function ContextProvider({ children }) {
     buscarProdutos,
     loginUser,
     BASEURL,
-    ENDPOINTPOSTUSUARIO
+    ENDPOINTPOSTUSUARIO,
+    errorMessage,
+
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

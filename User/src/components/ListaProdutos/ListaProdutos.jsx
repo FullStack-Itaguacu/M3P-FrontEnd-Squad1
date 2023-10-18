@@ -30,7 +30,7 @@ function ListagemProdutos() {
           limit
         );
 
-        if (data.length === 0) {
+        if (data && data.length === 0) {
           setNoProductsMessage("Nenhum produto encontrado com esses filtros");
           setTimeout(() => {
             setNoProductsMessage("");
@@ -139,18 +139,13 @@ function ListagemProdutos() {
         </Row>
 
         <Row className="">
-          
-            {/* Mensagem temporária quando nenhum produto é encontrado */}
-            {noProductsMessage && (
-              <p className="text-danger">{noProductsMessage}</p>
-            )}
           {produtos.length > 0 &&
             produtos.map((produto) => (
               <Card as={Col} md={3} className="p-1 m-1" key={produto.id}>
                 {/* Informações do Produto */}
                 <Card.Body>
                   <Card.Title>{produto.name}</Card.Title>
-                  <Card.Img variant="top" src={produto.image_link} />
+                  <Card.Img variant="top" src={produto.image_link} style={{ width: "100%" }}/>
                   <Card.Text>
                     <p>Preço unitário: {produto.unit_price}</p>
                     <p>Estoque: {produto.total_stock}</p>
@@ -178,12 +173,23 @@ function ListagemProdutos() {
                   </Form.Group>
                   
                 </Card.Footer>
-                <Button onClick={() => adicionarAoCarrinho(produto)}>
+                <button className="btn  bg-danger text-light" onClick={() => adicionarAoCarrinho(produto)}>
                     Adicionar ao Carrinho
-                  </Button>
+                  </button>
               </Card>
             ))}
         </Row>
+        <Col md={3}>
+            <Pagination>
+              <Pagination.First onClick={() => setPage(1)} />
+              <Pagination.Prev onClick={handleBack} />
+              <Pagination.Item>{page}</Pagination.Item>
+              <Pagination.Ellipsis />
+              <Pagination.Item>{totalPages}</Pagination.Item>
+              <Pagination.Next onClick={handleNext} />
+              <Pagination.Last onClick={() => setPage(totalPages)} />
+            </Pagination>
+          </Col>
       </Container>
     </>
   );
