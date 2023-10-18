@@ -9,10 +9,10 @@ import axios from "axios";
 
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
-  
+
 
   const BASEURL = "http://localhost:3000";
-  const ENDPOINTLOGIN = "/api/user/login";  
+  const ENDPOINTLOGIN = "/api/user/login";
   const ENDPOINTPOSTUSUARIO = "/api/user/signup";
 
 
@@ -60,7 +60,7 @@ export function ContextProvider({ children }) {
         if (response) {
           const { status } = response;
           const token = response.data.data.token;
-          
+
           if (status && status === 200) {
             localStorage.setItem("token", token);
             setIsLoggedin(true);
@@ -78,7 +78,7 @@ export function ContextProvider({ children }) {
         );
       });
   };
-  
+
   const value = {
     loginUser,
     isLoggedin,
