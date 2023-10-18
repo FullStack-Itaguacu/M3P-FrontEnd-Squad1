@@ -41,31 +41,39 @@ function ListaEndereco() {
         );
       });
   };
+  function setDataAdress(event) {
+    event.preventDefault();
 
+    try {
+      const endereco = JSON.parse(event.target.value);
+      const { street, number_street, city, state, users_addresses } = endereco;
+      setUsser_addresses_id(users_addresses.users_addresses_id);
+      setEnderecoEntrega(`${street}, ${number_street} - ${city}, ${state}`);
+    } catch (error) {
+      setEnderecoEntrega("Seleccione um endereço de entrega");
+      setUsser_addresses_id("");
+      return;
+    }
+  }
   function calcularCompra(compra) {}
 
   return (
     <Container>
       <h1>Finalizar Compra</h1>
-      <p>Endereço de Entrega: {enderecoEntrega}</p>
-      <p>Forma de Pagamento Escolhida: {pagamentoEscolhido}</p>
-      <p>User_Adress ID {usser_addresses_id}</p>
+      <Form.Group as={Col}>
+        <Form.Label>
+          <strong>Endereço de Entrega: </strong>
+          {enderecoEntrega}
+          <strong> Forma de Pagamento Escolhida: </strong>
+          {pagamentoEscolhido}
+          <strong> User_Adress ID: </strong>
+          {usser_addresses_id}
+        </Form.Label>
+      </Form.Group>
       <Row>
         <Form.Group as={Col}>
-          <Form.Label>Selecione o endereço de entrega:</Form.Label>
-          <Form.Control
-            as="select"
-            onClick={(e) => {
-              const endereco = JSON.parse(e.target.value);
-              const { street, number_street, city, state, users_addresses } =
-                endereco;
-              setUsser_addresses_id(users_addresses.users_addresses_id);
-
-              setEnderecoEntrega(
-                `${street}, ${number_street} - ${city}, ${state}`
-              );
-            }}
-          >
+          <Form.Label>Selecione endereço:</Form.Label>
+          <Form.Control as="select" onClick={(e) => setDataAdress(e)}>
             <option value="">Selecione</option>
             {enderecosUsuario.map((endereco) => (
               <option key={endereco.id} value={JSON.stringify(endereco)}>
