@@ -5,11 +5,13 @@ import {
     Container,
     Form,
     Row,
-    FormControl,
-    InputGroup,
+
 } from "react-bootstrap"
 
+import {useContexto} from "../../context/useContexto"
+
 function ListaEndereco() {
+    const{BASEURL, ENDPOINTLISTAENDERECOS} = useContexto()
     const [enderecosUsuario, setEnderescoUsuario] = useState([])
     const [enderecoEntrega, setEnderecoEntrega] = useState("")
     const type_payment = [
@@ -20,8 +22,7 @@ function ListaEndereco() {
         "transfer",
     ];
     const [pagamentoEscolhido, setPagamentoEscolhido] = useState("")
-    const BASEURL = "http://localhost:3000"
-    const ENDPOINTLISTAENDERECOS = "/api/buyers/address"
+
 
     useEffect(() => {
         buscaEnderecoUsuario()

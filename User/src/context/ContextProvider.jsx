@@ -14,6 +14,7 @@ export function ContextProvider({ children }) {
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/login";
   const ENDPOINTPOSTUSUARIO = "/api/user/signup";
+  const ENDPOINTLISTAENDERECOS = "/api/buyers/address"
 
 
   //função para validar senha
@@ -83,7 +84,8 @@ export function ContextProvider({ children }) {
     loginUser,
     isLoggedin,
     BASEURL,
-    ENDPOINTPOSTUSUARIO
+    ENDPOINTPOSTUSUARIO,
+    ENDPOINTLISTAENDERECOS,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
