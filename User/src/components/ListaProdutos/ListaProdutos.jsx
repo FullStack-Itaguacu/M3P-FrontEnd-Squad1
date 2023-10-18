@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useContexto } from "../../context/useContexto";
-import { Container, Card, Row, Col, Pagination, Form } from "react-bootstrap";
+import { Container, Card, Row, Col, Pagination, Form ,Button} from "react-bootstrap";
 
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -64,7 +64,6 @@ function ListagemProdutos() {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     const quantidadeDoProduto = quantidades[produto.id] || 1;
 
-    // Verificar se a quantidade selecionada é menor ou igual ao estoque disponível
     if (quantidadeDoProduto <= produto.total_stock) {
       const produtoNoCarrinho = carrinho.find((item) => item.id === produto.id);
 
@@ -72,6 +71,7 @@ function ListagemProdutos() {
         produtoNoCarrinho.quantidade += quantidadeDoProduto;
       } else {
         carrinho.push({ ...produto, quantidade: quantidadeDoProduto });
+        alert("Produto adicionado ao carrinho");
       }
       localStorage.setItem("carrinho", JSON.stringify(carrinho));
     } else {
@@ -139,15 +139,14 @@ function ListagemProdutos() {
         </Row>
 
         <Row className="">
-          <div>
+          
             {/* Mensagem temporária quando nenhum produto é encontrado */}
             {noProductsMessage && (
-              <h3 className="text-danger">{noProductsMessage}</h3>
+              <p className="text-danger">{noProductsMessage}</p>
             )}
-          </div>
           {produtos.length > 0 &&
             produtos.map((produto) => (
-              <Card as={Col} md={2} className="p-1 m-1" key={produto.id}>
+              <Card as={Col} md={3} className="p-1 m-1" key={produto.id}>
                 {/* Informações do Produto */}
                 <Card.Body>
                   <Card.Title>{produto.name}</Card.Title>
@@ -161,9 +160,7 @@ function ListagemProdutos() {
 
                 {/* Botão de Adicionar ao Carrinho */}
                 <Card.Footer className="col-12">
-                  <button onClick={() => adicionarAoCarrinho(produto)}>
-                    Adicionar ao Carrinho
-                  </button>
+                 
                   <Form.Group controlId={`quantidade-${produto.id}`}>
                     <Form.Label>Quantidade</Form.Label>
                     <Form.Control
@@ -179,7 +176,11 @@ function ListagemProdutos() {
                       }
                     />
                   </Form.Group>
+                  
                 </Card.Footer>
+                <Button onClick={() => adicionarAoCarrinho(produto)}>
+                    Adicionar ao Carrinho
+                  </Button>
               </Card>
             ))}
         </Row>
