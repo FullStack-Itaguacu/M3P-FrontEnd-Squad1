@@ -19,7 +19,7 @@ function ListaEndereco() {
     "transfer",
   ];
   const [pagamentoEscolhido, setPagamentoEscolhido] = useState("");
-  const [usser_addresses_id, setUsser_addresses_id] = useState("");
+  const [user_addresses_id, setUser_addresses_id] = useState("");
 
   useEffect(() => {
     buscaEnderecoUsuario();
@@ -31,11 +31,11 @@ function ListaEndereco() {
     try {
       const endereco = JSON.parse(event.target.value);
       const { street, number_street, city, state, users_addresses } = endereco;
-      setUsser_addresses_id(users_addresses.users_addresses_id);
+      setUser_addresses_id(Number(users_addresses.users_addresses_id));
       setEnderecoEntrega(`${street}, ${number_street} - ${city}, ${state}`);
     } catch (error) {
       setEnderecoEntrega("Seleccione um endereço de entrega");
-      setUsser_addresses_id("");
+      setUser_addresses_id("");
       return;
     }
   }
@@ -69,7 +69,7 @@ function ListaEndereco() {
           <strong> Forma de Pagamento Escolhida: </strong>
           {pagamentoEscolhido}
           <strong> User_Adress ID: </strong>
-          {usser_addresses_id}
+          {user_addresses_id}
         </Form.Label>
       </Form.Group>
       <Row>
@@ -102,7 +102,7 @@ function ListaEndereco() {
           </Form.Control>
         </Form.Group>
       </Row>
-      <FinalizarCompra pagamentoEscolhido={pagamentoEscolhido} users_addresses_id={usser_addresses_id}/>
+      <FinalizarCompra pagamentoEscolhido={pagamentoEscolhido} users_addresses_id={user_addresses_id}/>
     </Container>
   );
 }

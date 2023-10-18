@@ -31,8 +31,8 @@ const compras = [
   },
 ];
 
-function FinalizarCompra({ pagamentoEscolhido, usser_addresses_id }) {
-  const { carrinho,setCarrinho } = useContexto();
+function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
+  const { carrinho, setCarrinho } = useContexto();
   const [carro, setCarro] = useState([]);
 
   function calcularCompra() {
@@ -40,48 +40,47 @@ function FinalizarCompra({ pagamentoEscolhido, usser_addresses_id }) {
     const carro = [];
     compras.map((compra) => {
       axios
-        .get(`http://localhost:3000/api/products/${compra.product_id}`,{
-            headers: {
-                Authorization: token,
-            },
+        .get(`http://localhost:3000/api/products/${compra.product_id}`, {
+          headers: {
+            Authorization: token,
+          },
         })
         .then((response) => {
-            const { data } = response;
-            console.log(data)
-            const { name, image_link, unit_price, total_stock} = data;
-            const valorTotal = Number(unit_price) * Number(compra.amount_buy);
-            
-            carro.push({
-                amount_buy: Number(compra.amount_buy),
-                usser_addresses_id: Number(usser_addresses_id),
-                type_payment: String(pagamentoEscolhido),
-                name : name,
-                image_link : image_link,
-                total_stock : total_stock,  
-                valorTotal,
-            });
-            setCarrinho(carro.length);
-            localStorage.setItem("quantidade_carrinho", carro.length);
-            setCarro(carro);
-        });
+          const { data } = response;
+          const { name, image_link, unit_price, total_stock } = data;
+          const valorTotal = Number(unit_price) * Number(compra.amount_buy);
 
+          carro.push({
+            amount_buy: Number(compra.amount_buy),
+            user_addresses_id: Number(users_addresses_id),
+            type_payment: String(pagamentoEscolhido),
+            name: name,
+            image_link: image_link,
+            total_stock: total_stock,
+            valorTotal,
+          });
+          setCarrinho(carro.length);
+          localStorage.setItem("quantidade_carrinho", carro.length);
+          setCarro(carro);
+        });
+      console.log(carro);
     });
     localStorage.setItem("quantidade_carrinho", carro.length);
   }
   useEffect(() => {
     calcularCompra();
-  }, [pagamentoEscolhido, usser_addresses_id]);
+  }, [pagamentoEscolhido]);
 
   return (
     <Row>
-      {carro.map((compra) => {
+      {carro.map((compra, index) => {
         return (
           <CardProduto
-            key={compra.product_id}
+            key={index}
             image_link={compra.image_link}
             name={compra.name}
             amount_buy={compra.amount_buy}
-            total ={compra.valorTotal}
+            total={compra.valorTotal}
           />
         );
       })}
@@ -89,10 +88,9 @@ function FinalizarCompra({ pagamentoEscolhido, usser_addresses_id }) {
   );
 }
 
-
 FinalizarCompra.propTypes = {
   pagamentoEscolhido: PropTypes.string.isRequired,
-  usser_addresses_id: PropTypes.number.isRequired,
+  users_addresses_id: PropTypes.number.isRequired,
 };
 
 export default FinalizarCompra;
