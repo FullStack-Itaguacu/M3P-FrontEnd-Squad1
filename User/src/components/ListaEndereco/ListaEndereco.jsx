@@ -3,24 +3,12 @@ import { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 
 import { useContexto } from "../../context/useContexto";
+import FinalizarCompra from "../CarrinhoFinalizarCompra/FinalizarCompra";
 
-const compras = [
-  {
-    product_id: 1,
-    amount_buy: 10,
-  },
-  {
-    product_id: 5,
-    amount_buy: 1,
-  },
-  {
-    product_id: 6,
-    amount_buy: 1,
-  },
-];
+
 
 function ListaEndereco() {
-  const { BASEURL, ENDPOINTLISTAENDERECOS , carrinho, setCarrinho} = useContexto();
+  const { BASEURL, ENDPOINTLISTAENDERECOS, setCarrinho } = useContexto();
   const [enderecosUsuario, setEnderescoUsuario] = useState([]);
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
   const type_payment = [
@@ -35,9 +23,22 @@ function ListaEndereco() {
 
   useEffect(() => {
     buscaEnderecoUsuario();
-    calcularCompra();
-  }, [carrinho]);
+  }, []);
 
+  function setDataAdress(event) {
+    event.preventDefault();
+
+    try {
+      const endereco = JSON.parse(event.target.value);
+      const { street, number_street, city, state, users_addresses } = endereco;
+      setUsser_addresses_id(users_addresses.users_addresses_id);
+      setEnderecoEntrega(`${street}, ${number_street} - ${city}, ${state}`);
+    } catch (error) {
+      setEnderecoEntrega("Seleccione um endereço de entrega");
+      setUsser_addresses_id("");
+      return;
+    }
+  }
   const buscaEnderecoUsuario = () => {
     const token = localStorage.getItem("token");
     axios
@@ -57,36 +58,10 @@ function ListaEndereco() {
         );
       });
   };
-  function setDataAdress(event) {
-    event.preventDefault();
 
-    try {
-      const endereco = JSON.parse(event.target.value);
-      const { street, number_street, city, state, users_addresses } = endereco;
-      setUsser_addresses_id(users_addresses.users_addresses_id);
-      setEnderecoEntrega(`${street}, ${number_street} - ${city}, ${state}`);
-    } catch (error) {
-      setEnderecoEntrega("Seleccione um endereço de entrega");
-      setUsser_addresses_id("");
-      return;
-    }
-  }
-  function calcularCompra() {
-    const carro = []
-    compras.map((compra) => {
-      carro.push({
-        product_id: Number(compra.product_id),
-        amount_buy: Number(compra.amount_buy),
-        usser_addresses_id: Number(usser_addresses_id),
-        type_payment: String(pagamentoEscolhido),
-      });
-    });
-    setCarrinho(carro)
-  }
 
   return (
-    <Container>
-      <h1>Finalizar Compra</h1>
+    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">      <h1>Finalizar Compra</h1>
       <Form.Group as={Col}>
         <Form.Label>
           <strong>Endereço de Entrega: </strong>
@@ -127,6 +102,7 @@ function ListaEndereco() {
           </Form.Control>
         </Form.Group>
       </Row>
+      <FinalizarCompra pagamentoEscolhido={pagamentoEscolhido} users_addresses_id={usser_addresses_id}/>
     </Container>
   );
 }
