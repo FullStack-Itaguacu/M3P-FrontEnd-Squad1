@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,7 +10,15 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
-function Header({ children }) { 
+function Header({ children }) {
+  const [userEmail, setUserEmail] = useState(""); 
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+
+    setUserEmail(email);
+  }, []);
+
   return (
     <>
       <Navbar expand={"lg"} className={styles.navbarHeader}>
@@ -48,7 +57,7 @@ function Header({ children }) {
                 </Link>
                 <Link className={`nav-link text-light ${styles.navbarLink}`} to="/nome-usuario">
                   <i className="bi bi-person-circle"></i>
-                  Nome Usuário
+                  {userEmail}
                 </Link>                                      
                 <Link className={`nav-link text-light ${styles.navbarLink}`} to="/">
                   <i className="bi bi-box-arrow-right"></i>

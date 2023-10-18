@@ -41,9 +41,12 @@ export function ContextProvider({ children }) {
   }
 
   const loginUser = async (email, password) => {
-    if (!validaEmail(email)) {
+    if (!validaEmail(email)) {      
       return;
     }
+
+    localStorage.setItem("email", email);
+    
     if (!validaSenha(password)) {
       return;
     }
@@ -56,7 +59,7 @@ export function ContextProvider({ children }) {
       .then((response) => {
         if (response) {
           const { status } = response;
-          const token = response.data.data;
+          const token = response.data.data.token;
           
           if (status && status === 200) {
             localStorage.setItem("token", token);
