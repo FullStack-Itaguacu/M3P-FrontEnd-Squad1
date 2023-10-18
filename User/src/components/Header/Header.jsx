@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
-function Header({ children }) {
+function Header({ children, onLogout }) {
   const [userEmail, setUserEmail] = useState(""); 
 
   useEffect(() => {
@@ -18,6 +18,7 @@ function Header({ children }) {
 
     setUserEmail(email);
   }, []);
+  
 
   return (
     <>
@@ -59,7 +60,7 @@ function Header({ children }) {
                   <i className="bi bi-person-circle"></i>
                   {userEmail}
                 </Link>                                      
-                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/">
+                <Link className={`nav-link text-light ${styles.navbarLink}`} onClick={onLogout} to="/">
                   <i className="bi bi-box-arrow-right"></i>
                   Sair
                 </Link>
@@ -75,6 +76,7 @@ function Header({ children }) {
 
 Header.propTypes = {
   children: PropTypes.node.isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default Header;
