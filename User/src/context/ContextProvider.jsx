@@ -41,9 +41,12 @@ export function ContextProvider({ children }) {
   }
 
   const loginUser = async (email, password) => {
-    if (!validaEmail(email)) {
+    if (!validaEmail(email)) {      
       return;
     }
+
+    localStorage.setItem("email", email);
+    
     if (!validaSenha(password)) {
       return;
     }

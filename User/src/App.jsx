@@ -8,11 +8,16 @@ import CadastroUsuario from "./pages/CadastroUsuario/CadastroUsuario";
 import CarroCompras from "./pages/CarroCompras/CarroCompras";
 
 function App() {
-  const { isLoggedin } = useContexto();
+  const { isLoggedin, setIsLoggedin } = useContexto();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedin(false)
+  }
 
   return <> {isLoggedin ?
     <BrowserRouter>
-      <Header >
+        <Header onLogout={handleLogout} >
         <Routes>
           {/* Rotas da aplicaçao quando usuario esta logado */}
           <Route path="/" element={<h1>Home</h1>} />
