@@ -8,10 +8,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import styles from "./Header.module.css"
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import {useContexto} from '../../context/useContexto'
 
 
 function Header({ children, onLogout }) {
   const [userEmail, setUserEmail] = useState(""); 
+  const{carrinho}= useContexto()
 
   useEffect(() => {
     const email = localStorage.getItem("email");
@@ -53,6 +55,7 @@ function Header({ children, onLogout }) {
                   Minhas Compras
                 </Link>
                 <Link className={`nav-link text-light ${styles.navbarLink}`} to="/carrinho">
+                  <span style={{color : 'red'}}>{(carrinho && carrinho.length> 0) && `${carrinho.length} `}</span>
                   <i className="bi bi-cart"></i>
                   Carrinho
                 </Link>

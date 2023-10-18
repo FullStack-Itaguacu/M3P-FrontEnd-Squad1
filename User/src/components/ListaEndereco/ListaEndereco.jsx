@@ -4,8 +4,23 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 
 import { useContexto } from "../../context/useContexto";
 
+const compras = [
+  {
+    product_id: 1,
+    amount_buy: 10,
+  },
+  {
+    product_id: 5,
+    amount_buy: 1,
+  },
+  {
+    product_id: 6,
+    amount_buy: 1,
+  },
+];
+
 function ListaEndereco() {
-  const { BASEURL, ENDPOINTLISTAENDERECOS } = useContexto();
+  const { BASEURL, ENDPOINTLISTAENDERECOS , carrinho, setCarrinho} = useContexto();
   const [enderecosUsuario, setEnderescoUsuario] = useState([]);
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
   const type_payment = [
@@ -20,7 +35,8 @@ function ListaEndereco() {
 
   useEffect(() => {
     buscaEnderecoUsuario();
-  }, []);
+    calcularCompra();
+  }, [carrinho]);
 
   const buscaEnderecoUsuario = () => {
     const token = localStorage.getItem("token");
@@ -55,7 +71,18 @@ function ListaEndereco() {
       return;
     }
   }
-  function calcularCompra(compra) {}
+  function calcularCompra() {
+    const carro = []
+    compras.map((compra) => {
+      carro.push({
+        product_id: Number(compra.product_id),
+        amount_buy: Number(compra.amount_buy),
+        usser_addresses_id: Number(usser_addresses_id),
+        type_payment: String(pagamentoEscolhido),
+      });
+    });
+    setCarrinho(carro)
+  }
 
   return (
     <Container>
