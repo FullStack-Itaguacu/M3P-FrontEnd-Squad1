@@ -53,6 +53,9 @@ export function ContextProvider({ children }) {
     if (!validaEmail(email)) {
       return;
     }
+
+    localStorage.setItem("email", email);
+
     if (!validaSenha(password)) {
       return;
     }
