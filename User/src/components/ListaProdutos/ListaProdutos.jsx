@@ -99,7 +99,7 @@ function ListagemProdutos() {
         fluid
         className=" m-2 p-2  border border-2 rounded-3 accordion"
       >
-        <Row>
+        <Row className="align-items-center">
           <Col md={3}>
             <Form.Control
               type="text"
@@ -151,10 +151,10 @@ function ListagemProdutos() {
           </Col>
         </Row>
 
-        <Row className="">
+        <Row className="align-items-center justify-content-center">
           {produtos.length > 0 &&
             produtos.map((produto) => (
-              <Card as={Col} md={3} className="p-1 m-1" key={produto.id}>
+              <Card as={Col} md={2} className="p-1 m-3 h-100 " key={produto.id}>
                 {/* Informações do Produto */}
                 <Card.Body>
                   <Card.Title>{produto.name}</Card.Title>
