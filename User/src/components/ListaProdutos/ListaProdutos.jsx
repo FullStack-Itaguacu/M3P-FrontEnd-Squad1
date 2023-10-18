@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { useContexto } from "../../context/useContexto";
-import { Container, Card, Row, Col, Pagination, Form ,Button} from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  Pagination,
+  Form,
+  Button,
+} from "react-bootstrap";
 
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -9,7 +17,6 @@ function ListagemProdutos() {
   const [totalPages, setTotalPages] = useState([0]);
   const [name, setName] = useState("");
   const [type_product, setType_product] = useState("");
-  const [noProductsMessage, setNoProductsMessage] = useState("");
   const [quantidades, setQuantidades] = useState({});
 
   const { buscarProdutos } = useContexto();
@@ -17,7 +24,7 @@ function ListagemProdutos() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await buscarProdutos(
+        await buscarProdutos(
           setProdutos,
           setTotalPages,
           setPage,
@@ -29,13 +36,6 @@ function ListagemProdutos() {
           page,
           limit
         );
-
-        if (data && data.length === 0) {
-          setNoProductsMessage("Nenhum produto encontrado com esses filtros");
-          setTimeout(() => {
-            setNoProductsMessage("");
-          }, 3000);
-        }
       } catch (error) {
         console.error(error);
       }
@@ -69,8 +69,13 @@ function ListagemProdutos() {
 
       if (produtoNoCarrinho) {
         produtoNoCarrinho.quantidade += quantidadeDoProduto;
+        produtoNoCarrinho.amount_buy = quantidadeDoProduto; // Armazena a quantidade como "amount_buy"
       } else {
-        carrinho.push({ ...produto, quantidade: quantidadeDoProduto });
+        carrinho.push({
+          ...produto,
+          quantidade: quantidadeDoProduto,
+          amount_buy: quantidadeDoProduto,
+        }); // Adiciona "amount_buy"
         alert("Produto adicionado ao carrinho");
       }
       localStorage.setItem("carrinho", JSON.stringify(carrinho));
@@ -82,6 +87,7 @@ function ListagemProdutos() {
   return (
     <>
       <h1 className="p-3">Medicamentos</h1>
+
       <Container
         fluid
         className=" m-2 p-2  border border-2 rounded-3 accordion"
@@ -145,7 +151,11 @@ function ListagemProdutos() {
                 {/* Informações do Produto */}
                 <Card.Body>
                   <Card.Title>{produto.name}</Card.Title>
-                  <Card.Img variant="top" src={produto.image_link} style={{ width: "100%" }}/>
+                  <Card.Img
+                    variant="top"
+                    src={produto.image_link}
+                    style={{ width: "100%" }}
+                  />
                   <Card.Text>
                     <p>Preço unitário: {produto.unit_price}</p>
                     <p>Estoque: {produto.total_stock}</p>
@@ -155,7 +165,6 @@ function ListagemProdutos() {
 
                 {/* Botão de Adicionar ao Carrinho */}
                 <Card.Footer className="col-12">
-                 
                   <Form.Group controlId={`quantidade-${produto.id}`}>
                     <Form.Label>Quantidade</Form.Label>
                     <Form.Control
@@ -171,25 +180,27 @@ function ListagemProdutos() {
                       }
                     />
                   </Form.Group>
-                  
                 </Card.Footer>
-                <button className="btn  bg-danger text-light" onClick={() => adicionarAoCarrinho(produto)}>
-                    Adicionar ao Carrinho
-                  </button>
+                <button
+                  className="btn  bg-danger text-light"
+                  onClick={() => adicionarAoCarrinho(produto)}
+                >
+                  Adicionar ao Carrinho
+                </button>
               </Card>
             ))}
         </Row>
         <Col md={3}>
-            <Pagination>
-              <Pagination.First onClick={() => setPage(1)} />
-              <Pagination.Prev onClick={handleBack} />
-              <Pagination.Item>{page}</Pagination.Item>
-              <Pagination.Ellipsis />
-              <Pagination.Item>{totalPages}</Pagination.Item>
-              <Pagination.Next onClick={handleNext} />
-              <Pagination.Last onClick={() => setPage(totalPages)} />
-            </Pagination>
-          </Col>
+          <Pagination>
+            <Pagination.First onClick={() => setPage(1)} />
+            <Pagination.Prev onClick={handleBack} />
+            <Pagination.Item>{page}</Pagination.Item>
+            <Pagination.Ellipsis />
+            <Pagination.Item>{totalPages}</Pagination.Item>
+            <Pagination.Next onClick={handleNext} />
+            <Pagination.Last onClick={() => setPage(totalPages)} />
+          </Pagination>
+        </Col>
       </Container>
     </>
   );
