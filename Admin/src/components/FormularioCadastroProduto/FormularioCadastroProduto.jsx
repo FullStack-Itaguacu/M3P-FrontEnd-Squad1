@@ -25,7 +25,7 @@ function FormularioCadastroProduto() {
       onSubmit={handleSubmitProduto}
     >
       <div className="d-flex justify-content-left">
-        <h3 className= "m-3">Cadastro de Medicamento</h3>
+        <h3 className="m-3">Cadastro de Medicamento</h3>
       </div>
       <Row className="mb-3">
         <Form.Group as={Col} md="3" controlId="medicamento">

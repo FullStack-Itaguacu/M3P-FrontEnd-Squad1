@@ -31,7 +31,7 @@ function ListagemProdutos() {
         );
 
         if (data.length === 0) {
-          setNoProductsMessage("Nenhum produto encontrado.");
+          setNoProductsMessage("Nenhum produto encontrado com esses filtros");
           setTimeout(() => {
             setNoProductsMessage("");
           }, 3000);
@@ -62,8 +62,6 @@ function ListagemProdutos() {
 
   const adicionarAoCarrinho = (produto) => {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-    // Obter a quantidade do estado local
     const quantidadeDoProduto = quantidades[produto.id] || 1;
 
     // Verificar se a quantidade selecionada é menor ou igual ao estoque disponível
@@ -75,8 +73,6 @@ function ListagemProdutos() {
       } else {
         carrinho.push({ ...produto, quantidade: quantidadeDoProduto });
       }
-
-      // Atualizar o carrinho no localStorage
       localStorage.setItem("carrinho", JSON.stringify(carrinho));
     } else {
       alert("Quantidade indisponível");
@@ -85,7 +81,7 @@ function ListagemProdutos() {
 
   return (
     <>
-      <h2>Medicamentos</h2>
+      <h1 className="p-3">Medicamentos</h1>
       <Container
         fluid
         className=" m-2 p-2  border border-2 rounded-3 accordion"
@@ -146,7 +142,7 @@ function ListagemProdutos() {
           <div>
             {/* Mensagem temporária quando nenhum produto é encontrado */}
             {noProductsMessage && (
-              <p className="text-danger">{noProductsMessage}</p>
+              <h3 className="text-danger">{noProductsMessage}</h3>
             )}
           </div>
           {produtos.length > 0 &&
