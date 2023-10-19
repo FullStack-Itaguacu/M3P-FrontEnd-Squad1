@@ -7,9 +7,9 @@ import axios from "axios";
 
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
-
+  
   const BASEURL = "http://localhost:3000";
-  const ENDPOINTLOGIN = "/api/user/login";  
+  const ENDPOINTLOGIN = "/api/user/login";
   const ENDPOINTPOSTUSUARIO = "/api/user/signup";
   const ENDPOINPRODUTOS = "/api/products/";
 
@@ -38,9 +38,12 @@ export function ContextProvider({ children }) {
   }
 
   const loginUser = async (email, password) => {
-    if (!validaEmail(email)) {
+    if (!validaEmail(email)) {      
       return;
     }
+
+    localStorage.setItem("email", email);
+    
     if (!validaSenha(password)) {
       return;
     }
@@ -54,6 +57,7 @@ export function ContextProvider({ children }) {
         if (response) {
           const { status } = response;
           const token = response.data.data.token;
+
           if (status && status === 200) {
             localStorage.setItem("token", token);
             setIsLoggedin(true);

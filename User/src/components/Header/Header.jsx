@@ -1,4 +1,5 @@
 import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -10,7 +11,16 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
-function Header({ children }) { 
+function Header({ children, onLogout }) {
+  const [userEmail, setUserEmail] = useState(""); 
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+
+    setUserEmail(email);
+  }, []);
+  
+
   return (
     <>
       <Navbar expand={"lg"} className={styles.navbarHeader}>
@@ -53,9 +63,9 @@ function Header({ children }) {
                 </Link>
                 <Link className={`nav-link text-light ${styles.navbarLink}`} to="/nome-usuario">
                   <i className="bi bi-person-circle"></i>
-                  Nome Usuário
+                  {userEmail}
                 </Link>                                      
-                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/">
+                <Link className={`nav-link text-light ${styles.navbarLink}`} onClick={onLogout} to="/">
                   <i className="bi bi-box-arrow-right"></i>
                   Sair
                 </Link>
@@ -71,6 +81,7 @@ function Header({ children }) {
 
 Header.propTypes = {
   children: PropTypes.node.isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default Header;
