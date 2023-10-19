@@ -6,9 +6,10 @@ import { useContexto } from "../../context/useContexto";
 import axios from "axios";
 
 function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
-  const {  setCarrinho } = useContexto();
+  const { setCarrinho } = useContexto();
   const [carro, setCarro] = useState([]);
   const [disable, setDisable] = useState(true);
+  const [dataCards, setDataCards] = useState([]);
 
   useEffect(() => {
     const comprasLocalStorage = JSON.parse(localStorage.getItem("carrinho"));
@@ -16,12 +17,13 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
 
     if (users_addresses_id !== -1 && pagamentoEscolhido !== "") {
       setDisable(false);
+      if (carro.length > dataCards.length) {
+        calcularCompra();
+      }
     } else {
       setDisable(true);
     }
-  });
-
-
+  }, [users_addresses_id, pagamentoEscolhido]);
 
   async function comprar(event) {
     event.preventDefault();
@@ -47,7 +49,6 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
           }
         );
         const { total_stock, image_link, name, unit_price } = response.data;
-
         const valorTotal = Number(unit_price) * Number(amount_buy);
 
         precompra.push({
@@ -88,13 +89,34 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
         setCarrinho(null);
         setCarro([]);
         setDisable(true);
+        setDataCards([])
         return;
       }
     } catch (error) {
       console.log(error);
     }
   }
+  async function calcularCompra() {
+    const data = [];
+    for (let index = 0; index < carro.length; index++) {
+      const compra = carro[index];
+      const token = localStorage.getItem("token");
+      const { id, amount_buy } = compra;
 
+      const response = await axios.get(
+        `http://localhost:3000/api/products/${id}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      const { image_link, name, unit_price } = response.data;
+      const total = Number(unit_price) * Number(amount_buy);
+      data.push({ image_link, name, amount_buy, total });
+    }
+    setDataCards(data);
+  }
   return (
     <Form onSubmit={(e) => comprar(e)}>
       <Row>
@@ -104,14 +126,14 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
           </Button>
         </Col>
 
-        {carro.map((compra, index) => {
+        {dataCards.map((compra, index) => {
           return (
             <CardProduto
               key={index}
               image_link={compra.image_link}
               name={compra.name}
               amount_buy={compra.amount_buy}
-              total={compra.valorTotal}
+              total={compra.total}
             />
           );
         })}
@@ -126,3 +148,19 @@ FinalizarCompra.propTypes = {
 };
 
 export default FinalizarCompra;
+
+/**
+ *   const token = localStorage.getItem("token");
+          const { id, amount_buy } = compra;
+          const response = await axios.get(
+            `http://localhost:3000/api/products/${id}`,
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
+          const {  image_link, name, unit_price } = response.data;
+          const valorTotal = Number(unit_price) * Number(amount_buy);
+
+ */
