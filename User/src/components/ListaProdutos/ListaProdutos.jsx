@@ -9,6 +9,11 @@ import {
   Form,
   Button,
 } from "react-bootstrap";
+import {
+  adicionarProdutoAoCarrinho,
+  incrementarQuantidade,
+  decrementarQuantidade,
+} from "./utils/produtosUtils";
 
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -56,49 +61,25 @@ function ListagemProdutos() {
       setPage(page + 1);
     }
   };
-  const handleQuantidadeChange = (produtoId, quantidade) => {
-    setQuantidades({ ...quantidades, [produtoId]: quantidade });
-  };
 
-  const adicionarAoCarrinho = (produto) => {
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    const quantidadeDoProduto = quantidades[produto.id] || 1;
-
-    if (quantidadeDoProduto <= produto.total_stock) {
-      const produtoNoCarrinhoIndex = carrinho.findIndex(
-        (item) => item.id === produto.id
-      );
-
-      if (produtoNoCarrinhoIndex !== -1) {
-        // Se o produto já está no carrinho, atualize a quantidade e amount_buy
-        carrinho[produtoNoCarrinhoIndex].quantidade += quantidadeDoProduto;
-        carrinho[produtoNoCarrinhoIndex].amount_buy += quantidadeDoProduto;
-        alert("Quantidade atualizada no carrinho");
-      } else {
-        // Se o produto não está no carrinho, adicione ao carrinho com quantidade e amount_buy
-        carrinho.push({
-          ...produto,
-          quantidade: quantidadeDoProduto,
-          amount_buy: quantidadeDoProduto,
-        });
-        alert("Produto adicionado ao carrinho");
-      }
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    } else {
-      alert("Quantidade indisponível");
-    }
-  };
   const handleIncrement = (produtoId) => {
-    const quantidadeAtual = quantidades[produtoId] || 0;
-    const novaQuantidade = quantidadeAtual + 1;
-    setQuantidades({ ...quantidades, [produtoId]: novaQuantidade });
+    incrementarQuantidade(produtoId, quantidades, setQuantidades);
   };
 
   const handleDecrement = (produtoId) => {
-    const quantidadeAtual = quantidades[produtoId] || 0;
-    if (quantidadeAtual > 0) {
-      const novaQuantidade = quantidadeAtual - 1;
-      setQuantidades({ ...quantidades, [produtoId]: novaQuantidade });
+    decrementarQuantidade(produtoId, quantidades, setQuantidades);
+  };
+
+  const adicionarAoCarrinho = (produto) => {
+    const resultado = adicionarProdutoAoCarrinho(
+      produto,
+      quantidades[produto.id],
+      quantidades
+    );
+    if (resultado.success) {
+      alert(resultado.message);
+    } else {
+      alert(resultado.message);
     }
   };
 
@@ -110,7 +91,7 @@ function ListagemProdutos() {
         fluid
         className=" m-2 p-2  border border-2 rounded-3 accordion"
       >
-        <Row className="align-items-center">
+        <Row className="align-items-center ">
           <Col md={3}>
             <Form.Control
               type="text"
@@ -165,8 +146,7 @@ function ListagemProdutos() {
         <Row className="align-items-center justify-content-center">
           {produtos.length > 0 &&
             produtos.map((produto) => (
-              <Card as={Col} md={2} className="p-1 m-3 h-100 " key={produto.id}>
-                {/* Informações do Produto */}
+              <Card as={Col} md={2} className="p-3 m-2 h-100 " key={produto.id}>
                 <Card.Body>
                   <Card.Title>{produto.name}</Card.Title>
                   <Card.Img
@@ -175,26 +155,26 @@ function ListagemProdutos() {
                     style={{ width: "100%" }}
                   />
                   <Card.Text>
-                    <p>Preço unitário: {produto.unit_price}</p>
+                    <p>Preço unitário: R$ {produto.unit_price}</p>
                     <p>Estoque: {produto.total_stock}</p>
-                    {/* Adicionar mais informações conforme necessário */}
                   </Card.Text>
                 </Card.Body>
 
-                {/* Botão de Adicionar ao Carrinho */}
-                <Card.Footer className="col-12">
+                <Card.Footer className="mx-1">
                   <Form.Group controlId={`quantidade-${produto.id}`}>
                     <Form.Label>Quantidade</Form.Label>
                     <div className="d-flex">
                       <Button
-                        variant="primary"
+                        className="btn btn-secondary m-1 hover link-opacity-75-hover"
                         onClick={() => handleDecrement(produto.id)}
                       >
                         -
                       </Button>
-                      <div className="mx-2">{quantidades[produto.id] || 0}</div>
+                      <div className="mx-1 m-1 p-2">
+                        {quantidades[produto.id] || 0}
+                      </div>
                       <Button
-                        variant="primary"
+                        className="btn btn-warning m-1"
                         onClick={() => handleIncrement(produto.id)}
                       >
                         +
@@ -203,7 +183,7 @@ function ListagemProdutos() {
                   </Form.Group>
                 </Card.Footer>
                 <button
-                  className="btn  bg-danger text-light"
+                  className="btn  bg-danger text-light h-auto w-100 hover link-underline-dark-hover"
                   onClick={() => adicionarAoCarrinho(produto)}
                 >
                   Adicionar ao Carrinho
