@@ -19,7 +19,7 @@ function ListaEndereco() {
     "transfer",
   ];
   const [pagamentoEscolhido, setPagamentoEscolhido] = useState("");
-  const [user_addresses_id, setUser_addresses_id] = useState("");
+  const [user_addresses_id, setUser_addresses_id] = useState(-1);
 
   useEffect(() => {
     buscaEnderecoUsuario();
@@ -35,7 +35,7 @@ function ListaEndereco() {
       setEnderecoEntrega(`${street}, ${number_street} - ${city}, ${state}`);
     } catch (error) {
       setEnderecoEntrega("Seleccione um endereço de entrega");
-      setUser_addresses_id("");
+      setUser_addresses_id(-1);
       return;
     }
   }
