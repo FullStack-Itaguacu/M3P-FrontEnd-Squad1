@@ -8,7 +8,7 @@ import FinalizarCompra from "../CarrinhoFinalizarCompra/FinalizarCompra";
 
 
 function ListaEndereco() {
-  const { BASEURL, ENDPOINTLISTAENDERECOS, setCarrinho } = useContexto();
+  const { BASEURL, ENDPOINTLISTAENDERECOS } = useContexto();
   const [enderecosUsuario, setEnderescoUsuario] = useState([]);
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
   const type_payment = [
@@ -68,8 +68,6 @@ function ListaEndereco() {
           {enderecoEntrega}
           <strong> Forma de Pagamento Escolhida: </strong>
           {pagamentoEscolhido}
-          <strong> User_Adress ID: </strong>
-          {user_addresses_id}
         </Form.Label>
       </Form.Group>
       <Row>

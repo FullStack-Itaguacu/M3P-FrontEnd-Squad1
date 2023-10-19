@@ -1,5 +1,5 @@
 import CardProduto from "./CardProduto";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useContexto } from "../../context/useContexto";
@@ -11,7 +11,6 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
   const [carro, setCarro] = useState([]);
   const [disable, setDisable] = useState(true);
   const [dataCards, setDataCards] = useState([]);
-
 
   useEffect(() => {
     const comprasLocalStorage = JSON.parse(localStorage.getItem("carrinho"));
@@ -79,7 +78,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       if (responseCompra.status === 201) {
         const { message, valor_total_da_compra, pedido } = responseCompra.data;
         alert(
-          `${message}, valor total da compra: ${valor_total_da_compra}, quantidade de itens: ${pedido.length}`
+          `${message}, valor total da compra: ${valor_total_da_compra}, quantidade de pedidos: ${pedido.length}`
         );
         localStorage.removeItem("quantidade_carrinho");
         localStorage.removeItem("carrinho");
@@ -100,14 +99,11 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       const token = localStorage.getItem("token");
       const { id, amount_buy } = compra;
 
-      const response = await axios.get(
-        `${BASEURL}${ENDPOINPRODUTOS}${id}`,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const response = await axios.get(`${BASEURL}${ENDPOINPRODUTOS}${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
       const { image_link, name, unit_price } = response.data;
       const total = Number(unit_price) * Number(amount_buy);
       data.push({ image_link, name, amount_buy, total });
@@ -117,23 +113,56 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
   return (
     <Form onSubmit={(e) => comprar(e)}>
       <Row>
-        <Col md={12}>
+        <Row>
           <Button variant="primary" type="submit" disabled={disable}>
             Finalizar compra
           </Button>
-        </Col>
 
-        {dataCards.map((compra, index) => {
-          return (
-            <CardProduto
-              key={index}
-              image_link={compra.image_link}
-              name={compra.name}
-              amount_buy={compra.amount_buy}
-              total={compra.total}
-            />
-          );
-        })}
+          <Button
+            variant="danger"
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+
+              localStorage.removeItem("carrinho");
+              localStorage.removeItem("quantidade_carrinho");
+              setCarro([])
+              setDataCards([]);
+              setCarrinho(null);
+            }}
+          >
+            Cancelar compra
+          </Button>
+        </Row>
+
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Produto</th>
+              <th>Quantidade</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataCards.map((compra, index) => (
+              <tr key={index}>
+                <td>
+                  <img
+                    src={compra.image_link}
+                    alt={`Imagen de ${compra.name}`}
+                    style={{ maxWidth: "65px" }}
+                  />
+                </td>
+                <td>{compra.name}</td>
+                <td>{compra.amount_buy}</td>
+                <td>{compra.total}</td>
+              </tr>
+
+            ))}
+           
+          </tbody>
+        </Table>
       </Row>
     </Form>
   );
