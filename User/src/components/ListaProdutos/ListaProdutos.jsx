@@ -78,6 +78,7 @@ function ListagemProdutos() {
     );
     if (resultado.success) {
       alert(resultado.message);
+      setQuantidades({});
     } else {
       alert(resultado.message);
     }
