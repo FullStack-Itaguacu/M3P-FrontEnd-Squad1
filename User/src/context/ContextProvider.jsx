@@ -1,9 +1,7 @@
 import { createContext } from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
-// import axios from "axios";
 export const appContext = createContext();
-
 import axios from "axios";
 
 export function ContextProvider({ children }) {
@@ -14,6 +12,7 @@ export function ContextProvider({ children }) {
   const ENDPOINTLOGIN = "/api/user/login";
   const ENDPOINTPOSTUSUARIO = "/api/user/signup";
   const ENDPOINTLISTAENDERECOS = "/api/buyers/address";
+  const ENDPOINPRODUTOS = "/api/products/";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -78,14 +77,61 @@ export function ContextProvider({ children }) {
       });
   };
 
+// _______INICIO_função para buscar produtos_________
+  
+  function buscarProdutos(
+    setProdutos,
+    setTotalPages,
+    setPage,
+    setName,
+    setType_product,
+    setLimit,
+    name,
+    type_product,
+    page,
+    limit
+  ) {
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(`${BASEURL}${ENDPOINPRODUTOS}${page}/${limit}`, {
+        headers: {
+          Authorization: token,
+        },
+        params: {
+          name: name,
+          type_product: type_product,
+        },
+      })
+      .then((res) => {
+        BASEURL;
+        if (res && res.status === 200) {
+          setProdutos(res.data.products);
+          setTotalPages(res.data.total_pages);
+          setPage(res.data.actual_page);
+        }
+        if (res && res.status === 204) {
+          alert(
+            "Nenhum produto encontrado com essa descrição, tente novamente!"
+          );
+          setName("");
+          setType_product("");
+          setLimit(30);
+        }
+      });
+  }
+// _______FIM_função para buscar produtos_________
+
   const value = {
-    loginUser,
     isLoggedin,
     carrinho,
     setCarrinho,
     BASEURL,
     ENDPOINTPOSTUSUARIO,
     ENDPOINTLISTAENDERECOS,
+    setIsLoggedin,
+    buscarProdutos,
+    loginUser,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;

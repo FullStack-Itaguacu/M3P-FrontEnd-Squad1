@@ -1,14 +1,24 @@
+import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
+<<<<<<< HEAD
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import styles from "./Header.module.css";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useContexto } from "../../context/useContexto";
+=======
+import styles from "./Header.module.css"
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css"
+>>>>>>> developer
 
 function Header({ children, onLogout }) {
   const [userEmail, setUserEmail] = useState("");
@@ -51,11 +61,20 @@ function Header({ children, onLogout }) {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+<<<<<<< HEAD
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
                   to="/minhas-compras"
                 >
+=======
+              <Nav className="justify-content-end flex-grow-1 pe-3">   
+              <Link className={`nav-link text-light ${styles.navbarLink}`} to="/">
+                  <i className="bi bi-bag"></i>
+                  Produtos
+                </Link>               
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/minhas-compras">
+>>>>>>> developer
                   <i className="bi bi-bag"></i>
                   Minhas Compras
                 </Link>
