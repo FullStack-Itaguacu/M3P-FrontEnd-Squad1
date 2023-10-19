@@ -6,10 +6,12 @@ import { useContexto } from "../../context/useContexto";
 import axios from "axios";
 
 function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
-  const { setCarrinho } = useContexto();
+  const { setCarrinho, BASEURL, ENDPOINPRODUTOS, ENDPOINTPOSTSALES } =
+    useContexto();
   const [carro, setCarro] = useState([]);
   const [disable, setDisable] = useState(true);
   const [dataCards, setDataCards] = useState([]);
+
 
   useEffect(() => {
     const comprasLocalStorage = JSON.parse(localStorage.getItem("carrinho"));
@@ -38,16 +40,12 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
 
       for (let index = 0; index < carro.length; index++) {
         const compra = carro[index];
-        console.log(compra);
         const { id, amount_buy } = compra;
-        const response = await axios.get(
-          `http://localhost:3000/api/products/${id}`,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
+        const response = await axios.get(`${BASEURL}${ENDPOINPRODUTOS}${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         const { total_stock, image_link, name, unit_price } = response.data;
         const valorTotal = Number(unit_price) * Number(amount_buy);
 
@@ -69,9 +67,8 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
           return;
         }
       }
-
       const responseCompra = await axios.post(
-        `http://localhost:3000/api/sales`,
+        `${BASEURL}${ENDPOINTPOSTSALES}`,
         precompra,
         {
           headers: {
@@ -89,7 +86,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
         setCarrinho(null);
         setCarro([]);
         setDisable(true);
-        setDataCards([])
+        setDataCards([]);
         return;
       }
     } catch (error) {
@@ -104,7 +101,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       const { id, amount_buy } = compra;
 
       const response = await axios.get(
-        `http://localhost:3000/api/products/${id}`,
+        `${BASEURL}${ENDPOINPRODUTOS}${id}`,
         {
           headers: {
             Authorization: token,
@@ -148,19 +145,3 @@ FinalizarCompra.propTypes = {
 };
 
 export default FinalizarCompra;
-
-/**
- *   const token = localStorage.getItem("token");
-          const { id, amount_buy } = compra;
-          const response = await axios.get(
-            `http://localhost:3000/api/products/${id}`,
-            {
-              headers: {
-                Authorization: token,
-              },
-            }
-          );
-          const {  image_link, name, unit_price } = response.data;
-          const valorTotal = Number(unit_price) * Number(amount_buy);
-
- */

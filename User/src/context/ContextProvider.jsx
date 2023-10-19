@@ -13,6 +13,8 @@ export function ContextProvider({ children }) {
   const ENDPOINTPOSTUSUARIO = "/api/user/signup";
   const ENDPOINTLISTAENDERECOS = "/api/buyers/address";
   const ENDPOINPRODUTOS = "/api/products/";
+  const ENDPOINTPOSTSALES = "/api/sales"
+
 
   //função para validar senha
   function validaSenha(senha) {
@@ -132,6 +134,8 @@ export function ContextProvider({ children }) {
     setIsLoggedin,
     buscarProdutos,
     loginUser,
+    ENDPOINTPOSTSALES,
+    ENDPOINPRODUTOS
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
