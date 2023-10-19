@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useContexto } from "../../context/useContexto";
 import axios from "axios";
-const compras = [{ product_id: 10, amount_buy: 2 }];
 
 function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
   const { setCarrinho } = useContexto();
@@ -12,7 +11,11 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
   const [disable, setDisable] = useState(true);
 
   useEffect(() => {
-    precompra();
+    const comprasLocalStorage = JSON.parse(localStorage.getItem("carrinho"));
+    comprasLocalStorage && setCarro(comprasLocalStorage);
+    carro.length > 0 && setCarrinho(carro.length);
+    localStorage.setItem("quantidade_carrinho", carro.length);
+
     if (users_addresses_id !== -1 && pagamentoEscolhido !== "") {
       setDisable(false);
     } else {
@@ -20,39 +23,42 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
     }
   }, [pagamentoEscolhido, users_addresses_id]);
 
-  function precompra() {
-    const token = localStorage.getItem("token");
-    const precompra = [];
-    compras.map((compra) => {
-      axios
-        .get(`http://localhost:3000/api/products/${compra.product_id}`, {
-          headers: {
-            Authorization: token,
-          },
-        })
-        .then((response) => {
-          const { data } = response;
-          // console.log(data)
-          const { name, image_link, unit_price, total_stock, id } = data;
-          const valorTotal = Number(unit_price) * Number(compra.amount_buy);
+  // function precompra() {
+  //   const token = localStorage.getItem("token");
+  //   const precompra = [];
+  //   compras.map((compra) => {
+  //     console.log(...compra)
+  //     const { product_id } = compra;
+  //     console.log(product_id)
+  //     axios
+  //       .get(`http://localhost:3000/api/products/${compra.product_id}`, {
+  //         headers: {
+  //           Authorization: token,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         const { data } = response;
+  //         // console.log(data)
+  //         const { name, image_link, unit_price, total_stock, id } = data;
+  //         const valorTotal = Number(unit_price) * Number(compra.amount_buy);
 
-          precompra.push({
-            product_id: id,
-            amount_buy: Number(compra.amount_buy),
-            users_addresses_id: Number(users_addresses_id),
-            type_payment: String(pagamentoEscolhido),
-            name: name,
-            image_link: image_link,
-            total_stock: total_stock,
-            valorTotal,
-          });
-          setCarrinho(precompra.length);
-          localStorage.setItem("quantidade_carrinho", precompra.length);
-          setCarro(precompra);
-        });
-    });
-    localStorage.setItem("quantidade_carrinho", precompra.length);
-  }
+  //         precompra.push({
+  //           product_id: id,
+  //           amount_buy: Number(compra.amount_buy),
+  //           users_addresses_id: Number(users_addresses_id),
+  //           type_payment: String(pagamentoEscolhido),
+  //           name: name,
+  //           image_link: image_link,
+  //           total_stock: total_stock,
+  //           valorTotal,
+  //         });
+  //         setCarrinho(precompra.length);
+  //         localStorage.setItem("quantidade_carrinho", precompra.length);
+  //         setCarro(precompra);
+  //       });
+  //   });
+  //   localStorage.setItem("quantidade_carrinho", precompra.length);
+  // }
 
   async function comprar(event) {
     event.preventDefault();
@@ -63,19 +69,34 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
     }
     try {
       const token = localStorage.getItem("token");
+      const precompra = [];
 
       for (let index = 0; index < carro.length; index++) {
         const compra = carro[index];
-        const { product_id, amount_buy } = compra;
+        console.log(compra);
+        const { id, amount_buy } = compra;
         const response = await axios.get(
-          `http://localhost:3000/api/products/${product_id}`,
+          `http://localhost:3000/api/products/${id}`,
           {
             headers: {
               Authorization: token,
             },
           }
         );
-        const { total_stock } = response.data;
+        const { total_stock, image_link, name, unit_price } = response.data;
+
+        const valorTotal = Number(unit_price) * Number(amount_buy);
+
+        precompra.push({
+          product_id: id,
+          amount_buy: Number(amount_buy),
+          users_addresses_id: Number(users_addresses_id),
+          type_payment: String(pagamentoEscolhido),
+          name: name,
+          image_link: image_link,
+          total_stock: total_stock,
+          valorTotal,
+        });
 
         if (total_stock < amount_buy) {
           alert(
@@ -87,7 +108,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
 
       const responseCompra = await axios.post(
         `http://localhost:3000/api/sales`,
-        carro,
+        precompra,
         {
           headers: {
             Authorization: token,
@@ -95,16 +116,17 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
         }
       );
       if (responseCompra.status === 201) {
-        const{message, valor_total_da_compra, pedido} = responseCompra.data;
-        alert(`${message}, valor total da compra: ${valor_total_da_compra}, quantidade de itens: ${pedido.length}`);
+        const { message, valor_total_da_compra, pedido } = responseCompra.data;
+        alert(
+          `${message}, valor total da compra: ${valor_total_da_compra}, quantidade de itens: ${pedido.length}`
+        );
         localStorage.removeItem("quantidade_carrinho");
+        localStorage.removeItem("carrinho");
         setCarrinho(null);
         setCarro([]);
         setDisable(true);
         return;
       }
-
-    
     } catch (error) {
       console.log(error);
     }

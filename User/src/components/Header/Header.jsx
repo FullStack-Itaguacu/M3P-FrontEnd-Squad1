@@ -48,12 +48,17 @@ function Header({ children, onLogout }) {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-               
-              <Link className={`nav-link text-light ${styles.navbarLink}`} to="/">
+                <Link
+                  className={`nav-link text-light ${styles.navbarLink}`}
+                  to="/"
+                >
                   <i className="bi bi-bag"></i>
                   Produtos
-                </Link>               
-                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/minhas-compras">
+                </Link>
+                <Link
+                  className={`nav-link text-light ${styles.navbarLink}`}
+                  to="/minhas-compras"
+                >
                   <i className="bi bi-bag"></i>
                   Minhas Compras
                 </Link>
