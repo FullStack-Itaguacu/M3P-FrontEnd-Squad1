@@ -1,4 +1,4 @@
-export const adicionarProdutoAoCarrinho = (produto, quantidade, quantidades) => {
+export const adicionarProdutoAoCarrinho = (produto, quantidade, quantidades, setCarrinho) => {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     const quantidadeDoProduto = quantidades[produto.id] || 1;
   
@@ -16,6 +16,8 @@ export const adicionarProdutoAoCarrinho = (produto, quantidade, quantidades) => 
         });
       }
       localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      setCarrinho(carrinho.length);
+      localStorage.setItem("quantidade_carrinho", carrinho.length);
       return { success: true, message: "Produto adicionado ao carrinho" };
     } else {
       return { success: false, message: "Quantidade indisponível" };

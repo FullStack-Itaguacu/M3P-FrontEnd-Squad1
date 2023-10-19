@@ -24,7 +24,7 @@ function ListagemProdutos() {
   const [type_product, setType_product] = useState("");
   const [quantidades, setQuantidades] = useState({});
 
-  const { buscarProdutos } = useContexto();
+  const { buscarProdutos , setCarrinho} = useContexto();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,7 +74,8 @@ function ListagemProdutos() {
     const resultado = adicionarProdutoAoCarrinho(
       produto,
       quantidades[produto.id],
-      quantidades
+      quantidades,
+      setCarrinho
     );
     if (resultado.success) {
       alert(resultado.message);

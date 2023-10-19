@@ -6,59 +6,22 @@ import { useContexto } from "../../context/useContexto";
 import axios from "axios";
 
 function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
-  const { setCarrinho } = useContexto();
+  const {  setCarrinho } = useContexto();
   const [carro, setCarro] = useState([]);
   const [disable, setDisable] = useState(true);
 
   useEffect(() => {
     const comprasLocalStorage = JSON.parse(localStorage.getItem("carrinho"));
     comprasLocalStorage && setCarro(comprasLocalStorage);
-    carro.length > 0 && setCarrinho(carro.length);
-    localStorage.setItem("quantidade_carrinho", carro.length);
 
     if (users_addresses_id !== -1 && pagamentoEscolhido !== "") {
       setDisable(false);
     } else {
       setDisable(true);
     }
-  }, [pagamentoEscolhido, users_addresses_id]);
+  });
 
-  // function precompra() {
-  //   const token = localStorage.getItem("token");
-  //   const precompra = [];
-  //   compras.map((compra) => {
-  //     console.log(...compra)
-  //     const { product_id } = compra;
-  //     console.log(product_id)
-  //     axios
-  //       .get(`http://localhost:3000/api/products/${compra.product_id}`, {
-  //         headers: {
-  //           Authorization: token,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         const { data } = response;
-  //         // console.log(data)
-  //         const { name, image_link, unit_price, total_stock, id } = data;
-  //         const valorTotal = Number(unit_price) * Number(compra.amount_buy);
 
-  //         precompra.push({
-  //           product_id: id,
-  //           amount_buy: Number(compra.amount_buy),
-  //           users_addresses_id: Number(users_addresses_id),
-  //           type_payment: String(pagamentoEscolhido),
-  //           name: name,
-  //           image_link: image_link,
-  //           total_stock: total_stock,
-  //           valorTotal,
-  //         });
-  //         setCarrinho(precompra.length);
-  //         localStorage.setItem("quantidade_carrinho", precompra.length);
-  //         setCarro(precompra);
-  //       });
-  //   });
-  //   localStorage.setItem("quantidade_carrinho", precompra.length);
-  // }
 
   async function comprar(event) {
     event.preventDefault();

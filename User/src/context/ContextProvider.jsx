@@ -6,7 +6,7 @@ import axios from "axios";
 
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
-  const [carrinho, setCarrinho] = useState([]);
+  const [carrinho, setCarrinho] = useState();
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/login";
