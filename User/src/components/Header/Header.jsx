@@ -9,7 +9,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import styles from "./Header.module.css"
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-
+import "bootstrap-icons/font/bootstrap-icons.css"
 
 function Header({ children, onLogout }) {
   const [userEmail, setUserEmail] = useState(""); 
