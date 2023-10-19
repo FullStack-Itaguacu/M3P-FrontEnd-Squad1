@@ -106,13 +106,55 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       });
       const { image_link, name, unit_price } = response.data;
       const total = Number(unit_price) * Number(amount_buy);
-      data.push({ image_link, name, amount_buy, total });
+      data.push({ image_link, name, amount_buy, total , id});
     }
     setDataCards(data);
   }
   return (
     <Form onSubmit={(e) => comprar(e)}>
       <Row>
+       
+
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Produto</th>
+              <th>Quantidade</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataCards.map((compra, index) => (
+              <tr key={index}>
+                <td>{compra.id}</td>
+       
+                <td>
+                   <img
+                    src={compra.image_link}
+                    alt={`Imagen de ${compra.name}`}
+                    style={{ maxWidth: "50px" }}
+                  />
+                {`  ${compra.name}`}
+                </td>
+                <td>
+                  <Row>
+                    <Col>
+                      <Button variant="secondary">-</Button>
+                    </Col>
+                    <Col>
+                      <Button variant="ligth">{compra.amount_buy}</Button>
+                    </Col>
+                    <Col>
+                      <Button variant="secondary">+</Button>
+                    </Col>
+                  </Row>
+                </td>
+                <td>{compra.total}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
         <Row>
           <Button variant="primary" type="submit" disabled={disable}>
             Finalizar compra
@@ -126,7 +168,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
 
               localStorage.removeItem("carrinho");
               localStorage.removeItem("quantidade_carrinho");
-              setCarro([])
+              setCarro([]);
               setDataCards([]);
               setCarrinho(null);
             }}
@@ -134,35 +176,6 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
             Cancelar compra
           </Button>
         </Row>
-
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Produto</th>
-              <th>Quantidade</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataCards.map((compra, index) => (
-              <tr key={index}>
-                <td>
-                  <img
-                    src={compra.image_link}
-                    alt={`Imagen de ${compra.name}`}
-                    style={{ maxWidth: "65px" }}
-                  />
-                </td>
-                <td>{compra.name}</td>
-                <td>{compra.amount_buy}</td>
-                <td>{compra.total}</td>
-              </tr>
-
-            ))}
-           
-          </tbody>
-        </Table>
       </Row>
     </Form>
   );
