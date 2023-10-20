@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Card } from "react-bootstrap";
+import {  Card, Stack, Col } from "react-bootstrap";
 //import { useHistory } from "react-router-dom";
 import styles from "./Dashboard.module.css";
+import "bootstrap-icons/font/bootstrap-icons.css"
 
 
 function Dashboard() {
@@ -29,26 +30,33 @@ function Dashboard() {
     fetchData();
   }, [token]); 
   
-  return (
-    <div className={styles.dashboard}>
-      <h1>Bem-vindo</h1>
-      <h3> <br></br>Sistema de Gerenciamento de Usuários e Medicamentos</h3>
-    <Container className={styles.container}>
-      <Card className={styles.card}>
-        <Card.Body className={styles.card_body}>
-          <Card.Title className={styles.sub_title}>Valor Total de Vendas</Card.Title>
-          <Card.Text className={styles.text}>{`R$ ${salesData.totalSales}`}</Card.Text>
-        </Card.Body>
-      </Card>
+  return (    
+    <div className="">
+      <h1 className="text-center text-black pt-4">Bem-vindo ao Sistema Express Pharmacy</h1>
+      <h4 className="text-center text-black p-4">Administrador, aqui você tem acesso ao Gerenciamento de Usuários e Medicamentos.</h4>
+      <p className="text-center text-black">Abaixo você pode acompanhar um resumo dos seus resultados até agora:</p>
+      <Stack direction="horizontal" gap={3} className="d-flex justify-content-center">
+        <Col md={4}>      
+          <Card className="p-4" style={{border: "3px blue solid", backgroundColor: "rgb(3, 193, 25)" }}>
+            <Card.Body>
+              <i className="bi bi-cash-stack text-light d-flex justify-content-center p-3 "></i>
+              <Card.Title className="text-center text-white">Valor Total de Vendas</Card.Title>
+              <Card.Text className="text-center text-white">{`R$ ${salesData.totalSales}`}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
 
-      <Card className={styles.card}>
-        <Card.Body className={styles.card_body}>
-          <Card.Title className={styles.sub_title}>Quantidade de Podutos Vendido</Card.Title>
-          <Card.Text className={styles.text}>{salesData.totalAmount}</Card.Text>
-        </Card.Body>
-      </Card>
-    </Container>
-    </div>
+        <Col md={4}>
+        <Card className="p-4" style={{border: "3px blue solid", backgroundColor: "rgb(3, 193, 25)" }}>
+          <Card.Body>
+            <i className="bi bi-box-seam text-light d-flex justify-content-center p-3"></i>
+            <Card.Title className="text-center text-light">Qtd Produtos Vendidos</Card.Title>
+            <Card.Text className="text-center text-light">{salesData.totalAmount}</Card.Text>
+          </Card.Body>
+        </Card>
+        </Col>
+      </Stack>
+    </div>    
   );
 }
 
