@@ -8,6 +8,7 @@ import {
   incrementarQuantidade,
   decrementarQuantidade,
 } from "./utils/finalizarCompra.utils";
+import {useNavigate} from "react-router-dom"
 
 function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
   const { setCarrinho, BASEURL, ENDPOINPRODUTOS, ENDPOINTPOSTSALES } =
@@ -16,6 +17,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
   const [disable, setDisable] = useState(true);
   const [quantidades, setQuantidades] = useState({});
   const [atualiza, setAtualiza] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const comprasLocalStorage = JSON.parse([localStorage.getItem("carrinho")]);
@@ -101,7 +103,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
         setCarro([]);
         setDisable(true);
         localStorage.setItem("carrinho", "[]");
-
+        navigate("/")
         return;
       }
     } catch (error) {
