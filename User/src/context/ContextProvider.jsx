@@ -41,6 +41,8 @@ export function ContextProvider({ children }) {
   }
 
   const loginUser = async (email, password) => {
+    localStorage.setItem("carrinho", "[]");
+
     if (!validaEmail(email)) {
       return;
     }

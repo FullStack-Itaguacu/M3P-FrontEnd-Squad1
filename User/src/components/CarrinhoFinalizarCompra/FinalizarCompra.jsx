@@ -1,30 +1,45 @@
-import CardProduto from "./CardProduto";
 import { Row, Col, Form, Button, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useContexto } from "../../context/useContexto";
 import axios from "axios";
+import {
+  adicionarProdutoAoCarrinho,
+  incrementarQuantidade,
+  decrementarQuantidade,
+} from "./utils/finalizarCompra.utils";
 
 function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
   const { setCarrinho, BASEURL, ENDPOINPRODUTOS, ENDPOINTPOSTSALES } =
     useContexto();
   const [carro, setCarro] = useState([]);
   const [disable, setDisable] = useState(true);
-  const [dataCards, setDataCards] = useState([]);
+  const [quantidades, setQuantidades] = useState({});
+  const [atualiza, setAtualiza] = useState(false);
 
   useEffect(() => {
-    const comprasLocalStorage = JSON.parse(localStorage.getItem("carrinho"));
-    comprasLocalStorage && setCarro(comprasLocalStorage);
+    const comprasLocalStorage = JSON.parse([localStorage.getItem("carrinho")]);
+
+    for (let index = 0; index < comprasLocalStorage.length; index++) {
+      if (carro.length === 0) {
+        setCarro(JSON.parse(localStorage.getItem("carrinho")));
+        return;
+      }
+      const amount_carro = carro[index].amount_buy;
+      const amount_localstorage = comprasLocalStorage[index].amount_buy;
+      console.log(`${amount_carro}`);
+      console.log(`${amount_localstorage}`);
+
+      amount_localstorage != amount_carro &&
+        setCarro(JSON.parse(localStorage.getItem("carrinho")));
+    }
 
     if (users_addresses_id !== -1 && pagamentoEscolhido !== "") {
       setDisable(false);
-      if (carro.length > dataCards.length) {
-        calcularCompra();
-      }
     } else {
       setDisable(true);
     }
-  }, [users_addresses_id, pagamentoEscolhido]);
+  }, [users_addresses_id, pagamentoEscolhido, carro, atualiza]);
 
   async function comprar(event) {
     event.preventDefault();
@@ -81,40 +96,46 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
           `${message}, valor total da compra: ${valor_total_da_compra}, quantidade de pedidos: ${pedido.length}`
         );
         localStorage.removeItem("quantidade_carrinho");
-        localStorage.removeItem("carrinho");
+
         setCarrinho(null);
         setCarro([]);
         setDisable(true);
-        setDataCards([]);
+        localStorage.setItem("carrinho", "[]");
+
         return;
       }
     } catch (error) {
       console.log(error);
     }
   }
-  async function calcularCompra() {
-    const data = [];
-    for (let index = 0; index < carro.length; index++) {
-      const compra = carro[index];
-      const token = localStorage.getItem("token");
-      const { id, amount_buy } = compra;
 
-      const response = await axios.get(`${BASEURL}${ENDPOINPRODUTOS}${id}`, {
-        headers: {
-          Authorization: token,
-        },
-      });
-      const { image_link, name, unit_price } = response.data;
-      const total = Number(unit_price) * Number(amount_buy);
-      data.push({ image_link, name, amount_buy, total , id});
+  const handleIncrement = (produtoId) => {
+    incrementarQuantidade(produtoId, quantidades, setQuantidades);
+  };
+
+  const handleDecrement = (produtoId) => {
+    decrementarQuantidade(produtoId, quantidades, setQuantidades);
+  };
+
+  const atualizarQuantidade = (produto) => {
+    const resultado = adicionarProdutoAoCarrinho(
+      produto,
+      quantidades[produto.id],
+      quantidades,
+      setCarrinho
+    );
+
+    if (resultado.success) {
+      alert(resultado.message);
+      setQuantidades({});
+    } else {
+      alert(resultado.message);
     }
-    setDataCards(data);
-  }
+    setAtualiza(!atualiza);
+  };
   return (
     <Form onSubmit={(e) => comprar(e)}>
       <Row>
-       
-
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -125,34 +146,63 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
             </tr>
           </thead>
           <tbody>
-            {dataCards.map((compra, index) => (
-              <tr key={index}>
-                <td>{compra.id}</td>
-       
-                <td>
-                   <img
-                    src={compra.image_link}
-                    alt={`Imagen de ${compra.name}`}
-                    style={{ maxWidth: "50px" }}
-                  />
-                {`  ${compra.name}`}
-                </td>
-                <td>
-                  <Row>
-                    <Col>
-                      <Button variant="secondary">-</Button>
-                    </Col>
-                    <Col>
-                      <Button variant="ligth">{compra.amount_buy}</Button>
-                    </Col>
-                    <Col>
-                      <Button variant="secondary">+</Button>
-                    </Col>
-                  </Row>
-                </td>
-                <td>{compra.total}</td>
-              </tr>
-            ))}
+            {carro.length > 0 &&
+              carro.map((compra, index) => (
+                <tr key={index}>
+                  <td>{compra.id}</td>
+
+                  <td>
+                    <img
+                      src={compra.image_link}
+                      alt={`Imagen de ${compra.name}`}
+                      style={{ maxWidth: "50px" }}
+                    />
+                    {`  ${compra.name}`}
+                  </td>
+                  <td>
+                    <Row>
+                      <Col>
+                        <Button variant="ligth">{compra.amount_buy}</Button>
+                      </Col>{" "}
+                      <Col>
+                        {" "}
+                        <Button
+                          variant="secondary"
+                          onClick={() =>{ compra.amount_buy > 1 && handleDecrement(compra.id)}}
+                        >
+                          -
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button variant="info" disabled={true}>
+                          {" "}
+                          {quantidades[compra.id] }
+                        </Button>
+                      </Col>
+                      <Col>
+                        {" "}
+                        <Button
+                          className="btn btn-warning btn-sm me-1"
+                          onClick={() => {handleIncrement(compra.id)}}
+                        >
+                          +
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant="success"
+                          onClick={() => atualizarQuantidade(compra)}
+                        >
+                          Atualizar
+                        </Button>
+                      </Col>
+                    </Row>
+                  </td>
+                  <td>{
+                  compra.unit_price * compra.amount_buy
+                  }</td>
+                </tr>
+              ))}
           </tbody>
         </Table>
         <Row>
@@ -165,11 +215,9 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-
-              localStorage.removeItem("carrinho");
+              localStorage.setItem("carrinho", "[]");
               localStorage.removeItem("quantidade_carrinho");
               setCarro([]);
-              setDataCards([]);
               setCarrinho(null);
             }}
           >
