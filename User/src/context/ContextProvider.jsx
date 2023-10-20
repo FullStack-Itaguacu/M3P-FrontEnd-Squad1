@@ -4,14 +4,17 @@ import PropTypes from "prop-types";
 export const appContext = createContext();
 import axios from "axios";
 
-
 export function ContextProvider({ children }) {
   const [isLoggedin, setIsLoggedin] = useState(false);
-  
+  const [carrinho, setCarrinho] = useState();
+
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/login";
   const ENDPOINTPOSTUSUARIO = "/api/user/signup";
+  const ENDPOINTLISTAENDERECOS = "/api/buyers/address";
   const ENDPOINPRODUTOS = "/api/products/";
+  const ENDPOINTPOSTSALES = "/api/sales"
+
 
   //função para validar senha
   function validaSenha(senha) {
@@ -38,12 +41,14 @@ export function ContextProvider({ children }) {
   }
 
   const loginUser = async (email, password) => {
-    if (!validaEmail(email)) {      
+    localStorage.setItem("carrinho", "[]");
+
+    if (!validaEmail(email)) {
       return;
     }
 
     localStorage.setItem("email", email);
-    
+
     if (!validaSenha(password)) {
       return;
     }
@@ -123,11 +128,16 @@ export function ContextProvider({ children }) {
 
   const value = {
     isLoggedin,
+    carrinho,
+    setCarrinho,
+    BASEURL,
+    ENDPOINTPOSTUSUARIO,
+    ENDPOINTLISTAENDERECOS,
     setIsLoggedin,
     buscarProdutos,
     loginUser,
-    BASEURL,
-    ENDPOINTPOSTUSUARIO,
+    ENDPOINTPOSTSALES,
+    ENDPOINPRODUTOS
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
