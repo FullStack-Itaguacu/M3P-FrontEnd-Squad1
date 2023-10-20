@@ -33,12 +33,12 @@ function Header({ children, onLogout }) {
             />{' '}
           </Navbar.Brand>
           <Navbar.Brand href="#" className={styles.textLeft}>Express Pharmacy</Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
+          <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} className={styles.toggleStyle} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand`}
             aria-labelledby={`offcanvasNavbarLabel-expand`}
             placement="end"
-            style={{ backgroundColor: "#888888" }}
+            style={{ backgroundColor: "rgb(9, 157, 27)", color: "white" }}
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand`}>
