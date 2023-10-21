@@ -18,7 +18,7 @@ import {
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
   const [limit, setLimit] = useState(30);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState([0]);
   const [name, setName] = useState("");
   const [type_product, setType_product] = useState("");
