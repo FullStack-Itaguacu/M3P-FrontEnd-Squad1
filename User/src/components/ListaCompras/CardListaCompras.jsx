@@ -58,7 +58,7 @@ const CardListaCompras = ({ compras }) => {
                     })}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => setModal(false)}>Close</Button>
+                    <Button onClick={() => setModal(false)}>Fechar</Button>
                 </Modal.Footer>
             </Modal>
         </Card >

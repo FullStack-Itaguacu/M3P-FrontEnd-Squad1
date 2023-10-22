@@ -62,7 +62,7 @@ const ListaCompras = () => {
                             )
                         })
                     ) :
-                    <h2>Não há dados para mostrar</h2>
+                    <h2>Não há registro de compras.</h2>
                 }
             </Row>
 
