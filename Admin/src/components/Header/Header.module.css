@@ -58,18 +58,15 @@
     transform-origin: bottom left;
 }
 
-/* .navbarLink:hover {
-    background-color: rgb(3, 193, 25);
-    border-radius: 4px;
-    box-shadow: 2px 2px 4px grey;
-    transition: 0,6s ease-in-out;
-} */
-
 .navbarLink i {
     margin-right: 6px;    
 }
 
 .navbarLink:hover i {
     color: chartreuse;
+}
+
+.toggleStyle {    
+    background-color: white;
 }
 

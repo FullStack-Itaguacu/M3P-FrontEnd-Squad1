@@ -31,13 +31,13 @@ function Dashboard() {
   }, [token]); 
   
   return (    
-    <div className="pb-5" style={{backgroundColor: "rgb(214, 229, 243)"}} >
+    <div className="pb-5">
       <h1 className="text-center text-black pt-4">Bem-vindo ao Sistema Express Pharmacy</h1>
       <h4 className="text-center text-black p-4">Administrador, aqui você tem acesso ao Gerenciamento de Usuários e Medicamentos.</h4>
       <p className="text-center text-black">Abaixo você pode acompanhar um resumo dos seus resultados até agora:</p>
       <Stack direction="horizontal" gap={3} className="d-flex justify-content-center">
         <Col md={4}>      
-          <Card className="p-4" style={{border: "3px hsl(216, 97%, 53%) solid", backgroundColor: "rgb(2, 141, 18)" }}>
+          <Card className={`p-4 ${styles.cardStyle}`}>
             <Card.Body>
               <i className="bi bi-cash-stack text-light d-flex justify-content-center p-3"></i>
               <Card.Title className="text-center text-white">Valor Total de Vendas</Card.Title>
@@ -47,7 +47,7 @@ function Dashboard() {
         </Col>
 
         <Col md={4}>
-        <Card className="p-4" style={{border: "3px hsl(216, 97%, 53%) solid", backgroundColor: "rgb(2, 141, 18)" }}>
+        <Card className={`p-4 ${styles.cardStyle}`}>
           <Card.Body>
             <i className="bi bi-box-seam text-light d-flex justify-content-center p-3"></i>
             <Card.Title className="text-center text-light">Qtd Produtos Vendidos</Card.Title>
