@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login"
 import Error from "./pages/Error/NotFound"
 import CadastroUsuario from "./pages/CadastroUsuario/CadastroUsuario";
 import CarroCompras from "./pages/CarroCompras/CarroCompras";
+import MinhasCompras from "./pages/MinhasCompras/MinhasCompras";
 
 function App() {
   const { isLoggedin, setIsLoggedin } = useContexto();
@@ -17,11 +18,11 @@ function App() {
 
   return <> {isLoggedin ?
     <BrowserRouter>
-        <Header onLogout={handleLogout} >
+      <Header onLogout={handleLogout} >
         <Routes>
           {/* Rotas da aplicaçao quando usuario esta logado */}
           <Route path="/" element={<h1>Home</h1>} />
-          <Route path="/minhas-compras" element={<h1>Minhas compras</h1>} />
+          <Route path="/minhas-compras" element={<MinhasCompras />} />
           <Route path="/carrinho" element={<CarroCompras />} />
           <Route path="/nome-usuario" element={<h1>Nome do usuário</h1>} />
 
