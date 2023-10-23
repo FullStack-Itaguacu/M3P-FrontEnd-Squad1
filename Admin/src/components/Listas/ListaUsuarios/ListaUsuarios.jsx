@@ -102,7 +102,7 @@ function ListaUsuarios() {
                 </Col>
             </Form.Group>
 
-            <Row>
+            <Row className="justify-content-center">
                 {users.length > 0 ?
                     (
                         users.map((usuario) => {

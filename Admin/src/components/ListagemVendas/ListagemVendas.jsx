@@ -30,7 +30,7 @@ function ListagemVendas() {
       <p className="text-center text-black">Aqui você pode acompanhar suas vendas realizadas até o momento:</p>
       <Row className=" justify-content-center">
         {vendas.map((venda) => (
-          <Card as={Col} lg={3} md={6} xs={12} key={venda.id} style={{margin: "3px"}}>
+          <Card as={Col} lg={3} md={6} xs={12} key={venda.id} style={{margin: "8px"}}>
             <Card.Img
               variant="top"
               src={venda.product.image_link}

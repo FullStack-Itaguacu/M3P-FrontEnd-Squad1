@@ -12,12 +12,13 @@ function RegistroUsuarios() {
     // </section>
     <Container className={styles.usuarioStyle}>
       <Tabs className="pt-4 border-light" defaultActiveKey="lista" id="fill-tab-example">
-        <Tab className="pt-4 pb-4" eventKey="lista" title="Lista de usuários">
-          <ListaUsuarios />
-        </Tab>
         <Tab eventKey="cadastro" title="Cadastrar Usuario">
           <FormularioCadastroUsuario />
         </Tab>
+        <Tab className="pt-4 pb-4" eventKey="lista" title="Lista de usuários">
+          <ListaUsuarios />
+        </Tab>
+        
       </Tabs>
     </Container>
   );

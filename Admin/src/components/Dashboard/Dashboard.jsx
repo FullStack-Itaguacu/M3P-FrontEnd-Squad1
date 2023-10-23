@@ -33,7 +33,7 @@ function Dashboard() {
   return (    
     <div className={`pb-5 ${styles.dashboardStyle}`}>
       <h1 className="text-center text-black pt-4">Bem-vindo ao Sistema Express Pharmacy</h1>
-      <h4 className="text-center text-black p-4">Administrador, aqui você tem acesso ao Gerenciamento de Usuários e Medicamentos.</h4>
+      <h4 className="text-center text-black pt-2 pb-3">Administrador, aqui você tem acesso ao Gerenciamento de Usuários e Medicamentos.</h4>
       <p className="text-center text-black">Abaixo você pode acompanhar um resumo dos seus resultados até agora:</p>
       <Stack direction="horizontal" gap={3} className="d-flex justify-content-center">
         <Col md={4}>      

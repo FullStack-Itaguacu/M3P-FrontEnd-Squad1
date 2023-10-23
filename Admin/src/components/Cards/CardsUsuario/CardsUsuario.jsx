@@ -96,8 +96,8 @@ const CardsUsuario = ({ usuario }) => {
 
     return (
         <>
-            <Card style={{ width: '16rem', margin: '3px' }}>
-                <Card.Img variant="top" src={personCircle} />
+            <Card style={{ width: '16rem', margin: '8px' }}>
+                {/* <Card.Img variant="top" src={personCircle} /> */}
                 <Card.Body>
                     <Card.Title>{full_name}</Card.Title>
                     <Card.Text>
