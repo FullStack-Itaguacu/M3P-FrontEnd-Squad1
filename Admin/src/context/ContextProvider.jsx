@@ -24,6 +24,10 @@ export function ContextProvider({ children }) {
   const ENDPOINTLOGIN = "/api/user/admin/login";
   const ENDPOINTPOSTUSUARIO = "/api/user/admin/signup";
   const ENDPOINPRODUTOS = "/api/products/admin/";
+  const ENDPOINTATUALIZAUSUARIO = "/api/buyers/admin";
+  const ENDPOINTDASHBOARD = "/api/sales/dashboard/admin";
+  const ENDPOINTVENDAS = "/api/sales/admin/";
+  const ENDPOINTUSUARIOS = "/api/buyers/admin";
 
   //função para validar senha
   function validaSenha(senha) {
@@ -438,6 +442,10 @@ export function ContextProvider({ children }) {
     BASEURL,
     ENDPOINTLOGIN,
     ENDPOINPRODUTOS,
+    ENDPOINTATUALIZAUSUARIO,
+    ENDPOINTDASHBOARD,
+    ENDPOINTVENDAS,
+    ENDPOINTUSUARIOS,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
