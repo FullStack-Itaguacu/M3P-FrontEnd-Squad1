@@ -1,17 +1,19 @@
 import { useContexto } from "../../context/useContexto";
+import { useNavigate } from "react-router-dom";
 
 import { Container, Button, Form, Row, Col, Stack } from "react-bootstrap";
-import styles from "./Formulario.module.css"
+import styles from "./Formulario.module.css";
 
 function FormularioLogin() {
-  const { loginAadmin } = useContexto();
+  const navigate = useNavigate();
+  const { loginUser } = useContexto();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.elements["Login.email"].value;
     const senha = form.elements["Login.senha"].value;
     console.log(email, senha);
-    await loginAadmin(email, senha);
+    await loginUser(email, senha);
   };
 
   return (
@@ -19,7 +21,7 @@ function FormularioLogin() {
       <Row>
         <Col>
           <Form onSubmit={handleSubmit}>
-            <div className={styles.textTitle}>Login Administrador</div>
+            <div className={styles.textTitle}>Login Usuário</div>
             <Form.Group className="mb-3" controlId="Login.email">
               <Form.Label className="text-light">Email</Form.Label>
               <Form.Control
@@ -30,7 +32,11 @@ function FormularioLogin() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="Login.senha">
               <Form.Label className="text-light">Senha</Form.Label>
-              <Form.Control type="password" placeholder="senha" required />
+              <Form.Control
+                type="password"
+                placeholder="Digite sua senha..."
+                required
+              />
             </Form.Group>
             <Stack
               className="d-flex justify-content-center"
@@ -42,7 +48,15 @@ function FormularioLogin() {
                   Entrar
                 </Button>
               </div>
-            </Stack>            
+              <div className="mt-2">
+                <Button
+                  variant="light"
+                  onClick={() => navigate("/cadastro")}
+                >
+                  Cadastrar
+                </Button>
+              </div>
+            </Stack>
           </Form>
         </Col>
       </Row>

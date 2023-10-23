@@ -1,0 +1,74 @@
+.navbarHeader {     
+    background: linear-gradient(to right, rgb(3, 193, 25), blue);
+}
+
+.navbarHeader:hover {
+    box-shadow: 5px 5px 10px grey;
+    transition: 0,6s ease-in-out;
+}
+
+.textLeft {
+    display: inline-block;
+    position: relative;
+    color: #fff;
+}
+
+.textLeft:hover {
+    color: navy;
+}
+
+.textLeft::after {    
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: chartreuse;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.textLeft:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.navbarLink {
+    display: inline-block;
+    position: relative;    
+}
+
+.navbarLink::after {    
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: chartreuse;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.navbarLink:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* .navbarLink:hover {
+    background-color: rgb(3, 193, 25);
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px grey;
+    transition: 0,6s ease-in-out;
+} */
+
+.navbarLink i {
+    margin-right: 6px;
+}
+
+.navbarLink:hover i {
+    color: chartreuse;
+}

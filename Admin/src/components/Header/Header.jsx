@@ -1,59 +1,77 @@
-import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import "bootstrap-icons/font/bootstrap-icons.css"
 
+import styles from "./Header.module.css"
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
-function Header({ children }) {
+function Header({ children, onLogout }) {
+  const [userEmail, setUserEmail] = useState(""); 
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+
+    setUserEmail(email);
+  }, []);
+
   return (
     <>
-      <Navbar expand={"lg"} className="bg-body-tertiary mb-3">
+      <Navbar expand={"lg"} className={styles.navbarHeader}>
         <Container fluid>
-          <Navbar.Brand href="#">Admin</Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
+          <Navbar.Brand href="#home">
+            <img
+              alt=""
+              src="/logo1.png"
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+            />{' '}
+          </Navbar.Brand>
+          <Navbar.Brand href="#" className={styles.textLeft}>Express Pharmacy</Navbar.Brand>
+          <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} className={styles.toggleStyle} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand`}
             aria-labelledby={`offcanvasNavbarLabel-expand`}
             placement="end"
+            style={{ backgroundColor: "rgb(9, 157, 27)", color: "white" }}
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand`}>
-                Admin
+                Express Pharmacy
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Link className="nav-link" to="/">
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/">
+                  <i className="bi bi-bar-chart-line"></i>
                   Dashboard
                 </Link>
-                <NavDropdown
-                  title="Mais opções"
-                  id={`offcanvasNavbarDropdown-expand`}
-                >
-                  <Link className="nav-link" to="/">
-                    Dashboard
-                  </Link>
-                  <NavDropdown.Divider />
-                  <Link className="nav-link" to="/">
-                    Dashboard
-                  </Link>
-                </NavDropdown>
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/vendas">
+                  <i className="bi bi-cash-coin"></i>
+                  Vendas
+                </Link>
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/registro-produtos">
+                <i className="bi bi-box-seam-fill"></i>
+                  Produtos
+                </Link>
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/registro-usuarios">
+                  <i className="bi bi-people"></i>
+                  Usuários
+                </Link>
+                <Link className={`nav-link text-light ${styles.navbarLink}`} to="/registro-usuarios">
+                  <i className="bi bi-person-circle"></i>
+                  {userEmail}
+                </Link>
+                <Link className={`nav-link text-light ${styles.navbarLink}`} onClick={onLogout} to="/">
+                  <i className="bi bi-box-arrow-right"></i>
+                  Sair
+                </Link>
               </Nav>
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Item Buscado"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Buscar</Button>
-              </Form>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
@@ -65,6 +83,7 @@ function Header({ children }) {
 
 Header.propTypes = {
   children: PropTypes.node.isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default Header;
