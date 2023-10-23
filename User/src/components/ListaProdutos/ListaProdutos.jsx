@@ -89,14 +89,19 @@ function ListagemProdutos() {
     <>
       <h1 className="p-3">Medicamentos</h1>
 
-      <Container fluid className="m-2 p-2 border border-2 rounded-3 accordion">
-        <Row className="align-items-center mb-3">
+      <Container fluid className="m-2  border border-2 rounded-3 accordion">
+        <Row className="col-12 align-items-center mb-2">
           <Col md={3}>
             <Form.Control
               type="text"
               placeholder="Nome do produto"
               onChange={(e) => setName(e.target.value)}
             />
+          </Col>
+          <Col  col={2} className="">
+           <Button>
+            Buscar
+          </Button>
           </Col>
           <Col md={3}>
             <Form.Control
@@ -111,7 +116,7 @@ function ListagemProdutos() {
             </Form.Control>
           </Col>
 
-          <Col md={3}>
+          <Col md={2}>
             <Form.Control
               as="select"
               onChange={(e) => {
@@ -140,6 +145,7 @@ function ListagemProdutos() {
               <Pagination.Last onClick={() => setPage(totalPages)} />
             </Pagination>
           </Col>
+         
         </Row>
 
         <Row xs={1} md={3} lg={4} className="g-4">
