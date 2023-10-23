@@ -21,7 +21,7 @@ function Header({ children, onLogout }) {
 
   return (
     <>
-      <Navbar expand={"lg"} className={styles.navbarHeader}>
+      <Navbar expand={"lg"} className={styles.navbarHeader} sticky="top">
         <Container fluid>
           <Navbar.Brand href="#home">
             <img

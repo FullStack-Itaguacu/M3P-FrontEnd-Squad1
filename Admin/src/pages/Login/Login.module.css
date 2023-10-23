@@ -1,5 +1,6 @@
 .loginStyle {
-    background-color: rgb(214, 229, 243);    
+    background-color: rgb(214, 229, 243); 
+    min-height: 86vh;   
 }
 
 .imgStyle {

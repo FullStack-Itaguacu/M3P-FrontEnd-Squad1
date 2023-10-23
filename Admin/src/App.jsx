@@ -3,11 +3,13 @@ import { useContexto } from "./context/useContexto";
 import RegistroUsuarios from "./pages/RegistroUsuarios/RegistroUsuarios";
 import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
+import LoginHeader from "./components/LoginHeader/LoginHeader";
 import Error from "./pages/Error/NotFound";
 import PaginaDashboard from "./pages/PaginaDashboard/PaginaDashboard";
 import CadastroProduto from "./pages/CadastroProduto/CadastroProduto";
 import Vendas from "./pages/Vendas/Vendas";
 import "./App.css";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -36,13 +38,16 @@ function App() {
         </BrowserRouter>
       ) : (
         <BrowserRouter>
-          <Routes>
-            {/* Rotas da aplicaçao quando usuario nao esta logado */}
-            <Route path="/" element={<Login />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
-        </BrowserRouter>
+          <LoginHeader> 
+            <Routes>
+              {/* Rotas da aplicaçao quando usuario nao esta logado */}
+              <Route path="/" element={<Login />} />
+              <Route path="*" element={<Error />} />
+            </Routes>            
+          </LoginHeader>          
+        </BrowserRouter>        
       )}
+      <Footer />
     </>
   );
 }
