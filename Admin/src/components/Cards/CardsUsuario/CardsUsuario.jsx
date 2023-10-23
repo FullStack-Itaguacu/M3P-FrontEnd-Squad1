@@ -8,7 +8,7 @@ import personCircle from '../../../assets/personcircle.svg'
 import { useEffect, useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import axios from 'axios'
-import useContexto from "../../../context/useContexto"
+import {useContexto} from "../../../context/useContexto"
 
 const CardsUsuario = ({ usuario }) => {
 
