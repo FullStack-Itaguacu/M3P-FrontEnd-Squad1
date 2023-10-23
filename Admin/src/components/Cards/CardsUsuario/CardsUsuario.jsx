@@ -8,6 +8,7 @@ import personCircle from '../../../assets/personcircle.svg'
 import { useEffect, useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import axios from 'axios'
+import useContexto from "../../../context/useContexto"
 
 const CardsUsuario = ({ usuario }) => {
 
@@ -27,8 +28,7 @@ const CardsUsuario = ({ usuario }) => {
     const [cpfAtualizado, setCpfAtualizado] = useState(cpf)
     const [foneAtualizado, setFoneAtualizado] = useState(phone)
     const [tipoAtualizado, setTipoAtualizado] = useState(type_user)
-    const BASEURL = "http://localhost:3000";
-    const ENDPOINTATUALIZAUSUARIO = "/api/buyers/admin";
+    const{BASEURL,ENDPOINTATUALIZAUSUARIO} = useContexto()
     const token = localStorage.getItem("token") || null
 
     const geraMascaraCpf = (cpf) => {
