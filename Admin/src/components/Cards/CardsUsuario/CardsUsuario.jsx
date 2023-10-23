@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import personCircle from "../../../assets/personcircle.svg";
 import { useState } from "react";
-import { propTypes } from "react-bootstrap/esm/Image";
+import PropTypes from 'prop-types';
 import axios from "axios";
 import { useContexto } from "../../../context/useContexto";
 
@@ -213,16 +213,16 @@ const CardsUsuario = ({ usuario }) => {
 };
 
 CardsUsuario.propTypes = {
-  usuario: propTypes.shape({
-    id: propTypes.number.isRequired,
-    full_name: propTypes.string.isRequired,
-    email: propTypes.string.isRequired,
-    cpf: propTypes.string.isRequired,
-    phone: propTypes.string.isRequired,
-    birth_date: propTypes.number.isRequired,
-    type_user: propTypes.string.isRequired,
-    createdAt: propTypes.number.isRequired,
-    updatedAt: propTypes.number.isRequired,
+  usuario: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    full_name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    cpf: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    birth_date: PropTypes.number.isRequired,
+    type_user: PropTypes.string.isRequired,
+    createdAt: PropTypes.number.isRequired,
+    updatedAt: PropTypes.number.isRequired,
   }).isRequired,
 };
 
