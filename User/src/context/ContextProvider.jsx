@@ -9,6 +9,7 @@ export function ContextProvider({ children }) {
   const [carrinho, setCarrinho] = useState();
 
   const BASEURL = "http://localhost:3000";
+  const ENDPOINTLISTAVENDAS = "/api/sales";
   const ENDPOINTLOGIN = "/api/user/login";
   const ENDPOINTPOSTUSUARIO = "/api/user/signup";
   const ENDPOINTLISTAENDERECOS = "/api/buyers/address";
@@ -137,7 +138,8 @@ export function ContextProvider({ children }) {
     buscarProdutos,
     loginUser,
     ENDPOINTPOSTSALES,
-    ENDPOINPRODUTOS
+    ENDPOINPRODUTOS,
+    ENDPOINTLISTAVENDAS
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
