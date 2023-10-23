@@ -23,8 +23,9 @@ function ListagemProdutos() {
   const [name, setName] = useState("");
   const [type_product, setType_product] = useState("");
   const [quantidades, setQuantidades] = useState({});
+  const [typeProduct, setTypeProduct] = useState("");
 
-  const { buscarProdutos , setCarrinho} = useContexto();
+  const { buscarProdutos, setCarrinho } = useContexto();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,6 +71,31 @@ function ListagemProdutos() {
     decrementarQuantidade(produtoId, quantidades, setQuantidades);
   };
 
+  const handleSearch = () => {
+    buscarProdutos(
+      setProdutos,
+      setTotalPages,
+      setPage,
+      setName,
+      setTypeProduct,
+      setLimit,
+      name,
+      typeProduct,
+      page,
+      limit
+    )
+      .then((produtos) => {
+        if (produtos.length === 0) {
+          alert(
+            "Nenhum produto encontrado com essa descrição, tente novamente!"
+          );
+        }
+      })
+      .catch((error) => {
+        console.error(error); // Trate erros aqui, se necessário
+      });
+  };
+
   const adicionarAoCarrinho = (produto) => {
     const resultado = adicionarProdutoAoCarrinho(
       produto,
@@ -98,10 +124,12 @@ function ListagemProdutos() {
               onChange={(e) => setName(e.target.value)}
             />
           </Col>
-          <Col  col={2} className="">
-           <Button>
-            Buscar
-          </Button>
+          <Col col={2} className="">
+            <Button
+              className="btn btn-primary"
+              onClick={() => handleSearch()}
+
+            >Buscar</Button>
           </Col>
           <Col md={3}>
             <Form.Control
@@ -145,14 +173,13 @@ function ListagemProdutos() {
               <Pagination.Last onClick={() => setPage(totalPages)} />
             </Pagination>
           </Col>
-         
         </Row>
 
         <Row xs={1} md={3} lg={4} className="g-4">
           {produtos.length > 0 &&
             produtos.map((produto) => (
               <Col key={produto.id}>
-               <Card className="h-100">
+                <Card className="h-100">
                   <Card.Body>
                     <Card.Title>{produto.name}</Card.Title>
                     <Card.Img
