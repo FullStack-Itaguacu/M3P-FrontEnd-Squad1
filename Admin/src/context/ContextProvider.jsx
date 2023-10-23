@@ -25,6 +25,8 @@ export function ContextProvider({ children }) {
   const ENDPOINTPOSTUSUARIO = "/api/user/admin/signup";
   const ENDPOINPRODUTOS = "/api/products/admin/";
   const ENDPOINTATUALIZAUSUARIO = "/api/buyers/admin";
+  const ENDPOINTDASHBOARD = "/api/sales/dashboard/admin";
+
   //função para validar senha
   function validaSenha(senha) {
     // este regex e para validar senha com pelo menos 8 caracteres, uma letra maiúscula e uma minuscula
@@ -438,7 +440,8 @@ export function ContextProvider({ children }) {
     BASEURL,
     ENDPOINTLOGIN,
     ENDPOINPRODUTOS,
-    ENDPOINTATUALIZAUSUARIO
+    ENDPOINTATUALIZAUSUARIO,
+    ENDPOINTDASHBOARD,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
