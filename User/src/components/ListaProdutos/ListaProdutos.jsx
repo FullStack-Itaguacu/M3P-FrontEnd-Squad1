@@ -24,31 +24,36 @@ function ListagemProdutos() {
   const [type_product, setType_product] = useState("");
   const [quantidades, setQuantidades] = useState({});
   const [typeProduct, setTypeProduct] = useState("");
+  const [searchClicked, setSearchClicked] = useState(false);
 
   const { buscarProdutos, setCarrinho } = useContexto();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        await buscarProdutos(
-          setProdutos,
-          setTotalPages,
-          setPage,
-          setName,
-          setType_product,
-          setLimit,
-          name,
-          type_product,
-          page,
-          limit
-        );
-      } catch (error) {
-        console.error(error);
+      if (searchClicked) {
+        try {
+          await buscarProdutos(
+            setProdutos,
+            setTotalPages,
+            setPage,
+            setName,
+            setType_product,
+            setLimit,
+            name,
+            type_product,
+            page,
+            limit
+          );
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setSearchClicked(false);
+        }
       }
     };
 
     fetchData();
-  }, [page, limit, name, type_product]);
+  }, [searchClicked, page, limit, name, type_product, buscarProdutos]);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -92,7 +97,7 @@ function ListagemProdutos() {
         }
       })
       .catch((error) => {
-        console.error(error); // Trate erros aqui, se necessário
+        console.error(error);
       });
   };
 
@@ -124,13 +129,7 @@ function ListagemProdutos() {
               onChange={(e) => setName(e.target.value)}
             />
           </Col>
-          <Col col={2} className="">
-            <Button
-              className="btn btn-primary"
-              onClick={() => handleSearch()}
-
-            >Buscar</Button>
-          </Col>
+          
           <Col md={3}>
             <Form.Control
               as="select"
@@ -143,7 +142,17 @@ function ListagemProdutos() {
               <option value="uncontrolled">Não Controlado</option>
             </Form.Control>
           </Col>
-
+          <Col col={2} className="">
+            <Button
+              className="btn btn-primary"
+              onClick={() => {
+                setSearchClicked(true);
+                handleSearch(); // Aqui a função handleSearch é chamada quando o botão é clicado
+              }}
+            >
+              Buscar
+            </Button>
+          </Col>
           <Col md={2}>
             <Form.Control
               as="select"
