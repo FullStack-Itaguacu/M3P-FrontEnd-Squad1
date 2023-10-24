@@ -45,7 +45,9 @@ function ListagemProdutos() {
         );
 
         if (response.length === 0 && searchClicked) {
-          alert("Nenhum produto encontrado com essa descrição, tente novamente!");
+          alert(
+            "Nenhum produto encontrado com essa descrição, tente novamente!"
+          );
         }
       } catch (error) {
         console.error(error);
@@ -54,6 +56,37 @@ function ListagemProdutos() {
 
     fetchData();
   }, [searchClicked, page, limit, name, typeProduct, buscarProdutos]);
+
+  const fetchAllProducts = async () => {
+    try {
+      const response = await buscarProdutos(
+        setProdutos,
+        setTotalPages,
+        setPage,
+        setName,
+        setTypeProduct,
+        setLimit,
+        "",
+        "",
+        1,
+        limit
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, [
+    buscarProdutos,
+    setTotalPages,
+    setPage,
+    setName,
+    setTypeProduct,
+    setLimit,
+    limit,
+  ]);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -78,7 +111,18 @@ function ListagemProdutos() {
   };
 
   const handleSearch = () => {
-    buscarProdutos(setProdutos, setTotalPages, setPage, setName, setTypeProduct, setLimit, name, typeProduct, page, limit)
+    buscarProdutos(
+      setProdutos,
+      setTotalPages,
+      setPage,
+      setName,
+      setTypeProduct,
+      setLimit,
+      name,
+      typeProduct,
+      1,
+      limit
+    )
       .then((produtos) => {
         if (produtos.length === 0) {
           setSearchError(true);
@@ -137,10 +181,7 @@ function ListagemProdutos() {
             </Form.Control>
           </Col>
           <Col col={2} className="">
-            <Button
-              className="btn btn-primary"
-              onClick={handleSearch}
-            >
+            <Button className="btn btn-primary" onClick={handleSearch}>
               Buscar
             </Button>
           </Col>
