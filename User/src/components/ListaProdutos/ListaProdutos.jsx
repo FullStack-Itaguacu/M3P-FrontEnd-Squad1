@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useContexto } from "../../context/useContexto";
 import {
   Container,
@@ -18,52 +18,53 @@ import {
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
   const [limit, setLimit] = useState(30);
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState([0]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [name, setName] = useState("");
-  const [type_product, setType_product] = useState("");
-  const [quantidades, setQuantidades] = useState({});
   const [typeProduct, setTypeProduct] = useState("");
+  const [quantidades, setQuantidades] = useState({});
   const [searchClicked, setSearchClicked] = useState(false);
+  const [searchError, setSearchError] = useState(false);
 
   const { buscarProdutos, setCarrinho } = useContexto();
 
   useEffect(() => {
     const fetchData = async () => {
-      if (searchClicked) {
-        try {
-          await buscarProdutos(
-            setProdutos,
-            setTotalPages,
-            setPage,
-            setName,
-            setType_product,
-            setLimit,
-            name,
-            type_product,
-            page,
-            limit
-          );
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setSearchClicked(false);
+      try {
+        const response = await buscarProdutos(
+          setProdutos,
+          setTotalPages,
+          setPage,
+          setName,
+          setTypeProduct,
+          setLimit,
+          name,
+          typeProduct,
+          page,
+          limit
+        );
+
+        if (response.length === 0 && searchClicked) {
+          alert("Nenhum produto encontrado com essa descrição, tente novamente!");
         }
+      } catch (error) {
+        console.error(error);
       }
     };
 
     fetchData();
-  }, [searchClicked, page, limit, name, type_product, buscarProdutos]);
+  }, [searchClicked, page, limit, name, typeProduct, buscarProdutos]);
 
   const handleBack = (e) => {
     e.preventDefault();
-    if (page > 1 && page <= totalPages) {
+    if (page > 1) {
       setPage(page - 1);
     }
   };
+
   const handleNext = (e) => {
     e.preventDefault();
-    if (page >= 0 && page < totalPages) {
+    if (page < totalPages) {
       setPage(page + 1);
     }
   };
@@ -77,27 +78,19 @@ function ListagemProdutos() {
   };
 
   const handleSearch = () => {
-    buscarProdutos(
-      setProdutos,
-      setTotalPages,
-      setPage,
-      setName,
-      setTypeProduct,
-      setLimit,
-      name,
-      typeProduct,
-      page,
-      limit
-    )
+    buscarProdutos(setProdutos, setTotalPages, setPage, setName, setTypeProduct, setLimit, name, typeProduct, page, limit)
       .then((produtos) => {
         if (produtos.length === 0) {
-          alert(
-            "Nenhum produto encontrado com essa descrição, tente novamente!"
-          );
+          setSearchError(true);
+          alert("Nenhum produto encontrado com essa descrição, tente novamente!");
+        } else {
+          setSearchError(false);
         }
       })
       .catch((error) => {
         console.error(error);
+        setSearchError(true);
+        alert("Erro ao buscar produtos. Por favor, tente novamente mais tarde.");
       });
   };
 
@@ -108,6 +101,7 @@ function ListagemProdutos() {
       quantidades,
       setCarrinho
     );
+
     if (resultado.success) {
       alert(resultado.message);
       setQuantidades({});
@@ -120,22 +114,22 @@ function ListagemProdutos() {
     <>
       <h1 className="p-3">Medicamentos</h1>
 
-      <Container fluid className="m-2  border border-2 rounded-3 accordion">
+      <Container fluid className="m-2 border border-2 rounded-3 accordion">
         <Row className="col-12 align-items-center mb-2">
           <Col md={3}>
             <Form.Control
               type="text"
               placeholder="Nome do produto"
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Col>
-          
+
           <Col md={3}>
             <Form.Control
               as="select"
-              onChange={(e) => {
-                setType_product(e.target.value);
-              }}
+              value={typeProduct}
+              onChange={(e) => setTypeProduct(e.target.value)}
             >
               <option value="">Tipo de produto</option>
               <option value="controlled">Controlado</option>
@@ -145,10 +139,7 @@ function ListagemProdutos() {
           <Col col={2} className="">
             <Button
               className="btn btn-primary"
-              onClick={() => {
-                setSearchClicked(true);
-                handleSearch(); // Aqui a função handleSearch é chamada quando o botão é clicado
-              }}
+              onClick={handleSearch}
             >
               Buscar
             </Button>
@@ -156,12 +147,13 @@ function ListagemProdutos() {
           <Col md={2}>
             <Form.Control
               as="select"
+              value={limit}
               onChange={(e) => {
-                setLimit(e.target.value);
+                setLimit(parseInt(e.target.value));
                 setPage(1);
               }}
             >
-              <option value="30">Produtos por pagina</option>
+              <option value="30">Produtos por página</option>
               <option value="1">1</option>
               <option value="5">5</option>
               <option value="10">10</option>
