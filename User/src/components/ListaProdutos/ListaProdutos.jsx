@@ -57,37 +57,6 @@ function ListagemProdutos() {
     fetchData();
   }, [searchClicked, page, limit, name, typeProduct, buscarProdutos]);
 
-  const fetchAllProducts = async () => {
-    try {
-      const response = await buscarProdutos(
-        setProdutos,
-        setTotalPages,
-        setPage,
-        setName,
-        setTypeProduct,
-        setLimit,
-        "",
-        "",
-        1,
-        limit
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllProducts();
-  }, [
-    buscarProdutos,
-    setTotalPages,
-    setPage,
-    setName,
-    setTypeProduct,
-    setLimit,
-    limit,
-  ]);
-
   const handleBack = (e) => {
     e.preventDefault();
     if (page > 1) {
@@ -126,7 +95,9 @@ function ListagemProdutos() {
       .then((produtos) => {
         if (produtos.length === 0) {
           setSearchError(true);
-          alert("Nenhum produto encontrado com essa descrição, tente novamente!");
+          alert(
+            "Nenhum produto encontrado com essa descrição, tente novamente!"
+          );
         } else {
           setSearchError(false);
         }
@@ -134,7 +105,9 @@ function ListagemProdutos() {
       .catch((error) => {
         console.error(error);
         setSearchError(true);
-        alert("Erro ao buscar produtos. Por favor, tente novamente mais tarde.");
+        alert(
+          "Erro ao buscar produtos. Por favor, tente novamente mais tarde."
+        );
       });
   };
 
