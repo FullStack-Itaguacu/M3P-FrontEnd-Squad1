@@ -63,12 +63,24 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 ### Login
 <>
 
+### Cadastro
+<>
+
 ### Produtos
 <>
 
-### 
+### Minhas compras
 
 <>
+
+### Carrinho
+
+<>
+
+### Erro 404
+
+<>
+
 ## Contribuidores
 
 <div style="display: flex; flex-direction: row;">
