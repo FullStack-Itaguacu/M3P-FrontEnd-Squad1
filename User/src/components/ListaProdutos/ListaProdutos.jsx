@@ -18,7 +18,7 @@ import {
 function ListagemProdutos() {
   const [produtos, setProdutos] = useState([]);
   const [limit, setLimit] = useState(30);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [name, setName] = useState("");
   const [typeProduct, setTypeProduct] = useState("");
@@ -59,14 +59,14 @@ function ListagemProdutos() {
 
   const handleBack = (e) => {
     e.preventDefault();
-    if (page > 1) {
+    if (page > 0) {
       setPage(page - 1);
     }
   };
-
+  
   const handleNext = (e) => {
     e.preventDefault();
-    if (page < totalPages) {
+    if (page >= 0 && page < totalPages) {
       setPage(page + 1);
     }
   };
