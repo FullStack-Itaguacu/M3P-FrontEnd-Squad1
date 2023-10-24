@@ -1,4 +1,4 @@
-# Frontend de Administração
+# Frontend de Administrador
 
 
 <p align="center">
@@ -6,8 +6,7 @@
 </p>
 
 
-Este repositório contém o código-fonte do frontend para a aplicação administração.
-Utiliza React para criar uma interface de Administração, interativa e responsiva.
+Este repositório contém o código-fonte do frontend para a aplicação de administração de produtos e usuarios. Utiliza React com Vite para criar uma interface administrativa interativa e responsiva.
 
 ## Pré-requisitos
 
@@ -15,17 +14,17 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 
 - Node.js
 - Yarn ou npm
+## Tecnologias usadas
 
-## Dependências
-
-- axios
-- bootstrap
-- bootstrap-icons
-- react
-- react-bootstrap
-- react-dom
-- react-input-mask
-- react-router-dom
+- React
+- Vite
+- Npm ou Yarn
+- React Router
+- React Bootstrap
+- Axios
+- Bootstrap Icons
+- Bootstrap
+- React Input Mask
 
 ## Como Executar
 
@@ -35,14 +34,73 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
    git clone https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1
 ```
 
+2. Navegue até a pasta do projeto Admin:
+
+```bash
+   cd Admin
+```
+
+3. Instale as dependências:
+
+```bash
+   yarn install ou npm install
+```
+
+4. Execute o projeto:
+
+```bash
+   yarn start ou npm run dev
+```
+
+5. Abra o navegador e acesse a página:
+
+```bash
+   http://localhost:5173 "porta padrão do vite"
+```
+
+## Paginas do Sistema
+
+### Login de Administrador
+<>
+
+### Dashboard
+<>
+
+### Pagina de Vendas
+<>
+
+### Pagina de Produtos
+
+-Lista de Produtos
+<>
+-Adicionar Produto
+
+### Pagina de Usuarios
+
+-Lista de Usuarios
+<>
+-Adicionar Usuario
+<>
+
+### Pagina de Erro
+<>
 
 
-Esse projeto foi desenvolvido por:
+## Contribuidores
 
-* **Luis Federico Vilar Velazquez** - [GitHub](https://github.com/Luis-Vilar) | [LinkedIn](https://www.linkedin.com/in/luis-vilar/)
-* **Willyan G Gutierres Gonçalves** - [GitHub](https://github.com/wgeovanni) | [LinkedIn](https://www.linkedin.com/in/willyan-geovanni/)
-* **Adriano Jose Volter** - [GitHub](https://github.com/AdrianoVolter) | [LinkedIn](https://www.linkedin.com/in/adrianovolter/)
-* **Filipe Bratti Schmidt** - [GitHub](https://github.com/filipebratti) | [LinkedIn](https://www.linkedin.com/in/filipe-bratti-schmidt-408a925b/)
+<div style="display: flex; flex-direction: row;">
+  <img src="https://avatars.githubusercontent.com/Luis-Vilar" width="100" style="border-radius: 50%;" alt="Luis Federico Vilar Velazquez"> 
+  <img src="https://avatars.githubusercontent.com/wgeovanni" width="100" style="border-radius: 50%;" alt="Willyan G Gutierres Gonçalves">
+  <img src="https://avatars.githubusercontent.com/AdrianoVolter" width="100" style="border-radius: 50%;" alt="Adriano Jose Volter">
+  <img src="https://avatars.githubusercontent.com/filipebratti" width="100" style="border-radius: 50%;" alt="Filipe Bratti Schmidt">
+</div>
+
+- [Luis Federico Vilar Velazquez](https://github.com/Luis-Vilar) | [LinkedIn](https://www.linkedin.com/in/luis-vilar/)
+- [Willyan G Gutierres Gonçalves](https://github.com/wgeovanni) | [LinkedIn](https://www.linkedin.com/in/willyan-geovanni/)
+- [Adriano Jose Volter](https://github.com/AdrianoVolter) | [LinkedIn](https://www.linkedin.com/in/adrianovolter/)
+- [Filipe Bratti Schmidt](https://github.com/filipebratti) | [LinkedIn](https://www.linkedin.com/in/filipe-bratti-schmidt-408a925b/)
+
+
 
 
 Você também pode ver a lista de todos os desenvolvedores que participaram desse projeto no [Repositório do Projeto no GitHub.](https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1)
