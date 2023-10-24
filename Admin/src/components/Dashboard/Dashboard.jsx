@@ -33,17 +33,17 @@ function Dashboard() {
   }, [token]); 
   
   return (    
-    <div className="pb-5">
+    <div className={`pb-5 ${styles.dashboardStyle}`}>
       <h1 className="text-center text-black pt-4">Bem-vindo ao Sistema Express Pharmacy</h1>
-      <h4 className="text-center text-black p-4">Administrador, aqui você tem acesso ao Gerenciamento de Usuários e Medicamentos.</h4>
+      <h4 className="text-center text-black pt-2 pb-3">Administrador, aqui você tem acesso ao Gerenciamento de Usuários e Medicamentos.</h4>
       <p className="text-center text-black">Abaixo você pode acompanhar um resumo dos seus resultados até agora:</p>
       <Stack direction="horizontal" gap={3} className="d-flex justify-content-center">
         <Col md={4}>      
           <Card className={`p-4 ${styles.cardStyle}`}>
             <Card.Body>
-              <i className="bi bi-cash-stack text-light d-flex justify-content-center p-3"></i>
-              <Card.Title className="text-center text-white">Valor Total de Vendas</Card.Title>
-              <Card.Text className="text-center text-white">{`R$ ${salesData.totalSales}`}</Card.Text>
+              <i className="bi bi-cash-stack text-black d-flex justify-content-center p-3"></i>
+              <Card.Title className="text-center text-black">Valor Total de Vendas</Card.Title>
+              <Card.Text className="text-center text-black">{`R$ ${salesData.totalSales}`}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
@@ -51,9 +51,9 @@ function Dashboard() {
         <Col md={4}>
         <Card className={`p-4 ${styles.cardStyle}`}>
           <Card.Body>
-            <i className="bi bi-box-seam text-light d-flex justify-content-center p-3"></i>
-            <Card.Title className="text-center text-light">Qtd Produtos Vendidos</Card.Title>
-            <Card.Text className="text-center text-light">{salesData.totalAmount}</Card.Text>
+            <i className="bi bi-box-seam text-black d-flex justify-content-center p-3"></i>
+            <Card.Title className="text-center text-black">Qtd Produtos Vendidos</Card.Title>
+            <Card.Text className="text-center text-black">{salesData.totalAmount}</Card.Text>
           </Card.Body>
         </Card>
         </Col>
