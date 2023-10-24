@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import personCircle from "../../../assets/personcircle.svg";
 import { useState } from "react";
 import PropTypes from "prop-types";
+
 import axios from "axios";
 import { useContexto } from "../../../context/useContexto";
 

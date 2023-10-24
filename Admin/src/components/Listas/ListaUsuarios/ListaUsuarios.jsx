@@ -110,7 +110,6 @@ function ListaUsuarios() {
           </Button>
         </Col>
       </Form.Group>
-
             <Row className="justify-content-center">
                 {users.length > 0 ?
                     (
@@ -125,9 +124,8 @@ function ListaUsuarios() {
                     <h2 className="tituloListagem">Não há registros de usuários</h2>
                 }
             </Row>
-
-        </Container >
-    )
+    </Container>
+  );
 }
 
 
