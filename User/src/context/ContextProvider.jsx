@@ -87,7 +87,7 @@ export function ContextProvider({ children }) {
     setTotalPages,
     setPage,
     setName,
-    setType_product,
+    setTypeProduct,
     setLimit,
     name,
     type_product,
