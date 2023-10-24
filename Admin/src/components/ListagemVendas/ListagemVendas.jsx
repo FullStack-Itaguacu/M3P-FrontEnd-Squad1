@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Card, Row, Col } from "react-bootstrap";
 import styles from "./Vendas.module.css";
+import { useContexto } from "../../context/useContexto";
 
 function ListagemVendas() {
   const [vendas, setVendas] = useState([]);
+  const { BASEURL, ENDPOINTVENDAS } = useContexto();
   function getVendas() {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/api/sales/admin/", {
+      .get(`${BASEURL}${ENDPOINTVENDAS}`, {
         headers: {
           Authorization: `${token}`,
         },

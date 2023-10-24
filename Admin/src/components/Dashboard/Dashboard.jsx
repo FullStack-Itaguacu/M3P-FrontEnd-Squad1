@@ -4,17 +4,19 @@ import {  Card, Stack, Col } from "react-bootstrap";
 //import { useHistory } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 import "bootstrap-icons/font/bootstrap-icons.css"
-
+import {useContexto} from "../../context/useContexto";
 
 function Dashboard() {
   const [salesData, setSalesData] = useState({ totalSales: null, totalAmount: null });
 
   const token = localStorage.getItem("token");
+  const {BASEURL, ENDPOINTDASHBOARD} = useContexto();
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/sales/dashboard/admin", {
+        const response = await axios.get(`${BASEURL}${ENDPOINTDASHBOARD}`, {
           headers: {
             Authorization: `${token}`,
           },
