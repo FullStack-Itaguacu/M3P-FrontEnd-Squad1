@@ -9,6 +9,7 @@ import CadastroUsuario from "./pages/CadastroUsuario/CadastroUsuario";
 import Produtos from "./pages/Produtos/Produtos"
 import CarroCompras from "./pages/CarroCompras/CarroCompras";
 import MinhasCompras from "./pages/MinhasCompras/MinhasCompras";
+import Footer from "./components/Footer/Footer";
 import "./App.css"
 
 function App() {
@@ -42,7 +43,9 @@ function App() {
         <Route path="/cadastro" element={<CadastroUsuario />} />
         <Route path="*" element={<Error />} />
       </Routes>
-    </BrowserRouter>} </>;
+    </BrowserRouter>}
+    <Footer /> 
+    </>;
 }
 
 export default App
