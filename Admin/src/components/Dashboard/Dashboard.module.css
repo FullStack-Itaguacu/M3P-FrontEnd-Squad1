@@ -1,12 +1,16 @@
+.dashboardStyle {
+    height: 86vh;
+}
+
 .cardStyle {
-    background-color: rgb(2, 141, 18);
-    border: 3px white solid;
+    background-color: rgb(245, 245, 245);
+    /* border: 3px rgb(202, 196, 196) solid; */
     box-shadow: 5px 5px 10px grey;
 }
 
 .cardStyle:hover {
     box-shadow: 10px 10px 15px rgb(71, 71, 71);
     transition: 0,6s ease-in-out;
-    border: 3px hsl(216, 97%, 53%) solid;
+    border: 3px rgb(3, 193, 25) solid;
 }
 

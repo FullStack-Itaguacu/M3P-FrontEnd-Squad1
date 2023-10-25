@@ -29,6 +29,7 @@ function Header({ children, onLogout }) {
         className={styles.navbarHeader}
         expanded={isMenuOpen}
         onToggle={() => setIsMenuOpen(!isMenuOpen)}
+        sticky="top"
       >
         <Container fluid>
           <Navbar.Brand href="#home">
