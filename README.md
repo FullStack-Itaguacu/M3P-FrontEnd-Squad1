@@ -1,5 +1,7 @@
 # Frontend de Usuários e Administrador
 
+Express Pharmacy é uma aplicação Front-end construída durante o terceiro módulo do **Curso Full Stack**, organizado pelo [SESI/SENAI](https://cursos.sesisenai.org.br/ "Site do SESI/SENAI"), [LAB365](https://lab365.tech/ "Site do LAB365") e [floripamaistec](https://floripamaistec.pmf.sc.gov.br/ "Site do floripamaistec"). Ele tem como objetivo a elaboração de um sistema de Marketplace para venda de produtos do setor farmacêutico, utilizando as tecnologias mais atuais do mercado , *React js* e *Node.js*,
+
 <h1 align="center">Express Pharmacy </h1>
 
 <p align="center">
