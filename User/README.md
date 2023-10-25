@@ -1,12 +1,14 @@
-# Frontend de Usuários
-
+## Frontend de Usuários
+<h1 align="center">Express Pharmacy </h1>
 
 <p align="center">
   <img src="./public/logo.png" alt="Logo" width="200" height="200">
 </p>
 
 
-Este repositório contém o código-fonte do frontend para a aplicação de gerenciamento de usuários. Utiliza React para criar uma interface de usuário interativa e responsiva.
+Este repositório contém o código-fonte do frontend para a venda de medicamentos para usuarios. Utiliza React com Vite para criar interfaces de usuário interativas e responsivas , consome a API do backend para realizar as operações de CRUD. 
+Possibilita o cadastro de usuarios, login, compra de medicamentos, visualização de compras e carrinho de compras.
+
 
 ## Pré-requisitos
 
@@ -14,7 +16,9 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 
 - Node.js
 - Yarn ou npm
-## Tecnologias usadas
+## 🛠️ Tecnologias Utilizadas
+
+Para a construção desse projeto, utilizamos as seguintes tecnologias:
 
 - React
 - Vite
@@ -26,7 +30,7 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 - Bootstrap
 - React Input Mask
 
-## Como Executar
+## 🔧 Como executar o projeto
 
 1. Clone o repositório:
 
