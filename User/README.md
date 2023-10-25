@@ -87,22 +87,32 @@ Para a construção desse projeto, utilizamos as seguintes tecnologias:
 
 ## Contribuidores
 
-<div style="display: flex; align-items: center; margin-bottom: 15px;">
-  <img src="https://avatars.githubusercontent.com/Luis-Vilar" width="100" style="border-radius: 50%;" alt="Luis Federico Vilar Velazquez"> 
-  <a href="https://github.com/Luis-Vilar" style="margin-left: 15px;">Luis Federico Vilar Velazquez</a> | <a href="https://www.linkedin.com/in/luis-vilar/">LinkedIn</a>
-</div>
-<div style="display: flex; align-items: center; margin-bottom: 15px;">
-  <img src="https://avatars.githubusercontent.com/wgeovanni" width="100" style="border-radius: 50%;" alt="Willyan G Gutierres Gonçalves">
-  <a href="https://github.com/wgeovanni" style="margin-left: 15px;">Willyan G Gutierres Gonçalves</a> | <a href="https://www.linkedin.com/in/willyan-geovanni/">LinkedIn</a>
-</div>
-<div style="display: flex; align-items: center; margin-bottom: 15px;">
-  <img src="https://avatars.githubusercontent.com/AdrianoVolter" width="100" style="border-radius: 50%;" alt="Adriano Jose Volter">
-  <a href="https://github.com/AdrianoVolter" style="margin-left: 15px;">Adriano Jose Volter</a> | <a href="https://www.linkedin.com/in/adrianovolter/">LinkedIn</a>
-</div>
-<div style="display: flex; align-items: center; margin-bottom: 15px;">
-  <img src="https://avatars.githubusercontent.com/filipebratti" width="100" style="border-radius: 50%;" alt="Filipe Bratti Schmidt">
-  <a href="https://github.com/filipebratti" style="margin-left: 15px;">Filipe Bratti Schmidt</a> | <a href="https://www.linkedin.com/in/filipe-bratti-schmidt-408a925b/">LinkedIn</a>
-</div>
+<table>
+<tr>
+<td align="center">
+<img src="https://avatars.githubusercontent.com/Luis-Vilar" width="100" style="border-radius: 50%;" alt="Luis Federico Vilar Velazquez"><br>
+<a href="https://github.com/Luis-Vilar">Luis Federico Vilar Velazquez</a> | <a href="https://www.linkedin.com/in/luis-vilar/">LinkedIn</a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<img src="https://avatars.githubusercontent.com/wgeovanni" width="100" style="border-radius: 50%;" alt="Willyan G Gutierres Gonçalves"><br>
+<a href="https://github.com/wgeovanni">Willyan G Gutierres Gonçalves</a> | <a href="https://www.linkedin.com/in/willyan-geovanni/">LinkedIn</a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<img src="https://avatars.githubusercontent.com/AdrianoVolter" width="100" style="border-radius: 50%;" alt="Adriano Jose Volter"><br>
+<a href="https://github.com/AdrianoVolter">Adriano Jose Volter</a> | <a href="https://www.linkedin.com/in/adrianovolter/">LinkedIn</a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<img src="https://avatars.githubusercontent.com/filipebratti" width="100" style="border-radius: 50%;" alt="Filipe Bratti Schmidt"><br>
+<a href="https://github.com/filipebratti">Filipe Bratti Schmidt</a> | <a href="https://www.linkedin.com/in/filipe-bratti-schmidt-408a925b/">LinkedIn</a>
+</td>
+</tr>
+</table>
 
 Você também pode ver a lista de todos os desenvolvedores que participaram desse projeto no [Repositório do Projeto no GitHub.](https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1)
 
