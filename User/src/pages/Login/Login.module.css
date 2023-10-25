@@ -1,7 +1,5 @@
-.loginStyle {
-    background-color: rgb(214, 229, 243);
-    padding-bottom: 8%;
-    padding-top: 50px;        
+.loginStyle {        
+    min-height: 86vh;   
 }
 
 .imgStyle {
@@ -16,3 +14,26 @@
     transition: 0,6s ease-in-out;
     border: 4px chartreuse solid;
 }
+
+.leftImage {
+    background-image: url('./back1.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: left;
+    height: 50vh;
+    margin-top: 20vh;
+    
+  }
+  
+  .rightImage {
+    background-image: url('./back2.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: right;
+    height: 50vh;
+    margin-top: 20vh;
+  }
+
+  .loginRow {
+    margin-top: -70vh;
+  }

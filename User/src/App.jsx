@@ -3,11 +3,13 @@ import { useContexto } from "./context/useContexto";
 
 import Header from "./components/Header/Header"
 import Login from "./pages/Login/Login"
+import LoginHeader from "./components/LoginHeader/LoginHeader"
 import Error from "./pages/Error/NotFound"
 import CadastroUsuario from "./pages/CadastroUsuario/CadastroUsuario";
 import Produtos from "./pages/Produtos/Produtos"
 import CarroCompras from "./pages/CarroCompras/CarroCompras";
 import MinhasCompras from "./pages/MinhasCompras/MinhasCompras";
+import "./App.css"
 
 function App() {
   const { isLoggedin, setIsLoggedin } = useContexto();
@@ -33,6 +35,7 @@ function App() {
       </Header>
     </BrowserRouter> :
     <BrowserRouter>
+      <LoginHeader />
       <Routes>
         {/* Rotas da aplicaçao quando usuario nao esta logado */}
         <Route path="/" element={<Login />} />
