@@ -1,12 +1,15 @@
 # Frontend de Administrador
 
+<h1 align="center">Express Pharmacy </h1>
 
 <p align="center">
   <img src="./public/logo.png" alt="Logo" width="200" height="200">
 </p>
 
-
-Este repositório contém o código-fonte do frontend para a aplicação de administração de produtos e usuarios. Utiliza React com Vite para criar uma interface administrativa interativa e responsiva.
+Este repositório contém o código-fonte do frontend para a administração da aplicação Express Pharmacy. Utiliza React com Vite para criar interfaces de usuário interativas e responsivas , consome a API do backend para realizar as operações de CRUD.
+Possibilita o cadastro de usuarios, login, cadastro de medicamentos, visualização de vendas do administrador,
+visualização de usuarios, visualização dos produtos.
+.
 
 ## Pré-requisitos
 
@@ -14,7 +17,8 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 
 - Node.js
 - Yarn ou npm
-## Tecnologias usadas
+
+## 🛠️ Tecnologias Utilizadas
 
 - React
 - Vite
@@ -26,7 +30,7 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 - Bootstrap
 - React Input Mask
 
-## Como Executar
+## 🔧 Como executar o projeto
 
 1. Clone o repositório:
 
@@ -61,51 +65,59 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 ## Paginas do Sistema
 
 ### Login de Administrador
+
 <>
 
 ### Dashboard
+
 <>
 
 ### Pagina de Vendas
+
 <>
 
 ### Pagina de Produtos
 
 -Lista de Produtos
 <>
+
 -Adicionar Produto
+<>
 
 ### Pagina de Usuarios
 
 -Lista de Usuarios
 <>
+
 -Adicionar Usuario
 <>
 
 ### Pagina de Erro
-<>
 
+<>
 
 ## Contribuidores
 
-<div style="display: flex; flex-direction: row;">
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
   <img src="https://avatars.githubusercontent.com/Luis-Vilar" width="100" style="border-radius: 50%;" alt="Luis Federico Vilar Velazquez"> 
-  <img src="https://avatars.githubusercontent.com/wgeovanni" width="100" style="border-radius: 50%;" alt="Willyan G Gutierres Gonçalves">
-  <img src="https://avatars.githubusercontent.com/AdrianoVolter" width="100" style="border-radius: 50%;" alt="Adriano Jose Volter">
-  <img src="https://avatars.githubusercontent.com/filipebratti" width="100" style="border-radius: 50%;" alt="Filipe Bratti Schmidt">
+  <a href="https://github.com/Luis-Vilar" style="margin-left: 15px;">Luis Federico Vilar Velazquez</a> | <a href="https://www.linkedin.com/in/luis-vilar/">LinkedIn</a>
 </div>
-
-- [Luis Federico Vilar Velazquez](https://github.com/Luis-Vilar) | [LinkedIn](https://www.linkedin.com/in/luis-vilar/)
-- [Willyan G Gutierres Gonçalves](https://github.com/wgeovanni) | [LinkedIn](https://www.linkedin.com/in/willyan-geovanni/)
-- [Adriano Jose Volter](https://github.com/AdrianoVolter) | [LinkedIn](https://www.linkedin.com/in/adrianovolter/)
-- [Filipe Bratti Schmidt](https://github.com/filipebratti) | [LinkedIn](https://www.linkedin.com/in/filipe-bratti-schmidt-408a925b/)
-
-
-
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+  <img src="https://avatars.githubusercontent.com/wgeovanni" width="100" style="border-radius: 50%;" alt="Willyan G Gutierres Gonçalves">
+  <a href="https://github.com/wgeovanni" style="margin-left: 15px;">Willyan G Gutierres Gonçalves</a> | <a href="https://www.linkedin.com/in/willyan-geovanni/">LinkedIn</a>
+</div>
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+  <img src="https://avatars.githubusercontent.com/AdrianoVolter" width="100" style="border-radius: 50%;" alt="Adriano Jose Volter">
+  <a href="https://github.com/AdrianoVolter" style="margin-left: 15px;">Adriano Jose Volter</a> | <a href="https://www.linkedin.com/in/adrianovolter/">LinkedIn</a>
+</div>
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+  <img src="https://avatars.githubusercontent.com/filipebratti" width="100" style="border-radius: 50%;" alt="Filipe Bratti Schmidt">
+  <a href="https://github.com/filipebratti" style="margin-left: 15px;">Filipe Bratti Schmidt</a> | <a href="https://www.linkedin.com/in/filipe-bratti-schmidt-408a925b/">LinkedIn</a>
+</div>
 
 Você também pode ver a lista de todos os desenvolvedores que participaram desse projeto no [Repositório do Projeto no GitHub.](https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1)
 
 ## 🎁 Agradecimentos
 
-* Gostaríamos de agradecer a toda equipe do [SESI/SENAI](https://cursos.sesisenai.org.br/ "Site do SESI/SENAI"), [LAB365](https://lab365.tech/ "Site do LAB365") e [FLORIPAMAISTEC](https://floripamaistec.pmf.sc.gov.br/ "Site do floripamaistec") por todo suporte nesses nove meses do curso Full Stack. Com toda certeza sairemos desse ciclo com um grande conhecimento adquirido e melhor preparados para o mercado de trabalho na área da Tecnologia.
-* Um agradecimento especial a cada professor que passou por nossa turma e que contribuiu para nossa evolução pessoal e profissional, com toda paciência e dedicação que tiveram em sanar nossos problemas e dúvidas.
+- Gostaríamos de agradecer a toda equipe do [SESI/SENAI](https://cursos.sesisenai.org.br/ "Site do SESI/SENAI"), [LAB365](https://lab365.tech/ "Site do LAB365") e [FLORIPAMAISTEC](https://floripamaistec.pmf.sc.gov.br/ "Site do floripamaistec") por todo suporte nesses nove meses do curso Full Stack. Com toda certeza sairemos desse ciclo com um grande conhecimento adquirido e melhor preparados para o mercado de trabalho na área da Tecnologia.
+- Um agradecimento especial a cada professor que passou por nossa turma e que contribuiu para nossa evolução pessoal e profissional, com toda paciência e dedicação que tiveram em sanar nossos problemas e dúvidas.
