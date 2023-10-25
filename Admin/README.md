@@ -96,16 +96,16 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 
 <>
 
-## Contribuidores
+<div align="center">
+<h2> Contribuidores </h2>
+</div>
 
-<table>
+<table align="center">
 <tr>
 <td align="center">
 <img src="https://avatars.githubusercontent.com/Luis-Vilar" width="100" style="border-radius: 50%;" alt="Luis Federico Vilar Velazquez"><br>
 <a href="https://github.com/Luis-Vilar">Luis Federico Vilar Velazquez</a> | <a href="https://www.linkedin.com/in/luis-vilar/">LinkedIn</a>
 </td>
-</tr>
-<tr>
 <td align="center">
 <img src="https://avatars.githubusercontent.com/wgeovanni" width="100" style="border-radius: 50%;" alt="Willyan G Gutierres Gonçalves"><br>
 <a href="https://github.com/wgeovanni">Willyan G Gutierres Gonçalves</a> | <a href="https://www.linkedin.com/in/willyan-geovanni/">LinkedIn</a>
@@ -116,14 +116,13 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 <img src="https://avatars.githubusercontent.com/AdrianoVolter" width="100" style="border-radius: 50%;" alt="Adriano Jose Volter"><br>
 <a href="https://github.com/AdrianoVolter">Adriano Jose Volter</a> | <a href="https://www.linkedin.com/in/adrianovolter/">LinkedIn</a>
 </td>
-</tr>
-<tr>
 <td align="center">
 <img src="https://avatars.githubusercontent.com/filipebratti" width="100" style="border-radius: 50%;" alt="Filipe Bratti Schmidt"><br>
 <a href="https://github.com/filipebratti">Filipe Bratti Schmidt</a> | <a href="https://www.linkedin.com/in/filipe-bratti-schmidt-408a925b/">LinkedIn</a>
 </td>
 </tr>
 </table>
+
 
 Você também pode ver a lista de todos os desenvolvedores que participaram desse projeto no [Repositório do Projeto no GitHub.](https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1)
 
