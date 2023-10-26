@@ -152,9 +152,11 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       total += carro[i].unit_price * carro[i].amount_buy;
     }
     // Formatar o número usando toLocaleString
-    return total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    return total.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
   };
-
 
   return (
     <Form onSubmit={(e) => comprar(e)} className="p-2">
@@ -229,23 +231,35 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                           variant="danger"
                           size="sm"
                           onClick={() => {
-                            const carrinho = JSON.parse(
-                              localStorage.getItem("carrinho")
-                            );
-                            const index = carrinho.findIndex(
-                              (item) => item.id === compra.id
-                            );
-                            carrinho.splice(index, 1);
-                            localStorage.setItem(
-                              "carrinho",
-                              JSON.stringify(carrinho)
-                            );
-                            setCarrinho(carrinho.length);
-                            localStorage.setItem(
-                              "quantidade_carrinho",
-                              carrinho.length
-                            );
-                            setCarro(carrinho);
+                            const carrinhoString =
+                              localStorage.getItem("carrinho");
+
+                            if (carrinhoString && carrinhoString.length > 0) {
+                              const carrinho = JSON.parse(carrinhoString);
+                              const index = carrinho.findIndex(
+                                (item) => item.id === compra.id
+                              );
+                              carrinho.splice(index, 1);
+                              localStorage.setItem(
+                                "carrinho",
+                                JSON.stringify(carrinho)
+                              );
+                              const novoTamanhoCarrinho = carrinho.length;
+                              localStorage.setItem(
+                                "quantidade_carrinho",
+                                novoTamanhoCarrinho
+                              );
+                              if (novoTamanhoCarrinho < 1) {
+                                setCarrinho(null);
+                              } else {
+                                setCarrinho(novoTamanhoCarrinho);
+                              }
+                              setCarro(carrinho);
+                            } else {
+                              console.error(
+                                "Dados do carrinho no localStorage inválidos."
+                              );
+                            }
                           }}
                         >
                           Remover
@@ -253,17 +267,22 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                       </Col>
                     </Row>
                   </td>
-                  <td>R$ {compra.unit_price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                  <td>
+                    R${" "}
+                    {compra.unit_price.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
+                  </td>
                 </tr>
               ))}
           </tbody>
-         
         </Table>
         <Row className="mt-3 p-1">
-        <Col> 
-          <h5>Valor Total da Compra: {calcularValorTotalFormatado()}</h5>
-        </Col>
-      </Row>
+          <Col>
+            <h5>Valor Total da Compra: {calcularValorTotalFormatado()}</h5>
+          </Col>
+        </Row>
       </Row>
       <Row className="mt-3 p-1 justify-content-end">
         <Col className="d-flex">
