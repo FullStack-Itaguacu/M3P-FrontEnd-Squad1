@@ -154,7 +154,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
               <th>ID</th>
               <th>Produto</th>
               <th>Quantidade</th>
-              <th>Valor</th>
+              <th>Valor Unitário</th>
             </tr>
           </thead>
           <tbody>
@@ -196,7 +196,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                       <Col>
                         {" "}
                         <Button
-                          className="btn btn-warning btn-sm me-1"
+                          className="btn btn-warning"
                           onClick={() => {
                             handleIncrement(compra.id);
                           }}
@@ -242,7 +242,8 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                       </Col>
                     </Row>
                   </td>
-                  <td>R$ {compra.unit_price}</td>
+                  <td>R$ {compra.unit_price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+
                 </tr>
               ))}
           </tbody>
