@@ -50,6 +50,14 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       setDisable(true);
       return;
     }
+    for (let index = 0; index < carro.length; index++) {
+      const compra = carro[index];
+      if (compra.amount_buy <= 0) {
+        alert(`A quantidade do produto ${compra.name} não é válida para compra`);
+        return; // Não permita a compra se a quantidade for zero ou negativa
+      }
+    }
+
     try {
       const token = localStorage.getItem("token");
       const precompra = [];
