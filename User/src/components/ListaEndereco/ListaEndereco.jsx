@@ -1,11 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-
 import { useContexto } from "../../context/useContexto";
 import FinalizarCompra from "../CarrinhoFinalizarCompra/FinalizarCompra";
-
-
 
 function ListaEndereco() {
   const { BASEURL, ENDPOINTLISTAENDERECOS } = useContexto();
@@ -20,6 +17,14 @@ function ListaEndereco() {
   ];
   const [pagamentoEscolhido, setPagamentoEscolhido] = useState("");
   const [user_addresses_id, setUser_addresses_id] = useState(-1);
+
+  const traducaoFormasPagamento = {
+    credit_card: "Cartão de Crédito",
+    debit_card: "Cartão de Débito",
+    payment_slip: "Boleto Bancário",
+    pix: "PIX",
+    transfer: "Transferência Bancária",
+  };
 
   useEffect(() => {
     buscaEnderecoUsuario();
@@ -84,21 +89,21 @@ function ListaEndereco() {
           </Form.Control>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>Forma de Pagamento:</Form.Label>
-          <Form.Control
-            as="select"
-            onClick={(e) => {
-              setPagamentoEscolhido(e.target.value);
-            }}
-          >
-            <option value="">Selecione</option>
-            {type_payment.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
+        <Form.Label>Forma de Pagamento:</Form.Label>
+        <Form.Control
+          as="select"
+          onClick={(e) => {
+            setPagamentoEscolhido(e.target.value);
+          }}
+        >
+          <option value="">Selecione</option>
+          {type_payment.map((type) => (
+            <option key={type} value={type}>
+              {traducaoFormasPagamento[type]}
+            </option>
+          ))}
+        </Form.Control>
+      </Form.Group>
       </Row>
       <FinalizarCompra pagamentoEscolhido={pagamentoEscolhido} users_addresses_id={user_addresses_id}/>
     </Container>
