@@ -54,7 +54,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       const compra = carro[index];
       if (compra.amount_buy <= 0) {
         alert(
-          `A quantidade do produto ${compra.name} não é válida para compra ,remova o produto do carrinho ou atualize a quantidade`
+          `A quantidade do produto ${compra.name} não é válida para compra, remova o produto do carrinho ou atualize a quantidade`
         );
         return; // Não permita a compra se a quantidade for zero ou negativa
       }
@@ -242,8 +242,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                       </Col>
                     </Row>
                   </td>
-
-                  <td></td>
+                  <td>R$ {compra.unit_price}</td>
                 </tr>
               ))}
           </tbody>
