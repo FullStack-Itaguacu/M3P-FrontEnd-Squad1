@@ -5,14 +5,15 @@ import styles from "./NotFound.module.css";
 function NotFound() {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (event) => {
+    event.preventDefault()
     navigate("/"); 
   };
 
   return (
     <Container className={styles.notFoundStyle}>
-      <h3 className="text-center pt-5">Página não encontrada, clique no botão e faça Login novamente:</h3>
-      <div className="d-flex justify-content-center mt-5">
+      <h3 className="text-center pt-4">Página não encontrada, clique no botão e faça Login novamente:</h3>
+      <div className={`d-flex justify-content-center mt-4 ${styles.buttonStyle}`}>
         <Button          
           variant="primary"
           onClick={handleClick}

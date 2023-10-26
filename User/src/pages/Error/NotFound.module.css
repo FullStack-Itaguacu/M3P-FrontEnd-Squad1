@@ -2,11 +2,19 @@
     min-height: 88vh;
 }
 
+.buttonStyle {
+    z-index: 2;
+    position: relative;
+}
+
 .centerImage {
     background-image: url('./notfound.svg');
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;  
-    margin-top: -100px;  
+    height: 100vh; 
+    z-index: 1; 
+    margin-top: -80px;
+    position: relative;
+    top: 0;
 }
