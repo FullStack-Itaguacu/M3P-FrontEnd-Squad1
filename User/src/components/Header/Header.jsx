@@ -74,7 +74,7 @@ function Header({ children, onLogout }) {
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
-                  to="/nome-usuario"
+                  to="#"
                 >
                   <i className="bi bi-person-fill"></i>
                   {userEmail}
