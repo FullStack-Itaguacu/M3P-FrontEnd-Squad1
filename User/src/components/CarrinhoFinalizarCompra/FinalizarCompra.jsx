@@ -1,4 +1,4 @@
-import { Row, Col, Form, Button, Table } from "react-bootstrap";
+import { Row, Col, Form, Button, Table, Stack } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useContexto } from "../../context/useContexto";
@@ -136,9 +136,9 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
     setAtualiza(!atualiza);
   };
   return (
-    <Form onSubmit={(e) => comprar(e)}>
-      <Row>
-        <Table striped bordered hover>
+    <Form style={{ width: "95%" }} onSubmit={(e) => comprar(e)}>
+      <Row >
+        <Table  striped bordered hover>
           <thead>
             <tr>
               <th>ID</th>
@@ -207,11 +207,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
               ))}
           </tbody>
         </Table>
-        <Row>
-          <Button variant="primary" type="submit" disabled={disable}>
-            Finalizar compra
-          </Button>
-
+        <Stack direction="horizontal" gap={3} className="justify-content-center text-center mt-4">
           <Button
             variant="danger"
             type="submit"
@@ -225,7 +221,11 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
           >
             Cancelar compra
           </Button>
-        </Row>
+
+          <Button variant="success" type="submit" disabled={disable}>
+            Finalizar compra
+          </Button>
+        </Stack>
       </Row>
     </Form>
   );
