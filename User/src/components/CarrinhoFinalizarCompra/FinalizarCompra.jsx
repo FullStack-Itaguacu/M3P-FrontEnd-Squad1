@@ -1,4 +1,4 @@
-import { Row, Col, Form, Button, Table, Stack } from "react-bootstrap";
+import { Row, Col, Form, Button, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useContexto } from "../../context/useContexto";
@@ -135,6 +135,17 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
     }
     setAtualiza(!atualiza);
   };
+
+  const calcularValorTotalFormatado = () => {
+    let total = 0;
+    for (let i = 0; i < carro.length; i++) {
+      total += carro[i].unit_price * carro[i].amount_buy;
+    }
+    // Formatar o número usando toLocaleString
+    return total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  };
+
+
   return (
     <Form style={{ width: "95%" }} onSubmit={(e) => comprar(e)}>
       <Row >
@@ -200,32 +211,43 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                       </Col>
                     </Row>
                   </td>
-                  <td>{
+                  <td>R$ {
                   compra.unit_price * compra.amount_buy
                   }</td>
                 </tr>
               ))}
           </tbody>
+         
         </Table>
-        <Stack direction="horizontal" gap={3} className="justify-content-center text-center mt-4">
-          <Button
-            variant="danger"
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              localStorage.setItem("carrinho", "[]");
-              localStorage.removeItem("quantidade_carrinho");
-              setCarro([]);
-              setCarrinho(null);
-            }}
-          >
-            Cancelar compra
-          </Button>
+        <Row className="mt-3 p-1">
+        <Col> 
+          <h5>Valor Total da Compra: {calcularValorTotalFormatado()}</h5>
+        </Col>
+      </Row>
+      </Row>
+      <Row className="mt-3 p-1 justify-content-end">
+        <Col className="d-flex">
+          <div className="ms-auto">
+            <Button variant="primary" type="submit" disabled={disable}>
+              Finalizar compra
+            </Button>
 
-          <Button variant="success" type="submit" disabled={disable}>
-            Finalizar compra
-          </Button>
-        </Stack>
+            <Button
+              variant="danger"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                localStorage.setItem("carrinho", "[]");
+                localStorage.removeItem("quantidade_carrinho");
+                setCarro([]);
+                setCarrinho(null);
+              }}
+              className="ms-2"
+            >
+              Cancelar compra
+            </Button>
+          </div>
+        </Col>
       </Row>
     </Form>
   );
