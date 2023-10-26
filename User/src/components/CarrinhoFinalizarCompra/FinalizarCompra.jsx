@@ -244,6 +244,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                                 "carrinho",
                                 JSON.stringify(carrinho)
                               );
+                              setCarro(carrinho);
                               const novoTamanhoCarrinho = carrinho.length;
                               localStorage.setItem(
                                 "quantidade_carrinho",
@@ -251,10 +252,17 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                               );
                               if (novoTamanhoCarrinho < 1) {
                                 setCarrinho(null);
+                                localStorage.setItem(
+                                  "quantidade_carrinho",
+                                  null
+                                );
                               } else {
                                 setCarrinho(novoTamanhoCarrinho);
+                                localStorage.setItem(
+                                  "quantidade_carrinho",
+                                  novoTamanhoCarrinho
+                                );
                               }
-                              setCarro(carrinho);
                             } else {
                               console.error(
                                 "Dados do carrinho no localStorage inválidos."
