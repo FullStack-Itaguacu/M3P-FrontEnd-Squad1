@@ -135,8 +135,19 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
     }
     setAtualiza(!atualiza);
   };
+
+  const calcularValorTotalFormatado = () => {
+    let total = 0;
+    for (let i = 0; i < carro.length; i++) {
+      total += carro[i].unit_price * carro[i].amount_buy;
+    }
+    // Formatar o número usando toLocaleString
+    return total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  };
+
+
   return (
-    <Form onSubmit={(e) => comprar(e)}>
+    <Form onSubmit={(e) => comprar(e)} className="p-2">
       <Row>
         <Table striped bordered hover>
           <thead>
@@ -200,32 +211,43 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
                       </Col>
                     </Row>
                   </td>
-                  <td>{
+                  <td>R$ {
                   compra.unit_price * compra.amount_buy
                   }</td>
                 </tr>
               ))}
           </tbody>
+         
         </Table>
-        <Row>
-          <Button variant="primary" type="submit" disabled={disable}>
-            Finalizar compra
-          </Button>
+        <Row className="mt-3 p-1">
+        <Col> 
+          <h5>Valor Total da Compra: {calcularValorTotalFormatado()}</h5>
+        </Col>
+      </Row>
+      </Row>
+      <Row className="mt-3 p-1 justify-content-end">
+        <Col className="d-flex">
+          <div className="ms-auto">
+            <Button variant="primary" type="submit" disabled={disable}>
+              Finalizar compra
+            </Button>
 
-          <Button
-            variant="danger"
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              localStorage.setItem("carrinho", "[]");
-              localStorage.removeItem("quantidade_carrinho");
-              setCarro([]);
-              setCarrinho(null);
-            }}
-          >
-            Cancelar compra
-          </Button>
-        </Row>
+            <Button
+              variant="danger"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                localStorage.setItem("carrinho", "[]");
+                localStorage.removeItem("quantidade_carrinho");
+                setCarro([]);
+                setCarrinho(null);
+              }}
+              className="ms-2"
+            >
+              Cancelar compra
+            </Button>
+          </div>
+        </Col>
       </Row>
     </Form>
   );
