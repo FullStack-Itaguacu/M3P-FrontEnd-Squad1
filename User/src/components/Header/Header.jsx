@@ -64,7 +64,7 @@ function Header({ children, onLogout }) {
                   to="/"
                   onClick={handleMenuClose}
                 >
-                  <i className="bi bi-bag"></i>
+                  <i className="bi bi-box-seam-fill"></i>
                   Produtos
                 </Link>
                 <Link
@@ -72,7 +72,7 @@ function Header({ children, onLogout }) {
                   to="/minhas-compras"
                   onClick={handleMenuClose}
                 >
-                  <i className="bi bi-bag"></i>
+                  <i className="bi bi-bag-check-fill"></i>
                   Minhas Compras
                 </Link>
                 <Link
@@ -83,15 +83,14 @@ function Header({ children, onLogout }) {
                   <span style={{ color: "red" }}>
                     {carrinho && `${carrinho} `}
                   </span>
-                  <i className="bi bi-cart"></i>
+                  <i className="bi bi-cart4"></i>
                   Carrinho
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
-                  to="/nome-usuario"
-                  onClick={handleMenuClose}
+                  to="#"
                 >
-                  <i className="bi bi-person-circle"></i>
+                  <i className="bi bi-person-fill"></i>
                   {userEmail}
                 </Link>
                 <Link

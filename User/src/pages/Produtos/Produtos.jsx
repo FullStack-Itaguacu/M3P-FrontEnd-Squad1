@@ -1,8 +1,9 @@
 import ListaProdutos from '../../components/ListaProdutos/ListaProdutos';
+import styles from './Produtos.module.css';
 
 const Produtos = () => {
     return (
-        <div>
+        <div className={styles.produtosStyle}>
         <ListaProdutos />
         </div>
     );

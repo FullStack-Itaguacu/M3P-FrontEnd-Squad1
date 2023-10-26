@@ -147,9 +147,9 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
 
 
   return (
-    <Form onSubmit={(e) => comprar(e)} className="p-2">
-      <Row>
-        <Table striped bordered hover>
+    <Form style={{ width: "95%" }} onSubmit={(e) => comprar(e)}>
+      <Row >
+        <Table  striped bordered hover>
           <thead>
             <tr>
               <th>ID</th>

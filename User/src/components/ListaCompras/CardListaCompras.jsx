@@ -16,7 +16,7 @@ const CardListaCompras = ({ compras }) => {
     }
 
     return (
-        <Card style={{ width: '16rem', margin: '3px' }}>
+        <Card style={{ width: '16rem', margin: '8px' }}>
             <Card.Body>
                 <Card.Text>
                     <p>Data e hora da compra: {data}</p>

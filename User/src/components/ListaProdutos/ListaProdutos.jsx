@@ -129,10 +129,10 @@ function ListagemProdutos() {
 
   return (
     <>
-      <h1 className="p-3">Medicamentos</h1>
+      <h3 className="pt-4 pb-3 text-center">Aqui estão os produtos disponíveis em nosso Marketplace:</h3>
 
       <Container fluid className="m-2 border border-2 rounded-3 accordion">
-        <Row className="col-12 align-items-center mb-2">
+        <Row className="align-items-center mb-2">
           <Col md={3}>
             <Form.Control
               type="text"
@@ -142,7 +142,7 @@ function ListagemProdutos() {
             />
           </Col>
 
-          <Col md={3}>
+          <Col md={2}>
             <Form.Control
               as="select"
               value={typeProduct}
@@ -153,13 +153,14 @@ function ListagemProdutos() {
               <option value="uncontrolled">Não Controlado</option>
             </Form.Control>
           </Col>
-          <Col col={2} className="">
+          <Col md={1} className="">
             <Button className="btn btn-primary" onClick={handleSearch}>
               Buscar
             </Button>
           </Col>
-          <Col md={2}>
+          <Col md={3} >
             <Form.Control
+              // style={{ width: "170px" }}
               as="select"
               value={limit}
               onChange={(e) => {
@@ -231,7 +232,7 @@ function ListagemProdutos() {
                     </Form.Group>
                   </Card.Footer>
                   <button
-                    className="btn bg-danger text-light h-auto w-100 mt-1 mb-2 "
+                    className="btn bg-success text-light m-3"
                     onClick={() => adicionarAoCarrinho(produto)}
                   >
                     Adicionar ao Carrinho
@@ -240,7 +241,7 @@ function ListagemProdutos() {
               </Col>
             ))}
         </Row>
-        <Col md={3}>
+        <Col className="pt-3" md={3}>
           <Pagination>
             <Pagination.First onClick={() => setPage(1)} />
             <Pagination.Prev onClick={handleBack} />

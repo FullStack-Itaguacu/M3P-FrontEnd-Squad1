@@ -61,17 +61,21 @@ function ListaEndereco() {
 
 
   return (
-    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">      <h1>Finalizar Compra</h1>
+    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">      
+      <h4 className="text-center pb-3">Finalize sua compra aqui e receba seu pedido no conforto da sua casa</h4>
       <Form.Group as={Col}>
-        <Form.Label>
-          <strong>Endereço de Entrega: </strong>
-          {enderecoEntrega}
-          <strong> Forma de Pagamento Escolhida: </strong>
+        <Form.Label className="mb-3">
+          <strong className="m-2">Endereço de Entrega: </strong>
+          {enderecoEntrega} <br></br>
+          <strong className="m-2"> Forma de Pagamento Escolhida: </strong>
           {pagamentoEscolhido}
         </Form.Label>
+        <Form.Label>
+
+        </Form.Label>
       </Form.Group>
-      <Row>
-        <Form.Group as={Col}>
+      <Row className="mb-4" style={{ width: "90%"}}>
+        <Form.Group as={Col} >
           <Form.Label>Selecione endereço:</Form.Label>
           <Form.Control as="select" onClick={(e) => setDataAdress(e)}>
             <option value="">Selecione</option>
