@@ -80,9 +80,9 @@ function Header({ children, onLogout }) {
                   to="/carrinho"
                   onClick={handleMenuClose}
                 >
-                  <span style={{ color: "red" }}>
-                    {carrinho && `${carrinho} `}
-                  </span>
+                  {carrinho !== null && carrinho > 0 && (
+                    <span style={{ color: "red" }}>{carrinho}</span>
+                  )}
                   <i className="bi bi-cart4"></i>
                   Carrinho
                 </Link>
