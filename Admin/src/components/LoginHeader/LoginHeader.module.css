@@ -58,10 +58,8 @@
     transform-origin: bottom left;
 }
 
-
-
 .navbarLink i {
-    margin-right: 6px;
+    margin-right: 6px;    
 }
 
 .navbarLink:hover i {

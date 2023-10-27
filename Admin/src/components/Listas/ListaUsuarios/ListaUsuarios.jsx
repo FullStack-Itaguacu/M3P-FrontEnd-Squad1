@@ -110,24 +110,23 @@ function ListaUsuarios() {
           </Button>
         </Col>
       </Form.Group>
-
-      <Row>
-        {users.length > 0 ? (
-          users.map((usuario) => {
-            return (
-              <CardsUsuario
-                usuario={usuario}
-                key={usuario.id}
-                busca={{ buscaUsuarios, nome, page, limit, ordem }}
-              />
-            );
-          })
-        ) : (
-          <h2 className="tituloListagem">Não há registros de usuários</h2>
-        )}
-      </Row>
+            <Row className="justify-content-center">
+                {users.length > 0 ?
+                    (
+                        users.map((usuario) => {
+                            return (
+                                <CardsUsuario usuario={usuario}
+                                    key={usuario.id}
+                                    busca={{ buscaUsuarios, nome, page, limit, ordem }} />
+                            )
+                        })
+                    ) :
+                    <h2 className="tituloListagem">Não há registros de usuários</h2>
+                }
+            </Row>
     </Container>
   );
 }
+
 
 export default ListaUsuarios;

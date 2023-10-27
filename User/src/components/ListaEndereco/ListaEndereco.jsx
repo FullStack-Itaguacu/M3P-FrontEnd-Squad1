@@ -1,11 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-
 import { useContexto } from "../../context/useContexto";
 import FinalizarCompra from "../CarrinhoFinalizarCompra/FinalizarCompra";
-
-
 
 function ListaEndereco() {
   const { BASEURL, ENDPOINTLISTAENDERECOS } = useContexto();
@@ -20,6 +17,14 @@ function ListaEndereco() {
   ];
   const [pagamentoEscolhido, setPagamentoEscolhido] = useState("");
   const [user_addresses_id, setUser_addresses_id] = useState(-1);
+
+  const traducaoFormasPagamento = {
+    credit_card: "Cartão de Crédito",
+    debit_card: "Cartão de Débito",
+    payment_slip: "Boleto Bancário",
+    pix: "PIX",
+    transfer: "Transferência Bancária",
+  };
 
   useEffect(() => {
     buscaEnderecoUsuario();
@@ -61,17 +66,21 @@ function ListaEndereco() {
 
 
   return (
-    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">      <h1>Finalizar Compra</h1>
+    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">      
+      <h4 className="text-center pb-3">Finalize sua compra aqui e receba seu pedido no conforto da sua casa</h4>
       <Form.Group as={Col}>
-        <Form.Label>
-          <strong>Endereço de Entrega: </strong>
-          {enderecoEntrega}
-          <strong> Forma de Pagamento Escolhida: </strong>
+        <Form.Label className="mb-3">
+          <strong className="m-2">Endereço de Entrega: </strong>
+          {enderecoEntrega} <br></br>
+          <strong className="m-2"> Forma de Pagamento Escolhida: </strong>
           {pagamentoEscolhido}
         </Form.Label>
+        <Form.Label>
+
+        </Form.Label>
       </Form.Group>
-      <Row>
-        <Form.Group as={Col}>
+      <Row className="mb-4" style={{ width: "90%"}}>
+        <Form.Group as={Col} >
           <Form.Label>Selecione endereço:</Form.Label>
           <Form.Control as="select" onClick={(e) => setDataAdress(e)}>
             <option value="">Selecione</option>
@@ -84,21 +93,21 @@ function ListaEndereco() {
           </Form.Control>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>Forma de Pagamento:</Form.Label>
-          <Form.Control
-            as="select"
-            onClick={(e) => {
-              setPagamentoEscolhido(e.target.value);
-            }}
-          >
-            <option value="">Selecione</option>
-            {type_payment.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
+        <Form.Label>Forma de Pagamento:</Form.Label>
+        <Form.Control
+          as="select"
+          onClick={(e) => {
+            setPagamentoEscolhido(e.target.value);
+          }}
+        >
+          <option value="">Selecione</option>
+          {type_payment.map((type) => (
+            <option key={type} value={type}>
+              {traducaoFormasPagamento[type]}
+            </option>
+          ))}
+        </Form.Control>
+      </Form.Group>
       </Row>
       <FinalizarCompra pagamentoEscolhido={pagamentoEscolhido} users_addresses_id={user_addresses_id}/>
     </Container>

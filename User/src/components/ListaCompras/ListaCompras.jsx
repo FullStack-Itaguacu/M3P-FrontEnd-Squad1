@@ -56,8 +56,9 @@ const ListaCompras = () => {
   }, []);
 
   return (
-    <Container>
-      <Row>
+    <Container className="p-3 pb-5">
+      <h4 className="text-center p-3">Aqui você pode acompanhar todas as compras que já realizou na Express Pharmacy</h4>
+      <Row className="justify-content-center">
         {listaCompras.length !== 0 ? (
           listaCompras.map((compras) => {
             return <CardListaCompras compras={compras} key={compras.id} />;

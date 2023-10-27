@@ -35,7 +35,7 @@ function FormularioCadastroUsuario() {
 
   return (
     <Form
-      className="d-flex flex-column m-3 p-5"
+      className="d-flex flex-column m-2 p-"
       ref={refForm}
       noValidate
       validated={formularioValidado}

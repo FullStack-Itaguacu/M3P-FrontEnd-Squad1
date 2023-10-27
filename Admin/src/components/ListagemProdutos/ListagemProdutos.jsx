@@ -41,7 +41,7 @@ function ListagemProdutos() {
     }
   };
   return (
-    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">
+    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">      
       <Row>
         <Col md={3}>
           <Form.Control
@@ -94,9 +94,9 @@ function ListagemProdutos() {
         </Col>
       </Row>
 
-      <Row>
+      <Row className="justify-content-center">
         {produtos.map((produto) => (
-          <Card as={Col} md={3} key={produto.id}>
+          <Card className="m-2" as={Col} md={3} key={produto.id}>
             <Card.Body>
               <Card.Title>{produto.name}</Card.Title>
               <Card.Img

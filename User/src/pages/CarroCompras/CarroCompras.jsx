@@ -1,8 +1,11 @@
 import ListaEndereco from "../../components/ListaEndereco/ListaEndereco"
+import styles from "./Carrinho.module.css"
 
 function CarroCompras() {
     return (
-        <ListaEndereco />
+        <div className={styles.carrinhoStyle}>
+            <ListaEndereco />
+        </div>
     )
 }
 

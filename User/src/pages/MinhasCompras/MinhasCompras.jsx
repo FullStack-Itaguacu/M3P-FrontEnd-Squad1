@@ -1,8 +1,11 @@
 import ListaCompras from "../../components/ListaCompras/ListaCompras"
+import styles from "./Compras.module.css"
 
 const MinhasCompras = () => {
     return (
-        <ListaCompras />
+        <div className={styles.comprasStyle}>
+            <ListaCompras  />
+        </div>
     )
 }
 

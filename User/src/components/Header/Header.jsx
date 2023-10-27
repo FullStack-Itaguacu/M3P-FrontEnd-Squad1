@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 function Header({ children, onLogout }) {
   const [userEmail, setUserEmail] = useState("");
   const { carrinho, setCarrinho } = useContexto();
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     const email = localStorage.getItem("email");
@@ -17,6 +18,10 @@ function Header({ children, onLogout }) {
     setCarrinho(quantidade_carrinho);
     setUserEmail(email);
   }, []);
+
+  const handleMenuClose = () => {
+    setShowMenu(false);
+  };
 
   return (
     <>
@@ -34,8 +39,14 @@ function Header({ children, onLogout }) {
           <Navbar.Brand href="#" className={styles.textLeft}>
             Express Pharmacy
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-false`} />
+          <Navbar.Toggle
+            aria-controls={`offcanvasNavbar-false`}
+            onClick={() => setShowMenu(!showMenu)}
+            className={styles.toggleStyle}
+          />
           <Navbar.Offcanvas
+            show={showMenu}
+            onHide={handleMenuClose}
             id={`offcanvasNavbar-expand`}
             aria-labelledby={`offcanvasNavbarLabel-expand`}
             placement="end"
@@ -51,37 +62,43 @@ function Header({ children, onLogout }) {
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
                   to="/"
+                  onClick={handleMenuClose}
                 >
-                  <i className="bi bi-bag"></i>
+                  <i className="bi bi-box-seam-fill"></i>
                   Produtos
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
                   to="/minhas-compras"
+                  onClick={handleMenuClose}
                 >
-                  <i className="bi bi-bag"></i>
+                  <i className="bi bi-bag-check-fill"></i>
                   Minhas Compras
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
                   to="/carrinho"
+                  onClick={handleMenuClose}
                 >
                   <span style={{ color: "red" }}>
                     {carrinho && `${carrinho} `}
                   </span>
-                  <i className="bi bi-cart"></i>
+                  <i className="bi bi-cart4"></i>
                   Carrinho
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
-                  to="/nome-usuario"
+                  to="#"
                 >
-                  <i className="bi bi-person-circle"></i>
+                  <i className="bi bi-person-fill"></i>
                   {userEmail}
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
-                  onClick={onLogout}
+                  onClick={() => {
+                    handleMenuClose();
+                    onLogout();
+                  }}
                   to="/"
                 >
                   <i className="bi bi-box-arrow-right"></i>

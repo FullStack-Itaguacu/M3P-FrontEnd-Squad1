@@ -6,7 +6,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import personCircle from "../../../assets/personcircle.svg";
 import { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+
 import axios from "axios";
 import { useContexto } from "../../../context/useContexto";
 
@@ -100,7 +101,7 @@ const CardsUsuario = ({ usuario }) => {
 
   return (
     <>
-      <Card style={{ width: "16rem", margin: "3px" }}>
+      <Card style={{ width: "16rem", margin: "8px" }}>
         <Card.Img variant="top" src={personCircle} />
         <Card.Body>
           <Card.Title>{full_name}</Card.Title>

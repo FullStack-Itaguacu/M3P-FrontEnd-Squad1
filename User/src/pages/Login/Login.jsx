@@ -1,21 +1,24 @@
 import FormularioLogin from "../../components/FormularioLogin/FormularioLogin";
-import { Row, Col, Container, Image } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import styles from "./Login.module.css"
 
 function Login() {
   return ( 
-    <div className={styles.loginStyle}>
-    <Container className="justify-content-md-center">
-    <Row style={{ height: "80vh" }} className="align-items-center">
-        <Col md={4} className="mx-auto align-itens-center">
-            <Image className={styles.imgStyle} src={"/logo.png"} fluid />
-        </Col>
-        <Col md={5} className="mx-auto align-items-center">
-            <FormularioLogin  />
-        </Col>
-    </Row>
-    </Container>    
-    </div>   
+    <>
+      <Container className={styles.loginStyle}> 
+        <Row>
+          <Col className={styles.leftImage} xs={6}>            
+          </Col>
+          <Col className={styles.rightImage} xs={6}>            
+          </Col>
+        </Row>                 
+        <Row className={`align-items-center justify-content-center ${styles.loginRow}`}>            
+          <Col md={5} className="mx-auto d-flex align-items-center" style={{ height: '500px' }}>
+            <FormularioLogin />
+          </Col>
+        </Row>        
+      </Container>    
+    </>  
   );
 }
 
