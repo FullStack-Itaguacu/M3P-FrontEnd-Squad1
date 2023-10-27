@@ -7,9 +7,23 @@ function Login() {
     <>
       <Container className={styles.loginStyle}> 
         <Row>
-          <Col className={styles.leftImage} xs={6}>            
+          <Col style={{
+              backgroundImage: `url(/back1.svg)`,
+              backgroundSize: "60%",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "left",
+              height: "50vh",
+              marginTop: "20vh"
+            }} xs={6}>            
           </Col>
-          <Col className={styles.rightImage} xs={6}>            
+          <Col style={{
+              backgroundImage: `url(/back2.svg)`,
+              backgroundSize: "60%",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "right",
+              height: "50vh",
+              marginTop: "20vh"
+            }} xs={6}>            
           </Col>
         </Row>                 
         <Row className={`align-items-center justify-content-center ${styles.loginRow}`}>            
