@@ -41,7 +41,10 @@ export function ContextProvider({ children }) {
   }
 
   const loginUser = async (email, password) => {
-    localStorage.setItem("carrinho", "[]");
+    const existeCarrinho = localStorage.getItem("carrinho")
+    if(!existeCarrinho || existeCarrinho.length === 0) {
+      localStorage.setItem("carrinho", "[]");
+    }      
 
     if (!validaEmail(email)) {
       return;
