@@ -229,7 +229,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
         <Col className="d-flex">
           <div className="ms-auto">
             <Button variant="primary" type="submit" disabled={disable}>
-              Finalizar compra
+              Finalizar Compra
             </Button>
 
             <Button
@@ -244,7 +244,7 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
               }}
               className="ms-2"
             >
-              Cancelar compra
+              Cancelar
             </Button>
           </div>
         </Col>
