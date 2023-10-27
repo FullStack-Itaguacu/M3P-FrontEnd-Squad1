@@ -39,7 +39,7 @@ function ListaEndereco() {
       setUser_addresses_id(Number(users_addresses.users_addresses_id));
       setEnderecoEntrega(`${street}, ${number_street} - ${city}, ${state}`);
     } catch (error) {
-      setEnderecoEntrega("Seleccione um endereço de entrega");
+      setEnderecoEntrega("Selecione um endereço de entrega");
       setUser_addresses_id(-1);
       return;
     }
