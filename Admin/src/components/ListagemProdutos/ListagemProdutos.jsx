@@ -105,9 +105,9 @@ function ListagemProdutos() {
                 style={{ width: "100%" }}
               />
               <Card.Text>
-                <p>Preço unitario: {produto.unit_price}</p>
+              <p>Preço unitário: {produto.unit_price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
                 <p>Stock: {produto.total_stock}</p>
-                <p>Tipo : {produto.type_product}</p>
+                <p>Tipo: {produto.type_product === "controlled" ? "Controlado" : "Não Controlado"}</p>
               </Card.Text>
             </Card.Body>
             <Card.Footer>

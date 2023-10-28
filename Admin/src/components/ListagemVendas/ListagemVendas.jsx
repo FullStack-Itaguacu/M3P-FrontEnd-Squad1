@@ -27,12 +27,24 @@ function ListagemVendas() {
   }, []);
 
   return (
-    <Container fluid className={`m-2 p-3  border border-2 rounded-3 ${styles.vendasStyle}`}>      
+    <Container
+      fluid
+      className={`m-2 p-3  border border-2 rounded-3 ${styles.vendasStyle}`}
+    >
       <h3 className="text-center text-black p-2">Suas Vendas</h3>
-      <p className="text-center text-black">Aqui você pode acompanhar todas as vendas realizadas até o momento:</p>
+      <p className="text-center text-black">
+        Aqui você pode acompanhar todas as vendas realizadas até o momento:
+      </p>
       <Row className=" justify-content-center">
         {vendas.map((venda) => (
-          <Card as={Col} lg={3} md={6} xs={12} key={venda.id} style={{margin: "8px"}}>
+          <Card
+            as={Col}
+            lg={3}
+            md={6}
+            xs={12}
+            key={venda.id}
+            style={{ margin: "8px" }}
+          >
             <Card.Img
               variant="top"
               src={venda.product.image_link}
@@ -45,10 +57,21 @@ function ListagemVendas() {
                 <br />
                 <strong>Quantidade Vendida: </strong> {venda.amount_buy}
                 <br />
-                <strong>Valor Unitario : </strong>{" "}
-                {Number(venda.total / venda.amount_buy)}
+                <strong>Valor Unitario: </strong>{" "}
+                {venda.amount_buy && venda.total
+                  ? (venda.total / venda.amount_buy).toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })
+                  : "N/A"}
                 <br />
-                <strong>Valor Total da venda: </strong> {venda.total}
+                <strong>Valor Total da venda: </strong>{" "}
+                {venda.total
+                  ? venda.total.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })
+                  : "N/A"}
                 <br />
               </Card.Text>
             </Card.Body>
