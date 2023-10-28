@@ -72,6 +72,39 @@ yarn start ou npm run dev
 ```bash
 http://localhost:5173 "a porta padrão do vite"
 ```
+
+## Backend e Banco de Dados
+
+Antes de executar o frontend, é importante ter o backend e o banco de dados configurados e em execução. Este projeto requer um backend que pode ser encontrado no seguinte repositório: [M3P-BackEnd-Squad1](https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1).
+
+### Configuração do Backend
+
+1. Clone o repositório do backend:
+
+```bash
+   git clone https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1.git
+
+```
+
+2. Navegue até a pasta do projeto:
+
+```bash
+cd M3P-BackEnd-Squad1
+```
+
+3. Instale as dependências:
+
+```bash
+npm install
+```
+
+4. Execute o projeto:
+
+```bash
+npm run dev
+```
+
+
 # Como Contribuir
 
 Nós encorajamos a contribuição para este projeto. Se você encontrar problemas ou tem sugestões de melhorias, por favor, crie uma **issue** para que possamos discutir suas sugestões.
