@@ -10,7 +10,6 @@ function FormularioLogin() {
     const form = event.target;
     const email = form.elements["Login.email"].value;
     const senha = form.elements["Login.senha"].value;
-    console.log(email, senha);
     await loginAadmin(email, senha);
   };
 
