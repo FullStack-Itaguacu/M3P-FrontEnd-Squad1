@@ -220,10 +220,10 @@ CardsUsuario.propTypes = {
     email: PropTypes.string.isRequired,
     cpf: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    birth_date: PropTypes.number.isRequired,
+    birth_date: PropTypes.string.isRequired,
     type_user: PropTypes.string.isRequired,
-    createdAt: PropTypes.number.isRequired,
-    updatedAt: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
   }).isRequired,
 };
 
