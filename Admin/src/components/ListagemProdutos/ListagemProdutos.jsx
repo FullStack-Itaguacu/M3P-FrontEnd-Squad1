@@ -41,7 +41,7 @@ function ListagemProdutos() {
     }
   };
   return (
-    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">      
+    <Container fluid className=" m-2 p-3  border border-2 rounded-3 accordion">
       <Row>
         <Col md={3}>
           <Form.Control
@@ -105,9 +105,18 @@ function ListagemProdutos() {
                 style={{ width: "100%" }}
               />
               <Card.Text>
-              <p>Preço unitário: {produto.unit_price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
-                <p>Stock: {produto.total_stock}</p>
-                <p>Tipo: {produto.type_product === "controlled" ? "Controlado" : "Não Controlado"}</p>
+                Preço unitário:{" "}
+                {produto.unit_price.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </Card.Text>
+              <Card.Text>Stock: {produto.total_stock}</Card.Text>
+              <Card.Text>
+                Tipo:{" "}
+                {produto.type_product === "controlled"
+                  ? "Controlado"
+                  : "Não Controlado"}
               </Card.Text>
             </Card.Body>
             <Card.Footer>
