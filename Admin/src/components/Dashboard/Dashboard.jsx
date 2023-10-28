@@ -43,7 +43,7 @@ function Dashboard() {
             <Card.Body>
               <i className="bi bi-cash-stack text-black d-flex justify-content-center p-3"></i>
               <Card.Title className="text-center text-black">Valor Total de Vendas</Card.Title>
-              <Card.Text className="text-center text-black">{`R$ ${salesData.totalSales}`}</Card.Text>
+              <Card.Text className="text-center text-black">{`R$ ${salesData.totalSales ? salesData.totalSales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : 'N/A'}`}</Card.Text>
             </Card.Body>
           </Card>
         </Col>

@@ -308,7 +308,6 @@ export function ContextProvider({ children }) {
         const { message, usuario } = response.data;
         if (usuario && usuario.full_name) {
           const { full_name } = usuario;
-          console.log(usuario);
           alert(`${message} - Usuário ${full_name} cadastrado com sucesso!`);
         } else {
           alert(`${message} - Usuário cadastrado com sucesso!`);
