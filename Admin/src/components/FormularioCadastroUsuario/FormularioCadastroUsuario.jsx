@@ -86,7 +86,8 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="password">
           <Form.Label>Senha</Form.Label>
-          <Form.Control required type="password" placeholder="Crie uma senha" />
+          <Form.Control required type="password" placeholder="Crie uma senha" autoComplete="on"
+ />
           <Form.Control.Feedback>
             {refForm.current &&
             refForm.current.elements["password"].value.length >= 8
