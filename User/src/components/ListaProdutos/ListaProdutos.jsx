@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useContexto } from "../../context/useContexto";
 import {
   Container,
@@ -195,7 +195,7 @@ function ListagemProdutos() {
           {produtos.length > 0 &&
             produtos.map((produto) => (
               <Col key={produto.id}>
-                <Card className="h-100">
+                <Card className="h-100" key={produto.id}>
                   <Card.Body>
                     <Card.Title>{produto.name}</Card.Title>
                     <Card.Img
@@ -204,8 +204,10 @@ function ListagemProdutos() {
                       style={{ width: "100%" }}
                     />
                     <Card.Text>
-                      <p>Preço unitário: R$ {produto.unit_price.toLocaleString('pt-br', {minimumFractionDigits: 2})}</p>
-                      <p>Estoque: {produto.total_stock}</p>
+                      Preço unitário: R$ {produto.unit_price.toLocaleString('pt-br', {minimumFractionDigits: 2})}
+                    </Card.Text>
+                    <Card.Text>
+                    Estoque: {produto.total_stock}
                     </Card.Text>
                   </Card.Body>
 

@@ -34,6 +34,7 @@ function FormularioLogin() {
               <Form.Control
                 type="password"
                 placeholder="Digite sua senha..."
+                autoComplete="on"
                 required
               />
             </Form.Group>

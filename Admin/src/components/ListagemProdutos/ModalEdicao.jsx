@@ -37,7 +37,6 @@ function ModalEdicao({ produto }) {
       total_stock: event.target.elements["total_stock"].value,
       image_link: event.target.elements["image_link"].value,
     });
-    console.log(data);
 
     if (salvar) {
       axios
