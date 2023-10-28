@@ -204,7 +204,7 @@ function ListagemProdutos() {
                       style={{ width: "100%" }}
                     />
                     <Card.Text>
-                      <p>Preço unitário: R$ {produto.unit_price}</p>
+                      <p>Preço unitário: R$ {produto.unit_price.toLocaleString('pt-br', {minimumFractionDigits: 2})}</p>
                       <p>Estoque: {produto.total_stock}</p>
                     </Card.Text>
                   </Card.Body>

@@ -19,8 +19,11 @@ const CardListaCompras = ({ compras }) => {
         <Card style={{ width: '16rem', margin: '8px' }}>
             <Card.Body>
                 <Card.Text>
-                    <p>Data e hora da compra: {data}</p>
-                    <p>Total da Compra: R$ {somaTotal.toFixed(2)}</p>
+                    <p>Data e hora da compra: {data}
+                    
+                    </p>
+                    <p>Total da Compra: R$ {somaTotal.toLocaleString('pt-br', { minimumFractionDigits: 2 })} 
+                    </p>
                 </Card.Text>
                 <Button variant="primary" onClick={() => setModal(true)}>Detalhes</Button>
             </Card.Body>
@@ -45,7 +48,7 @@ const CardListaCompras = ({ compras }) => {
                                 <p>Id da compra: {compraIndividual.id}</p>
                                 <img src={product.image_link} alt="Imagem do medicamento" />
                                 <p>Quantidade comprada: {compraIndividual.amount_buy}</p>
-                                <p>Total: R$ {compraIndividual.total}</p>
+                                <p>Total: R$ {compraIndividual.total.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</p>
                                 <p>Endereço de entrega: {`${address.street},
                                     ${address.number_street} -
                                     ${address.zip} -
