@@ -66,37 +66,50 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 
 ## Paginas do Sistema
 
+<div align="center">
+  
 ### Login de Administrador
 
-<>
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/56bf0ef0-b5bc-4b6a-a334-79f77cc93fa1" width="500" height="300">
+
 
 ### Dashboard
 
-<>
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/42dfade8-c46f-435c-8791-8f34a4f3cb90" width="500" height="300">
+
 
 ### Pagina de Vendas
 
-<>
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/5db8ee8b-3931-47c6-81f2-890079a6e4aa" width="500" height="300">
+
 
 ### Pagina de Produtos
 
--Lista de Produtos
-<>
+- Lista de Produtos
 
--Adicionar Produto
-<>
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/4fb3fd67-08d9-41ca-8c2c-c3f3e6605025" width="500" height="500">
+
+- Adicionar Produto
+
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/719fe7d9-fa01-40ad-b8f4-8b4679135684" width="500" height="400">
+
 
 ### Pagina de Usuarios
 
--Lista de Usuarios
-<>
+- Lista de Usuarios
 
--Adicionar Usuario
-<>
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/846cd60e-eac0-47d2-8c92-c5dbdfc5d568" width="500" height="600">
+
+- Adicionar Usuario
+
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/ff8c3ca2-e293-43af-a67b-6d5029d9a4c3" width="500" height="300">
+
 
 ### Pagina de Erro
 
-<>
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/f059722b-a936-4cb7-916f-f96493e420ae" width="500" height="300">
+
+</div>
 
 <div align="center">
 <h2> Contribuidores </h2>

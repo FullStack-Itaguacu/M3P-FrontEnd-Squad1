@@ -10,6 +10,20 @@ Express Pharmacy é uma aplicação Front-end construída durante o terceiro mó
 
 Este repositório contém o código-fonte dos frontends para a aplicação de gerenciamento de usuários e administração de produtos e usuários. Utiliza React com Vite para criar interfaces de usuário interativas e responsivas.
 
+## Estrutura do Projeto
+
+O repositório está organizado em duas pastas principais:
+
+### User
+
+Esta pasta contém o código-fonte do frontend para a aplicação de gerenciamento de usuários. Aqui, você encontrará uma variedade de páginas, componentes e estilos exclusivos, todos dedicados a proporcionar uma experiência de usuário eficiente e amigável.
+
+### Admin
+
+Dentro desta pasta, você terá acesso ao código-fonte do frontend para a aplicação de administração de produtos e usuários. Aqui, desenvolvemos uma série de páginas especializadas, componentes específicos e estilos personalizados para facilitar a administração de produtos e usuários de forma simplificada e intuitiva.
+
+Cada uma dessas pastas representa uma área distinta de nosso projeto, cada uma com seu próprio conjunto de funcionalidades e designs cuidadosamente elaborados para atender às necessidades específicas de usuários e administradores.
+
 ## Pré-requisitos
 
 Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de executar o projeto:
@@ -59,17 +73,53 @@ yarn start ou npm run dev
 http://localhost:5173 "a porta padrão do vite"
 ```
 
+## Backend e Banco de Dados
+
+Antes de executar o frontend, é importante ter o backend e o banco de dados configurados e em execução. Este projeto requer um backend que pode ser encontrado no seguinte repositório: [M3P-BackEnd-Squad1](https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1).
+
+### Configuração do Backend
+
+1. Clone o repositório do backend:
+
+```bash
+   git clone https://github.com/FullStack-Itaguacu/M3P-BackEnd-Squad1.git
+
+```
+
+2. Navegue até a pasta do projeto:
+
+```bash
+cd M3P-BackEnd-Squad1
+```
+
+3. Instale as dependências:
+
+```bash
+npm install
+```
+
+4. Execute o projeto:
+
+```bash
+npm run dev
+```
 
 
+# Como Contribuir
+
+Nós encorajamos a contribuição para este projeto. Se você encontrar problemas ou tem sugestões de melhorias, por favor, crie uma **issue** para que possamos discutir suas sugestões.
+
+Se você deseja contribuir diretamente para o código, por favor, siga estes passos:
+
+1. **Fork** o repositório
+2. Crie uma branch para sua contribuição (`git checkout -b feature/sua-contribuicao`)
+3. Faça commit de suas mudanças (`git commit -m 'Adiciona sua contribuição'`)
+4. Push para a branch (`git push origin feature/sua-contribuicao`)
+5. Abra um **Pull Request**
+
+Agradecemos antecipadamente por suas contribuições!
 
 
-## Estrutura do Projeto
-O repositório contém duas pastas principais:
-
-User: Contém o código-fonte do frontend para a aplicação de gerenciamento de usuários.
-
-Admin: Contém o código-fonte do frontend para a aplicação de administração de produtos e usuários.
-Cada pasta tem seu próprio conjunto de páginas, componentes e estilos específicos.
 
 <div align="center">
 <h2> Contribuidores </h2>
