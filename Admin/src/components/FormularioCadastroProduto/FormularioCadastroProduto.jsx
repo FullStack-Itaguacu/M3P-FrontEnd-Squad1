@@ -142,13 +142,13 @@ function FormularioCadastroProduto() {
       <div className="d-flex justify-content-end">
         <Button
           onClick={(e) => handleLimpar(e, refForm)}
-          className="m-0"
+          className="m-1"
           variant="outline-secondary"
           type="button"
         >
           Limpar
         </Button>
-        <Button className="m-0" variant="outline-success" type="submit">
+        <Button className="m-1" variant="outline-success" type="submit">
           Cadastrar
         </Button>
       </div>

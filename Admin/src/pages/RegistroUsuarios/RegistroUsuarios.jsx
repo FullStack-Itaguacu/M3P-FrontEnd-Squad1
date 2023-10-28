@@ -11,7 +11,7 @@ function RegistroUsuarios() {
     //     <ListaUsuarios>Lista de usuários</ListaUsuarios>
     // </section>
     <Container className={styles.usuarioStyle}>
-      <h4 className="text-center text-black pt-4">Cadastre novos usuários ou veja a lista de usuários</h4>
+      <h3 className="text-center text-black pt-4">Cadastre novos usuários ou veja a lista de usuários já cadastrados</h3>
       <Tabs className="pt-4 border-light" defaultActiveKey="lista" id="fill-tab-example">
         <Tab eventKey="cadastro" title="Cadastrar Usuario">
           <FormularioCadastroUsuario />

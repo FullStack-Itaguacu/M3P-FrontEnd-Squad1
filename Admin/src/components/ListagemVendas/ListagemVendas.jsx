@@ -28,8 +28,8 @@ function ListagemVendas() {
 
   return (
     <Container fluid className={`m-2 p-3  border border-2 rounded-3 ${styles.vendasStyle}`}>      
-      <h4 className="text-center text-black p-2">Suas Vendas</h4>
-      <p className="text-center text-black">Aqui você pode acompanhar suas vendas realizadas até o momento:</p>
+      <h3 className="text-center text-black p-2">Suas Vendas</h3>
+      <p className="text-center text-black">Aqui você pode acompanhar todas as vendas realizadas até o momento:</p>
       <Row className=" justify-content-center">
         {vendas.map((venda) => (
           <Card as={Col} lg={3} md={6} xs={12} key={venda.id} style={{margin: "8px"}}>
