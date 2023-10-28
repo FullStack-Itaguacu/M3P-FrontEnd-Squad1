@@ -66,17 +66,17 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 
 <div align="center">
   
-### Login
+### Login de usuário
 
 <img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/da1477a2-bc24-4135-b106-4b58d0036559" width="500" height="300">
 
 
-### Cadastro
+### Formulário de cadastro de usuário
 
 <img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/cd85ab0d-ac82-4abd-bb5f-e94fa45c6418" width="500" height="300">
 
 
-### Produtos
+### Produtos disponíveis
 
 <img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/af1ab429-3a85-4dcf-95f1-e457d0ebc124" width="500" height="500">
 
@@ -85,12 +85,12 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 <img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/d69c348f-0fbe-4787-9449-6d4cee94a61d" width="500" height="300">
 
 
-### Minhas compras
+### Minhas compras realizadas
 
 <img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/ccdfea3c-ee56-46ab-a425-f78cf733fc60" width="500" height="300">
 
 
-### Erro 404
+### Erro 404 - Página não encontrada
 
 <img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/0f2061b4-7306-4c43-a201-025ad6830efb" width="500" height="300">
 
