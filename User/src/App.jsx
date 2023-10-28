@@ -36,13 +36,14 @@ function App() {
       </Header>
     </BrowserRouter> :
     <BrowserRouter>
-      <LoginHeader />
+      <LoginHeader>
       <Routes>
         {/* Rotas da aplicaçao quando usuario nao esta logado */}
         <Route path="/" element={<Login />} />
         <Route path="/cadastro" element={<CadastroUsuario />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      </LoginHeader>
     </BrowserRouter>}
     <Footer /> 
     </>;
