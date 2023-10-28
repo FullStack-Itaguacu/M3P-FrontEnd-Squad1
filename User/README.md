@@ -64,35 +64,38 @@ Certifique-se de ter os seguintes pacotes e tecnologias instalados antes de exec
 
 ## Paginas do Sistema
 
+<div align="center">
+  
 ### Login
 
-![loginuser](https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/da1477a2-bc24-4135-b106-4b58d0036559)
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/da1477a2-bc24-4135-b106-4b58d0036559" width="500" height="300">
 
 
 ### Cadastro
 
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/cd85ab0d-ac82-4abd-bb5f-e94fa45c6418" width="500" height="300">
 
-![cadastro](https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/cd85ab0d-ac82-4abd-bb5f-e94fa45c6418)
 
 ### Produtos
 
-![produto](https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/fbc9f991-0059-47fa-85d5-7161b5aed817)
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/af1ab429-3a85-4dcf-95f1-e457d0ebc124" width="500" height="500">
 
+### Carrinho de compras
 
-### Carrinho
-
-![carrinho1](https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/d69c348f-0fbe-4787-9449-6d4cee94a61d)
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/d69c348f-0fbe-4787-9449-6d4cee94a61d" width="500" height="300">
 
 
 ### Minhas compras
 
-![Captura de tela de 2023-10-27 22-47-28](https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/ccdfea3c-ee56-46ab-a425-f78cf733fc60)
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/ccdfea3c-ee56-46ab-a425-f78cf733fc60" width="500" height="300">
 
 
 ### Erro 404
 
+<img src="https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/0f2061b4-7306-4c43-a201-025ad6830efb" width="500" height="300">
 
-![erro](https://github.com/FullStack-Itaguacu/M3P-FrontEnd-Squad1/assets/91354299/0f2061b4-7306-4c43-a201-025ad6830efb)
+</div>
+
 
 <div align="center">
 <h2> Contribuidores </h2>
