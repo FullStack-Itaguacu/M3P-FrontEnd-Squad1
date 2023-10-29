@@ -8,17 +8,26 @@ import PropTypes from "prop-types";
 
 function Header({ children, onLogout }) {
   const [userEmail, setUserEmail] = useState("");
+  const [fullName, setFullName] = useState("");
   const { carrinho, setCarrinho } = useContexto();
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     const email = localStorage.getItem("email");
-    const quantidade_carrinho = localStorage.getItem("quantidade_carrinho");
+    const token = localStorage.getItem("token");
+    
+    if (token) {
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace("-", "+").replace("_", "/");
+      const decodedToken = JSON.parse(atob(base64));
+      const fullNameFromToken = decodedToken.full_name;
+      setFullName(fullNameFromToken);
+    }
 
+    const quantidade_carrinho = localStorage.getItem("quantidade_carrinho");
     setCarrinho(quantidade_carrinho);
     setUserEmail(email);
   }, []);
-
   const handleMenuClose = () => {
     setShowMenu(false);
   };
@@ -91,7 +100,7 @@ function Header({ children, onLogout }) {
                   to="#"
                 >
                   <i className="bi bi-person-fill"></i>
-                  {userEmail}
+                  {fullName}
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
