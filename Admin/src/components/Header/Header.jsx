@@ -10,12 +10,18 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function Header({ children, onLogout }) {
-  const [userEmail, setUserEmail] = useState("");
+  const [fullName, setFullName] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const email = localStorage.getItem("email");
-    setUserEmail(email);
+    const token = localStorage.getItem("token");
+    if (token) {
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace("-", "+").replace("_", "/");
+      const decodedToken = JSON.parse(atob(base64));
+      const fullNameFromToken = decodedToken.full_name;
+      setFullName(fullNameFromToken);
+    }
   }, []);
 
   const handleMenuClose = () => {
@@ -95,11 +101,11 @@ function Header({ children, onLogout }) {
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
-                  to="/registro-usuarios"
+                  
                   onClick={handleMenuClose}
                 >
                   <i className="bi bi-person-circle"></i>
-                  {userEmail}
+                  {fullName}
                 </Link>
                 <Link
                   className={`nav-link text-light ${styles.navbarLink}`}
