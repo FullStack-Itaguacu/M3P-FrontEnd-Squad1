@@ -1,4 +1,4 @@
-import  { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useContexto } from "../../context/useContexto";
 import InputMask from "react-input-mask";
@@ -36,7 +36,7 @@ function FormularioCadastroUsuario() {
       validated={formularioValidado}
       onSubmit={handleCadastrarUsuario}
     >
- 
+
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="full_name">
           <Form.Label>Nome Completo</Form.Label>
@@ -87,10 +87,10 @@ function FormularioCadastroUsuario() {
         <Form.Group as={Col} md="4" controlId="password">
           <Form.Label>Senha</Form.Label>
           <Form.Control required type="password" placeholder="Crie uma senha" autoComplete="on"
- />
+          />
           <Form.Control.Feedback>
             {refForm.current &&
-            refForm.current.elements["password"].value.length >= 8
+              refForm.current.elements["password"].value.length >= 8
               ? "OK"
               : "Senha deve ter no mínimo 8 caracteres."}
           </Form.Control.Feedback>
