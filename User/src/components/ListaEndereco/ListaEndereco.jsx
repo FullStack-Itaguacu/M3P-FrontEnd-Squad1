@@ -73,7 +73,7 @@ function ListaEndereco() {
           <strong className="m-2">Endereço de Entrega: </strong>
           {enderecoEntrega} <br></br>
           <strong className="m-2"> Forma de Pagamento Escolhida: </strong>
-          {pagamentoEscolhido}
+          {traducaoFormasPagamento[pagamentoEscolhido]}
         </Form.Label>
         <Form.Label>
 

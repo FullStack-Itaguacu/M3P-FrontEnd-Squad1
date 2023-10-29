@@ -10,7 +10,7 @@ function ListaUsuarios() {
   const [nome, setNome] = useState("");
   const [ordem, setOrdem] = useState("ASC");
   const [limit, setLimit] = useState(20);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState([0]);
   const { BASEURL, ENDPOINTUSUARIOS } = useContexto();
 
@@ -110,20 +110,20 @@ function ListaUsuarios() {
           </Button>
         </Col>
       </Form.Group>
-            <Row className="justify-content-center">
-                {users.length > 0 ?
-                    (
-                        users.map((usuario) => {
-                            return (
-                                <CardsUsuario usuario={usuario}
-                                    key={usuario.id}
-                                    busca={{ buscaUsuarios, nome, page, limit, ordem }} />
-                            )
-                        })
-                    ) :
-                    <h2 className="tituloListagem">Não há registros de usuários</h2>
-                }
-            </Row>
+      <Row className="justify-content-center">
+        {users.length > 0 ?
+          (
+            users.map((usuario) => {
+              return (
+                <CardsUsuario usuario={usuario}
+                  key={usuario.id}
+                  busca={{ buscaUsuarios, nome, page, limit, ordem }} />
+              )
+            })
+          ) :
+          <h2 className="tituloListagem">Não há registros de usuários</h2>
+        }
+      </Row>
     </Container>
   );
 }

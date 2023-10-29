@@ -6,12 +6,8 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 
 function RegistroUsuarios() {
   return (
-    // <section>
-    //     <h2>Formulário de Cadastro</h2>
-    //     <ListaUsuarios>Lista de usuários</ListaUsuarios>
-    // </section>
     <Container className={styles.usuarioStyle}>
-      <h4 className="text-center text-black pt-4">Cadastre novos usuários ou veja a lista de usuários</h4>
+      <h3 className="text-center text-black pt-4">Cadastre novos usuários ou veja a lista de usuários já cadastrados</h3>
       <Tabs className="pt-4 border-light" defaultActiveKey="lista" id="fill-tab-example">
         <Tab eventKey="cadastro" title="Cadastrar Usuario">
           <FormularioCadastroUsuario />
@@ -19,7 +15,7 @@ function RegistroUsuarios() {
         <Tab className="pt-4 pb-4" eventKey="lista" title="Lista de usuários">
           <ListaUsuarios />
         </Tab>
-        
+
       </Tabs>
     </Container>
   );

@@ -1,7 +1,7 @@
 import { useContexto } from "../../context/useContexto";
 
 import { Container, Button, Form, Row, Col, Stack } from "react-bootstrap";
-import styles from "./Formulario.module.css"
+import styles from "./Formulario.module.css";
 
 function FormularioLogin() {
   const { loginAadmin } = useContexto();
@@ -10,7 +10,6 @@ function FormularioLogin() {
     const form = event.target;
     const email = form.elements["Login.email"].value;
     const senha = form.elements["Login.senha"].value;
-    console.log(email, senha);
     await loginAadmin(email, senha);
   };
 
@@ -30,7 +29,12 @@ function FormularioLogin() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="Login.senha">
               <Form.Label className="text-light">Senha</Form.Label>
-              <Form.Control type="password" placeholder="senha" required />
+              <Form.Control
+                type="password"
+                placeholder="senha"
+                autoComplete="on"
+                required
+              />
             </Form.Group>
             <Stack
               className="d-flex justify-content-center"
@@ -42,7 +46,7 @@ function FormularioLogin() {
                   Entrar
                 </Button>
               </div>
-            </Stack>            
+            </Stack>
           </Form>
         </Col>
       </Row>

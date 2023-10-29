@@ -8,7 +8,6 @@ const ListaCompras = () => {
 
   const { BASEURL, ENDPOINTLISTAVENDAS } = useContexto();
 
-
   const buscaVendas = async () => {
     const token = localStorage.getItem("token");
     await axios
@@ -33,21 +32,23 @@ const ListaCompras = () => {
         return res.data;
       })
       .then((res) => {
-        const datas = res.reduce((acumulador, compra) => {
-          const data = compra.created_at;
-          if (!acumulador[data]) {
-            acumulador[data] = [];
-          }
-          acumulador[data].push(compra);
-          return acumulador;
-        }, {});
-        const comprasAgrupadas = Object.entries(datas).map(
-          ([data, compra]) => ({
-            data,
-            compra,
-          })
-        );
-        setListaCompras(comprasAgrupadas);
+        if (res.datas !== undefined) {
+          const datas = res.reduce((acumulador, compra) => {
+            const data = compra.created_at;
+            if (!acumulador[data]) {
+              acumulador[data] = [];
+            }
+            acumulador[data].push(compra);
+            return acumulador;
+          }, {});
+          const comprasAgrupadas = Object.entries(datas).map(
+            ([data, compra]) => ({
+              data,
+              compra,
+            })
+          );
+          setListaCompras(comprasAgrupadas);
+        }
       });
   };
 
@@ -64,7 +65,7 @@ const ListaCompras = () => {
             return <CardListaCompras compras={compras} key={compras.id} />;
           })
         ) : (
-          <h2>Não há registro de compras.</h2>
+          <h2 className="text-center">Não há registros de usuários</h2>
         )}
       </Row>
     </Container>

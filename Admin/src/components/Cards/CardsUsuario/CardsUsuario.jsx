@@ -189,7 +189,7 @@ const CardsUsuario = ({ usuario }) => {
                   disabled
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="tipo">
+              <Form.Group as={Col} md="4" controlId="atualizado">
                 <Form.Label>Atualizado em</Form.Label>
                 <Form.Control
                   type="text"
@@ -220,10 +220,10 @@ CardsUsuario.propTypes = {
     email: PropTypes.string.isRequired,
     cpf: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    birth_date: PropTypes.number.isRequired,
+    birth_date: PropTypes.string.isRequired,
     type_user: PropTypes.string.isRequired,
-    createdAt: PropTypes.number.isRequired,
-    updatedAt: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
   }).isRequired,
 };
 

@@ -29,8 +29,6 @@ function FinalizarCompra({ pagamentoEscolhido, users_addresses_id }) {
       }
       const amount_carro = carro[index].amount_buy;
       const amount_localstorage = comprasLocalStorage[index].amount_buy;
-      console.log(`${amount_carro}`);
-      console.log(`${amount_localstorage}`);
 
       amount_localstorage != amount_carro &&
         setCarro(JSON.parse(localStorage.getItem("carrinho")));

@@ -65,7 +65,6 @@ function LoginHeader({ children }) {
 
 LoginHeader.propTypes = {
   children: PropTypes.node.isRequired,
-  onLogout: PropTypes.func.isRequired,
 };
 
 export default LoginHeader;

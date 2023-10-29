@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { Modal, Form } from "react-bootstrap";
+import { Modal, Form, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useContexto } from "../../context/useContexto";
@@ -28,7 +28,7 @@ function ModalEdicao({ produto }) {
       \n Stock : ${data.total_stock}
       \n Link Imagem : ${data.image_link}
       `
-      
+
     );
     setData({
       id: produto.id,
@@ -37,7 +37,6 @@ function ModalEdicao({ produto }) {
       total_stock: event.target.elements["total_stock"].value,
       image_link: event.target.elements["image_link"].value,
     });
-    console.log(data);
 
     if (salvar) {
       axios
@@ -79,30 +78,44 @@ function ModalEdicao({ produto }) {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={salvarAlteracoes}>
-            <Form.Group controlId="name">
-              <Form.Label>Nome do produto</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nome do produto"
-                value={data.name}
-                onChange={(e) => setData({ ...data, name: e.target.value })}
-              />
-            </Form.Group>
-
+            <Row className="mb-3">
+              <Form.Group as={Col} md="12" controlId="name">
+                <Form.Label>Nome do produto</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Nome do produto"
+                  value={data.name}
+                  onChange={(e) => setData({ ...data, name: e.target.value })}
+                />
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="12" controlId="image_link">
+                <Form.Label>Link da Imagem</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Imagem"
+                  value={data.image_link}
+                  onChange={(e) =>
+                    setData({ ...data, image_link: e.target.value })
+                  }
+                />
+              </Form.Group>
+            </Row>
             <Form.Group controlId="dosage">
               <Form.Label>Dosagem</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="dosagem"
+                placeholder="10mg / 5g / 500mL"
                 value={data.dosage}
                 onChange={(e) => setData({ ...data, dosage: e.target.value })}
               />
             </Form.Group>
             <Form.Group controlId="total_stock">
-              <Form.Label>Stock</Form.Label>
+              <Form.Label>Estoque</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Stock"
+                type="number"
+                placeholder="Estoque"
                 value={data.total_stock}
                 onChange={(e) =>
                   setData({ ...data, total_stock: e.target.value })
@@ -110,21 +123,10 @@ function ModalEdicao({ produto }) {
               />
             </Form.Group>
 
-            <Form.Group controlId="image_link">
-              <Form.Label>Imagem</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Imagem"
-                value={data.image_link}
-                onChange={(e) =>
-                  setData({ ...data, image_link: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="danger" onClick={handleClose}>
               Cancelar
             </Button>
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="success">
               Salvar
             </Button>
           </Form>

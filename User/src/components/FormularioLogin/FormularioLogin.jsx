@@ -12,7 +12,6 @@ function FormularioLogin() {
     const form = event.target;
     const email = form.elements["Login.email"].value;
     const senha = form.elements["Login.senha"].value;
-    console.log(email, senha);
     await loginUser(email, senha);
   };
 
@@ -35,6 +34,7 @@ function FormularioLogin() {
               <Form.Control
                 type="password"
                 placeholder="Digite sua senha..."
+                autoComplete="on"
                 required
               />
             </Form.Group>
