@@ -65,7 +65,7 @@ const ListaCompras = () => {
             return <CardListaCompras compras={compras} key={compras.id} />;
           })
         ) : (
-          <h2 className="text-center">Não há registros de usuários</h2>
+          <h2 className="text-center">Não há registros de compras.</h2>
         )}
       </Row>
     </Container>
