@@ -13,12 +13,9 @@ export function ContextProvider({ children }) {
   const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
-  const [endereco, setEndereco] = useState({
-    logradouro: "",
-    bairro: "",
-    cidade: "",
-    estado: "",
-  });
+  const [lat, setLat] = useState("");
+  const [long, setLong] = useState("");
+
 
   const BASEURL = "http://localhost:3000";
   const ENDPOINTLOGIN = "/api/user/admin/login";
@@ -256,43 +253,37 @@ export function ContextProvider({ children }) {
   function removeNonNumericCharacters(value) {
     return value.replace(/\D/g, "");
   }
-
-  //função para buscar endereço pelo cep
-  const handleBuscarEndereco = async (e) => {
+  const handleBuscarEndereco = (e) => {
     const { value } = e.target;
     const cep = value?.replace(/\D/g, "");
 
     if (cep?.length !== 8) {
       return;
     }
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    fetch(`https://brasilapi.com.br/api/cep/v2/{${cep}}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.erro) {
           alert("CEP não encontrado");
           return;
         }
-        setEndereco({
-          setCep: data.cep,
-          logradouro: data.logradouro,
-          bairro: data.bairro,
-          cidade: data.localidade,
-          estado: data.uf,
-        });
+        setLogradouro(data.street);
+        setCidade(data.city);
+        setEstado(data.state);
+        setBairro(data.neighborhood);
+        setLat(data.location.coordinates.latitude);
+        setLong(data.location.coordinates.longitude);
       });
   };
+
   const handleLimparCamposCadastroUsuario = () => {
     setCep("");
     setLogradouro("");
     setBairro("");
     setCidade("");
     setEstado("");
-    setEndereco({
-      logradouro: "",
-      bairro: "",
-      cidade: "",
-      estado: "",
-    });
+    setLat("");
+    setLong("");
   };
   const postUsuario = (usuarioProp) => {
     usuarioProp.user.type_user = tipoUsuario;
@@ -426,8 +417,6 @@ export function ContextProvider({ children }) {
     setTipoUsuario,
     handleBuscarEndereco,
     handleLimparCamposCadastroUsuario,
-    endereco,
-    setEndereco,
     cep,
     setCep,
     logradouro,
@@ -445,6 +434,10 @@ export function ContextProvider({ children }) {
     ENDPOINTDASHBOARD,
     ENDPOINTVENDAS,
     ENDPOINTUSUARIOS,
+    lat,
+    setLat,
+    long,
+    setLong,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
