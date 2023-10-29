@@ -14,19 +14,25 @@ function FormularioCadastroUsuario() {
     tipoUsuario,
     handleBuscarEndereco,
     handleLimparCamposCadastroUsuario,
-    endereco,
     cep,
     setCep,
+    logradouro,
     setLogradouro,
+    bairro,
     setBairro,
+    cidade,
     setCidade,
+    estado,
     setEstado,
+    lat,
+    setLat,
+    long,
+    setLong,
   } = useContexto();
 
   useEffect(() => {
     setFormularioValidado(false);
   }, []);
-
 
   return (
     <Form
@@ -36,7 +42,6 @@ function FormularioCadastroUsuario() {
       validated={formularioValidado}
       onSubmit={handleCadastrarUsuario}
     >
-
       <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="full_name">
           <Form.Label>Nome Completo</Form.Label>
@@ -86,7 +91,11 @@ function FormularioCadastroUsuario() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="password">
           <Form.Label>Senha</Form.Label>
-          <Form.Control required type="password" placeholder="Crie uma senha" autoComplete="on"
+          <Form.Control
+            required
+            type="password"
+            placeholder="Crie uma senha"
+            autoComplete="on"
           />
           <Form.Control.Feedback>
             {refForm.current &&
@@ -144,8 +153,8 @@ function FormularioCadastroUsuario() {
           <Form.Control
             required
             type="text"
-            placeholder="Avenida / Rua / Servidão ..."
-            value={endereco.logradouro}
+            placeholder="Avenida / Rua "
+            value={logradouro}
             onChange={(e) => setLogradouro(e.target.value)}
           />
           <Form.Control.Feedback type="invalid">
@@ -164,7 +173,7 @@ function FormularioCadastroUsuario() {
 
         <Form.Group as={Col} md="4" controlId="complement">
           <Form.Label>Complemento</Form.Label>
-          <Form.Control required type="text" placeholder="Complemento" />
+          <Form.Control  type="text" placeholder="Complemento (opcional)" />
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="neighborhood">
           <Form.Label>Bairro</Form.Label>
@@ -172,7 +181,7 @@ function FormularioCadastroUsuario() {
             required
             type="text"
             placeholder="Bairro"
-            value={endereco.bairro}
+            value={bairro}
             onChange={(e) => setBairro(e.target.value)}
           />
         </Form.Group>
@@ -184,7 +193,7 @@ function FormularioCadastroUsuario() {
             required
             type="text"
             placeholder="Cidade"
-            value={endereco.cidade}
+            value={cidade}
             onChange={(e) => setCidade(e.target.value)}
           />
         </Form.Group>
@@ -195,18 +204,30 @@ function FormularioCadastroUsuario() {
             required
             type="text"
             placeholder="Estado"
-            value={endereco.estado}
+            value={estado}
             onChange={(e) => setEstado(e.target.value)}
           />
-        </Form.Group>
-        <Form.Group as={Col} md="3" controlId="lat">
-          <Form.Label>Latitude</Form.Label>
-          <Form.Control type="text" placeholder="Latitude (opcional)" />
-        </Form.Group>
-        <Form.Group as={Col} md="3" controlId="long">
-          <Form.Label>Longitude</Form.Label>
-          <Form.Control type="text" placeholder="Longitude (opcional)" />
-        </Form.Group>
+         </Form.Group>
+          <Form.Group as={Col} md="3" controlId="lat">
+            <Form.Label>Latitude</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Latitude (opcional)"
+              value={lat}
+              onChange={(e) => setLat(e.target.value)}
+              step={0.0000001}
+            />
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="long">
+            <Form.Label>Longitude</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Longitude (opcional)"
+              value={long}
+              onChange={(e) => setLong(e.target.value)}
+              step={0.0000001}
+            />
+          </Form.Group>
       </Row>
       <div className="d-flex justify-content-end">
         <Button
