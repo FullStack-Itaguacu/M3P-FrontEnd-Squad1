@@ -168,7 +168,7 @@ function FormularioCadastroUsuario() {
   return (
     <>
       <div className="d-flex justify-content-center pt-3">
-          <h3 className="m-3">Faço seu cadastro para acessar a plataforma Express Pharmacy:</h3>
+        <h3 className="m-3">Faço seu cadastro para acessar a plataforma Express Pharmacy:</h3>
       </div>
       <Form
         className="d-flex flex-column m-3 mt-0 p-5 pt-3"
@@ -176,7 +176,7 @@ function FormularioCadastroUsuario() {
         noValidate
         validated={formularioValidado}
         onSubmit={handleCadastrarUsuario}
-      >        
+      >
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="full_name">
             <Form.Label>Nome Completo</Form.Label>
@@ -229,7 +229,7 @@ function FormularioCadastroUsuario() {
             <Form.Control required type="password" placeholder="Crie uma senha" />
             <Form.Control.Feedback>
               {refForm.current &&
-              refForm.current.elements["password"].value.length >= 8
+                refForm.current.elements["password"].value.length >= 8
                 ? "OK"
                 : "Senha deve ter no mínimo 8 caracteres."}
             </Form.Control.Feedback>
@@ -267,7 +267,7 @@ function FormularioCadastroUsuario() {
             <Form.Control
               required
               type="text"
-              placeholder="Avenida / Rua / Servidão ..."
+              placeholder="Avenida / Rua"
               value={logradouro}
               onChange={(e) => setLogradouro(e.target.value)}
             />
@@ -286,7 +286,7 @@ function FormularioCadastroUsuario() {
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="complement">
             <Form.Label>Complemento</Form.Label>
-            <Form.Control required type="text" placeholder="Complemento" />
+            <Form.Control type="text" placeholder="Complemento" />
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="neighborhood">
             <Form.Label>Bairro</Form.Label>
