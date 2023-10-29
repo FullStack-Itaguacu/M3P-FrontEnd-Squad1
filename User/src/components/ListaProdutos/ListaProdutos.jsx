@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useContexto } from "../../context/useContexto";
 import {
   Container,
@@ -63,7 +63,7 @@ function ListagemProdutos() {
       setPage(page - 1);
     }
   };
-  
+
   const handleNext = (e) => {
     e.preventDefault();
     if (page >= 0 && page < totalPages) {
@@ -160,7 +160,6 @@ function ListagemProdutos() {
           </Col>
           <Col md={3} >
             <Form.Control
-              // style={{ width: "170px" }}
               as="select"
               value={limit}
               onChange={(e) => {
@@ -204,10 +203,10 @@ function ListagemProdutos() {
                       style={{ width: "100%" }}
                     />
                     <Card.Text>
-                      Preço unitário: R$ {produto.unit_price.toLocaleString('pt-br', {minimumFractionDigits: 2})}
+                      Preço unitário: R$ {produto.unit_price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
                     </Card.Text>
                     <Card.Text>
-                    Estoque: {produto.total_stock}
+                      Estoque: {produto.total_stock}
                     </Card.Text>
                   </Card.Body>
 
