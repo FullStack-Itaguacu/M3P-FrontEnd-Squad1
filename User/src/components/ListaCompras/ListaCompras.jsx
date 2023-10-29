@@ -32,7 +32,7 @@ const ListaCompras = () => {
         return res.data;
       })
       .then((res) => {
-        if (res.datas !== undefined) {
+        if (res !== undefined && res.length !== 0) {
           const datas = res.reduce((acumulador, compra) => {
             const data = compra.created_at;
             if (!acumulador[data]) {
