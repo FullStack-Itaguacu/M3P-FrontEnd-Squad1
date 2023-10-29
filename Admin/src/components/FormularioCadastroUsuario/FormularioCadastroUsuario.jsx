@@ -99,7 +99,7 @@ function FormularioCadastroUsuario() {
           />
           <Form.Control.Feedback>
             {refForm.current &&
-            refForm.current.elements["password"].value.length >= 8
+              refForm.current.elements["password"].value.length >= 8
               ? "OK"
               : "Senha deve ter no mínimo 8 caracteres."}
           </Form.Control.Feedback>

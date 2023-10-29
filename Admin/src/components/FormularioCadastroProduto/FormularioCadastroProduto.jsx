@@ -8,13 +8,18 @@ function FormularioCadastroProduto() {
   const {
     formularioValidado,
     setFormularioValidado,
-    handleSubmitProduto,
-    handleLimpar,
+    handleSubmitProduto
   } = useContexto();
 
   useEffect(() => {
     setFormularioValidado(false);
   }, []);
+
+  const handleLimpar = (e, refForm) => {
+    e.preventDefault();
+    refForm.current.reset();
+    setFormularioValidado(false);
+  }
 
   return (
     <Form
