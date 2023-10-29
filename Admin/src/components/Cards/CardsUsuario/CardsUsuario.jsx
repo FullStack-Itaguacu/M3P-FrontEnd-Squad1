@@ -189,7 +189,7 @@ const CardsUsuario = ({ usuario }) => {
                   disabled
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="tipo">
+              <Form.Group as={Col} md="4" controlId="atualizado">
                 <Form.Label>Atualizado em</Form.Label>
                 <Form.Control
                   type="text"
