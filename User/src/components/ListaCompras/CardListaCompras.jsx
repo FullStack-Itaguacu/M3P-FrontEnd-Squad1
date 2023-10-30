@@ -18,7 +18,7 @@ const CardListaCompras = ({ compras }) => {
   return (
     <Card style={{ width: "16rem", margin: "8px" }}>
       <Card.Body>
-        <Card.Text>Data e hora da compra: {data}</Card.Text>
+        <Card.Text>Data e hora da compra: {data} UTC</Card.Text>
         <Card.Text>
           Total da Compra: R${" "}
           {somaTotal.toLocaleString("pt-br", { minimumFractionDigits: 2 })}
@@ -47,7 +47,7 @@ const CardListaCompras = ({ compras }) => {
             const address = user_address.address;
 
             return (
-              <Container key = {compraIndividual.id}>
+              <Container key={compraIndividual.id}>
                 <p>Id da compra: {compraIndividual.id}</p>
                 <img src={product.image_link} alt="Imagem do medicamento" />
                 <p>Quantidade comprada: {compraIndividual.amount_buy}</p>
