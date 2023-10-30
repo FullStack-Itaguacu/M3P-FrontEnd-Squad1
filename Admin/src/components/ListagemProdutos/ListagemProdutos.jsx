@@ -109,7 +109,7 @@ function ListagemProdutos() {
                   currency: "BRL",
                 })}
               </Card.Text>
-              <Card.Text>Stock: {produto.total_stock}</Card.Text>
+              <Card.Text>Estoque: {produto.total_stock}</Card.Text>
               <Card.Text>
                 Tipo:{" "}
                 {produto.type_product === "controlled"
